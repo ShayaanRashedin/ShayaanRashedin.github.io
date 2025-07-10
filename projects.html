@@ -15,16 +15,70 @@
   </header>
 
   <main>
+    <!-- 1. Conducting a Security Audit (full report) -->
     <div class="accordion-item">
       <div class="accordion-header">Conducting a Security Audit</div>
       <div class="accordion-content">
+        <h3>1. Organization Background &amp; Audit Scope</h3>
         <p>
-          Filler: In this audit I scanned external hosts, identified outdated services, and recommended patching schedules.<br>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          <strong>Botium Toys</strong> is a retail company selling toys online and in physical stores. They manage a mix of digital and physical assets—employee workstations, on-premises servers, an internal network, plus some legacy infrastructure.<br>
+          Customer payments (credit cards) and sensitive personal data (PII/SPII) are processed and stored internally.<br>
+          <em>This audit</em> evaluates current security controls and compliance with PCI DSS, GDPR, and SOC 2 standards.
         </p>
+        <p>
+          <strong>Scope:</strong> Entire security program—technology, physical security, and processes.<br>
+          <strong>Goals:</strong> Assess controls, identify compliance gaps, and recommend steps to reduce risk and strengthen posture.
+        </p>
+
+        <h3>2. Controls Assessment Checklist</h3>
+        <ul>
+          <li><strong>Least Privilege:</strong> ❌ All employees have unrestricted access to sensitive data; implement role-based restrictions.</li>
+          <li><strong>Disaster Recovery Plan:</strong> ❌ No formal DRP exists; develop and test a comprehensive plan.</li>
+          <li><strong>Password Policies:</strong> ❌ Weak standards; enforce complexity, rotation, and lockout policies.</li>
+          <li><strong>Separation of Duties:</strong> ❌ Critical functions handled by one person; split responsibilities to reduce fraud/error.</li>
+          <li><strong>Firewall:</strong> ✅ Properly configured to control inbound/outbound traffic.</li>
+          <li><strong>Intrusion Detection System (IDS):</strong> ❌ Missing; install and tune an IDS to alert on suspicious activity.</li>
+          <li><strong>Backups:</strong> ❌ No regular backups; schedule automated backups to prevent data loss.</li>
+          <li><strong>Antivirus Software:</strong> ✅ Up-to-date AV is deployed and monitored.</li>
+          <li><strong>Legacy System Monitoring:</strong> ❌ No maintenance plan; document and review legacy platforms regularly.</li>
+          <li><strong>Encryption:</strong> ❌ Data at rest/in transit is unencrypted; apply full-disk and data-level encryption.</li>
+          <li><strong>Password Management System:</strong> ❌ No centralized vault; adopt a secure password manager.</li>
+          <li><strong>Physical Locks:</strong> ✅ Facility access controlled by locks.</li>
+          <li><strong>CCTV Surveillance:</strong> ✅ Cameras operational for deterrence and forensics.</li>
+          <li><strong>Fire Safety Systems:</strong> ✅ Alarms and suppression systems functional.</li>
+        </ul>
+
+        <h3>3. Compliance Checklist</h3>
+        <ul>
+          <li><strong>PCI DSS – Authorized Access to Card Data:</strong> ❌ All employees can view cardholder data; restrict by role.</li>
+          <li><strong>PCI DSS – Secure Storage &amp; Transmission:</strong> ❌ No encryption or controls on stored card data.</li>
+          <li><strong>Encryption Procedures:</strong> ✅ Recommendation to implement for all transaction touchpoints.</li>
+          <li><strong>Password Management Policies:</strong> ✅ Adopt secure password handling and renewal.</li>
+          <li><strong>GDPR – EU Data Privacy:</strong> ❌ PII stored unencrypted; apply strict access and encryption.</li>
+          <li><strong>GDPR – Breach Notification:</strong> ✅ Plan exists to notify within 72 hours of a breach.</li>
+          <li><strong>Data Classification:</strong> ❌ No formal classification; create an asset inventory and class scheme.</li>
+          <li><strong>Privacy Policies:</strong> ✅ Policies in place and enforced across departments.</li>
+          <li><strong>User Access Policies:</strong> ❌ No formal access policy; establish and enforce role-based policies.</li>
+          <li><strong>Data Integrity:</strong> ✅ Controls ensure data remains accurate and unaltered.</li>
+          <li><strong>Data Availability:</strong> ❌ Universal access currently; limit to authorized roles only.</li>
+        </ul>
+
+        <h3>4. Recommendations</h3>
+        <ul>
+          <li>Implement role-based access control (RBAC) and enforce least privilege.</li>
+          <li>Deploy a centralized password management solution with strong policies.</li>
+          <li>Introduce full-disk and data-level encryption for all sensitive data.</li>
+          <li>Develop, test, and regularly review a disaster recovery plan (DRP) and backups.</li>
+          <li>Install and configure an Intrusion Detection System (IDS) with alerting.</li>
+          <li>Document and schedule maintenance reviews for all legacy systems.</li>
+          <li>Enforce separation of duties for critical business functions.</li>
+          <li>Create a formal data classification and inventory program.</li>
+          <li>Expand security awareness training, covering PCI DSS, GDPR, and SOC 2.</li>
+        </ul>
       </div>
     </div>
 
+    <!-- 2. Analyzing Network Structure and Security -->
     <div class="accordion-item">
       <div class="accordion-header">Analyzing Network Structure and Security</div>
       <div class="accordion-content">
@@ -35,6 +89,7 @@
       </div>
     </div>
 
+    <!-- 3. Using Linux Commands to Manage File Permissions -->
     <div class="accordion-item">
       <div class="accordion-header">Using Linux Commands to Manage File Permissions</div>
       <div class="accordion-content">
@@ -45,6 +100,7 @@
       </div>
     </div>
 
+    <!-- 4. Applying Filters to SQL Queries -->
     <div class="accordion-item">
       <div class="accordion-header">Applying Filters to SQL Queries</div>
       <div class="accordion-content">
@@ -55,6 +111,7 @@
       </div>
     </div>
 
+    <!-- 5. Identifying Vulnerabilities for a Small Business -->
     <div class="accordion-item">
       <div class="accordion-header">Identifying Vulnerabilities for a Small Business</div>
       <div class="accordion-content">
@@ -65,6 +122,7 @@
       </div>
     </div>
 
+    <!-- 6. Documenting Incidents with an Incident Handler's Journal -->
     <div class="accordion-item">
       <div class="accordion-header">Documenting Incidents with an Incident Handler's Journal</div>
       <div class="accordion-content">
@@ -75,6 +133,7 @@
       </div>
     </div>
 
+    <!-- 7. Importing and Parsing a Text File in a Security-Related Scenario -->
     <div class="accordion-item">
       <div class="accordion-header">Importing and Parsing a Text File in a Security-Related Scenario</div>
       <div class="accordion-content">
@@ -90,7 +149,6 @@
     <p>&copy; 2025 Shayaan Rashedin. All rights reserved.</p>
   </footer>
 
-  <!-- load script after all HTML to guarantee .accordion-header exists -->
   <script src="script.js"></script>
 </body>
 </html>
