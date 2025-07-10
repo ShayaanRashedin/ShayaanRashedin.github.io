@@ -1,127 +1,63 @@
+/* ─────────────────── VARIABLES & RESET ─────────────────── */
 :root {
-  --bg-color: #f9f9f9;
-  --text-color: #222;
-  --header-bg: #ffffff;
-  --footer-bg: #eaeaea;
-  --accent-color: #007acc;
+  --accent-color: #000dff;
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --header-bg: #f8f8f8;
 }
 
-body.dark-mode {
+body.dark {
   --bg-color: #1e1e1e;
-  --text-color: #ddd;
-  --header-bg: #2d2d2d;
-  --footer-bg: #2d2d2d;
-  --accent-color: #4ea1f3;
+  --text-color: #e0e0e0;
+  --header-bg: #2a2a2a;
 }
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
+* {
   margin: 0;
   padding: 0;
-  transition: background-color 0.3s, color 0.3s;
+  box-sizing: border-box;
 }
 
-header, footer {
-  background-color: var(--header-bg);
-  padding: 1.5rem;
-  text-align: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-nav ul {
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  padding: 0;
-  margin: 1rem 0;
-  flex-wrap: wrap;
-}
-
-nav ul li {
-  margin: 0 1rem;
-}
-
-nav ul li a {
-  text-decoration: none;
-  color: var(--accent-color);
-  font-weight: bold;
+/* ─────────────────── BASE STYLES ─────────────────── */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.6;
 }
 
 main {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 2rem;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
 }
 
 section {
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
-h1, h2 {
-  color: var(--accent-color);
+section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
-button#theme-toggle {
-  background-color: var(--accent-color);
-  color: #fff;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-  margin-top: 1rem;
-}
-
-button#theme-toggle:hover {
-  opacity: 0.9;
-}
-
-a {
-  color: var(--accent-color);
-}
-
-footer {
-  background-color: var(--footer-bg);
-  text-align: center;
-  font-size: 0.9rem;
-  padding: 1rem;
-  border-top: 1px solid #ccc;
-}
-
-/* ─────────────────── NAV BUTTONS ─────────────────── */
-nav {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin: 1.5rem 0;
-}
-
-nav button {
-  background-color: var(--accent-color);
-  color: #fff;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
-}
-
-nav button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 8px rgba(0,0,0,0.15);
-}
-
-/* ─────────────────── THEME BUTTON ALIGNMENT ─────────────────── */
+/* ─────────────────── HEADER & THEME TOGGLE ─────────────────── */
 header {
+  background-color: var(--header-bg);
+  padding: 1rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+}
+
+header h1 {
+  font-size: 1.75rem;
+}
+
+header p {
+  font-size: 1rem;
+  color: var(--text-color);
 }
 
 header > button#theme-toggle {
@@ -133,4 +69,70 @@ header > button#theme-toggle {
   border-radius: 0.5rem;
   font-weight: 600;
   cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: opacity 0.2s ease;
+}
+
+header > button#theme-toggle:hover {
+  opacity: 0.9;
+}
+
+/* ─────────────────── NAV BUTTONS ─────────────────── */
+nav {
+  height: 60vh;               /* give vertical space to truly center */
+  display: flex;
+  justify-content: center;    /* horizontal centering */
+  align-items: center;        /* vertical centering */
+  gap: 2rem;                  /* space between buttons */
+}
+
+nav button {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+nav button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+nav button:active {
+  transform: scale(0.98);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* ─────────────────── SKILLS GRID ─────────────────── */
+#skills ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.5rem 2rem;
+}
+
+#skills li {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+#skills li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--accent-color);
+}
+
+/* ─────────────────── FOOTER ─────────────────── */
+footer {
+  text-align: center;
+  margin: 2rem 0;
+  color: var(--text-color);
+  font-size: 0.9rem;
 }
