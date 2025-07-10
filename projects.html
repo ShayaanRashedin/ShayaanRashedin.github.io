@@ -212,10 +212,57 @@
     <div class="accordion-item">
       <div class="accordion-header">Analyzing Network Structure and Security</div>
       <div class="accordion-content">
-        <p>
-          Filler: Mapped VLANs and firewall rules, ran Nmap scans, and documented potential lateral movement paths.<br>
-          Pellentesque habitant morbi tristique senectus et netus.
-        </p>
+        <h3>Scenario</h3>
+        <p>Review the scenario below. Then complete the step-by-step instructions.</p>
+        <p>You are a cybersecurity analyst working for a multimedia company that offers web design services, graphic design, and social media marketing solutions to small businesses. Your organization recently experienced a DDoS attack, which compromised the internal network for two hours until it was resolved.</p>
+        <p>During the attack, your organization’s network services suddenly stopped responding due to an incoming flood of ICMP packets. Normal internal network traffic could not access any network resources. The incident management team responded by blocking incoming ICMP packets, stopping non-critical services, and restoring critical network services.</p>
+        <p>The company’s cybersecurity team then investigated the security event. They found that a malicious actor had sent a flood of ICMP pings into the network through an unconfigured firewall. This vulnerability allowed the attacker to overwhelm the network through a distributed denial of service (DDoS) attack.</p>
+        <p>To address this event, the network security team implemented:</p>
+        <ul>
+          <li>A new firewall rule to limit the rate of incoming ICMP packets</li>
+          <li>Source IP verification on the firewall to check for spoofed IP addresses</li>
+          <li>Network monitoring software to detect abnormal traffic patterns</li>
+          <li>An IDS/IPS system to filter suspicious ICMP traffic</li>
+        </ul>
+        <h3>Incident Report Analysis</h3>
+        <h4>Summary</h4>
+        <p>Your organization experienced a Distributed Denial of Service (DDoS) attack targeting its internal network through a flood of ICMP packets. The vulnerability was due to an unconfigured firewall which allowed the attack to overwhelm network resources, causing a two-hour outage. Remediation efforts included temporarily blocking ICMP packets and implementing new firewall rules, IP source verification, and traffic monitoring systems.</p>
+        <h4>Identify</h4>
+        <ul>
+          <li>Conducted internal audits and found an unconfigured firewall as the primary vulnerability.</li>
+          <li>Identified lack of ICMP traffic rate-limiting as a major risk.</li>
+          <li>Recognized that current network infrastructure lacked adequate traffic anomaly detection tools.</li>
+          <li>Mapped out affected systems and potential entry points for malicious actors.</li>
+        </ul>
+        <h4>Protect</h4>
+        <ul>
+          <li>Implemented firewall rules to limit the rate of incoming ICMP packets.</li>
+          <li>Enabled source IP verification to defend against spoofed packets.</li>
+          <li>Developed updated network access policies.</li>
+          <li>Trained staff on identifying DDoS-related symptoms and emergency procedures.</li>
+        </ul>
+        <h4>Detect</h4>
+        <ul>
+          <li>Installed and configured network monitoring software to alert for abnormal traffic patterns.</li>
+          <li>Deployed IDS/IPS to flag suspicious ICMP traffic and provide better visibility.</li>
+          <li>Enhanced logging and alerting to identify unusual spikes in packet traffic.</li>
+        </ul>
+        <h4>Respond</h4>
+        <ul>
+          <li>Immediately blocked incoming ICMP traffic to contain the incident.</li>
+          <li>Worked with the incident response team to restore critical services quickly.</li>
+          <li>Investigated source and nature of attack using logs and traffic analysis.</li>
+          <li>Documented the event for future reference and used it as a learning opportunity.</li>
+        </ul>
+        <h4>Recover</h4>
+        <ul>
+          <li>Gradually restored all network services once the threat was neutralized.</li>
+          <li>Validated firewall configurations to ensure lasting protection.</li>
+          <li>Updated incident response and recovery plans based on lessons learned.</li>
+          <li>Communicated with stakeholders regarding the resolution and prevention measures.</li>
+        </ul>
+        <h4>Reflections/Notes</h4>
+        <p>This event highlighted the importance of basic firewall configurations and proactive network traffic monitoring. The use of the NIST Cybersecurity Framework helped systematically improve our organization’s defense and response capabilities. Regular reviews of firewall rules and detection systems are now scheduled to avoid future oversights.</p>
       </div>
     </div>
 
