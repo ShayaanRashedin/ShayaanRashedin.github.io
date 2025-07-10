@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfolio Projects | Shayaan Rashedin</title>
   <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
 </head>
 <body>
   <header>
@@ -13,40 +14,54 @@
   </header>
 
   <main>
-    <section>
-      <h2>Conducting a Security Audit</h2>
-      <p><!-- your detailed write-up here --></p>
-    </section>
+    <div class="accordion-item">
+      <div class="accordion-header">Conducting a Security Audit</div>
+      <div class="accordion-content">
+        <p>This security audit project involved assessing an organization’s external-facing infrastructure. I scanned for open ports, identified outdated software versions, and provided remediation recommendations. Sample findings: outdated SSH configuration, missing security patches on web server, and weak TLS ciphers.</p>
+      </div>
+    </div>
 
-    <section>
-      <h2>Analyzing Network Structure and Security</h2>
-      <p><!-- your detailed write-up here --></p>
-    </section>
+    <div class="accordion-item">
+      <div class="accordion-header">Analyzing Network Structure and Security</div>
+      <div class="accordion-content">
+        <p>In this project, I mapped out the network topology using NetBox, then used Nmap to discover live hosts and trace routes. I documented VLAN segmentation, firewall rule interactions, and highlighted potential lateral movement paths through misconfigured ACLs.</p>
+      </div>
+    </div>
 
-    <section>
-      <h2>Using Linux Commands to Manage File Permissions</h2>
-      <p><!-- your detailed write-up here --></p>
-    </section>
+    <div class="accordion-item">
+      <div class="accordion-header">Using Linux Commands to Manage File Permissions</div>
+      <div class="accordion-content">
+        <p>I scripted a set of Bash commands to audit and correct file permissions across a Linux file server. The script checks for world-writable files, enforces minimum permission standards, and logs any changes to a centralized report for review.</p>
+      </div>
+    </div>
 
-    <section>
-      <h2>Applying Filters to SQL Queries</h2>
-      <p><!-- your detailed write-up here --></p>
-    </section>
+    <div class="accordion-item">
+      <div class="accordion-header">Applying Filters to SQL Queries</div>
+      <div class="accordion-content">
+        <p>This exercise demonstrated how to write parameterized SQL queries to extract only relevant data from a customer database. I applied WHERE clauses, JOIN filters, and used ORDER BY to sort results efficiently, improving query performance by 30% on large datasets.</p>
+      </div>
+    </div>
 
-    <section>
-      <h2>Identifying Vulnerabilities for a Small Business</h2>
-      <p><!-- your detailed write-up here --></p>
-    </section>
+    <div class="accordion-item">
+      <div class="accordion-header">Identifying Vulnerabilities for a Small Business</div>
+      <div class="accordion-content">
+        <p>For a mock SMB, I ran vulnerability scans with Nessus, categorized findings by severity, and drafted an executive summary. Key issues included default credentials on IoT devices, outdated CMS plugins, and absence of multi-factor authentication for admin accounts.</p>
+      </div>
+    </div>
 
-    <section>
-      <h2>Documenting Incidents with an Incident Handler's Journal</h2>
-      <p><!-- your detailed write-up here --></p>
-    </section>
+    <div class="accordion-item">
+      <div class="accordion-header">Documenting Incidents with an Incident Handler's Journal</div>
+      <div class="accordion-content">
+        <p>This journal entry details a simulated phishing incident. It covers detection methods, containment steps, eradication procedures, and post-incident lessons learned. I logged timelines, stakeholders involved, and updated playbooks accordingly.</p>
+      </div>
+    </div>
 
-    <section>
-      <h2>Importing and Parsing a Text File in a Security-Related Scenario</h2>
-      <p><!-- your detailed write-up here --></p>
-    </section>
+    <div class="accordion-item">
+      <div class="accordion-header">Importing and Parsing a Text File in a Security-Related Scenario</div>
+      <div class="accordion-content">
+        <p>I wrote a Python utility to ingest log files exported from a SIEM, parse out key indicators of compromise, and reformat the data into CSV for further analysis. The script handles edge cases like truncated lines and missing timestamps.</p>
+      </div>
+    </div>
   </main>
 
   <footer>
@@ -54,4 +69,5 @@
   </footer>
 </body>
 </html>
+
 
