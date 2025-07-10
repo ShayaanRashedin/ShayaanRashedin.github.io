@@ -5,12 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Portfolio Projects | Shayaan Rashedin</title>
   <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
 </head>
 <body>
   <header>
     <h1>Portfolio Projects</h1>
-    <!-- back button now using .nav-button class -->
     <button class="nav-button" onclick="location.href='index.html'">
       ← Back to Home
     </button>
@@ -21,7 +19,7 @@
       <div class="accordion-header">Conducting a Security Audit</div>
       <div class="accordion-content">
         <p>
-          Filler: In this audit I scanned external hosts, identified outdated services, and recommended patching schedules.  
+          Filler: In this audit I scanned external hosts, identified outdated services, and recommended patching schedules.<br>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </p>
       </div>
@@ -31,7 +29,7 @@
       <div class="accordion-header">Analyzing Network Structure and Security</div>
       <div class="accordion-content">
         <p>
-          Filler: Mapped VLANs and firewall rules, ran Nmap scans, and documented potential lateral movement paths.  
+          Filler: Mapped VLANs and firewall rules, ran Nmap scans, and documented potential lateral movement paths.<br>
           Pellentesque habitant morbi tristique senectus et netus.
         </p>
       </div>
@@ -41,7 +39,7 @@
       <div class="accordion-header">Using Linux Commands to Manage File Permissions</div>
       <div class="accordion-content">
         <p>
-          Filler: Wrote a Bash script to enforce u=rw,g=r,o= permissions across shared directories and logged changes centrally.  
+          Filler: Wrote a Bash script to enforce u=rw,g=r,o= permissions across shared directories and logged changes centrally.<br>
           Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
       </div>
@@ -51,7 +49,7 @@
       <div class="accordion-header">Applying Filters to SQL Queries</div>
       <div class="accordion-content">
         <p>
-          Filler: Built parameterized queries with WHERE, JOIN, and ORDER BY clauses to extract customer records by region.  
+          Filler: Built parameterized queries with WHERE, JOIN, and ORDER BY clauses to extract customer records by region.<br>
           Ut enim ad minim veniam, quis nostrud exercitation ullamco.
         </p>
       </div>
@@ -61,7 +59,7 @@
       <div class="accordion-header">Identifying Vulnerabilities for a Small Business</div>
       <div class="accordion-content">
         <p>
-          Filler: Ran Nessus scans, ranked findings by CVSS score, and produced an executive summary with remediation steps.  
+          Filler: Ran Nessus scans, ranked findings by CVSS score, and produced an executive summary with remediation steps.<br>
           Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.
         </p>
       </div>
@@ -71,7 +69,7 @@
       <div class="accordion-header">Documenting Incidents with an Incident Handler's Journal</div>
       <div class="accordion-content">
         <p>
-          Filler: Simulated phishing incident, logged detection, containment, and lessons learned in a structured playbook entry.  
+          Filler: Simulated phishing incident, logged detection, containment, and lessons learned in a structured playbook entry.<br>
           Excepteur sint occaecat cupidatat non proident, sunt in culpa.
         </p>
       </div>
@@ -81,7 +79,7 @@
       <div class="accordion-header">Importing and Parsing a Text File in a Security-Related Scenario</div>
       <div class="accordion-content">
         <p>
-          Filler: Wrote a Python tool to parse SIEM log exports, extract IoC fields, and output CSV for downstream analysis.  
+          Filler: Wrote a Python tool to parse SIEM log exports, extract IoC fields, and output CSV for downstream analysis.<br>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </p>
       </div>
@@ -91,5 +89,8 @@
   <footer>
     <p>&copy; 2025 Shayaan Rashedin. All rights reserved.</p>
   </footer>
+
+  <!-- load script after all HTML to guarantee .accordion-header exists -->
+  <script src="script.js"></script>
 </body>
 </html>
