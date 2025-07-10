@@ -14,27 +14,23 @@
     <button id="theme-toggle">Toggle Theme</button>
   </header>
 
+  <!-- NAV: swapped out duplicate links for big buttons -->
   <nav>
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <!-- we keep anchors for quick scroll, but you can swap these to real pages if you prefer -->
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-    </ul>
+    <button onclick="location.href='projects.html'">
+      View Portfolio Projects
+    </button>
+    <button onclick="location.href='homelab.html'">
+      View Home Lab
+    </button>
   </nav>
 
   <main>
+    <!-- ABOUT ME: kept the title, updated the copy -->
     <section id="about">
       <h2>About Me</h2>
       <p>
-        I'm a Computer Engineering student at Toronto Metropolitan University passionate about cybersecurity, systems administration, and IT problem solving. I'm actively pursuing a 12–16 month internship in the cybersecurity field and building a home lab to strengthen my practical skills.
+        I’m a computer engineering student at Toronto Metroploitan University and have a strong interest in cybersecurity and a hands-on approach to solving technical problems. I bring a solid foundation in systems, networks, and security principles, and I’m actively building experience through labs, certifications, and projects. I’m passionate about protecting people and organizations from digital threats and continuously developing the skills needed to contribute to secure, reliable systems. I’m seeking opportunities where I can apply my knowledge, learn from experts, and help strengthen an organization’s cybersecurity posture.
       </p>
-    </section>
-
-    <section id="quick-links" class="centered-buttons">
-      <button onclick="location.href='projects.html'">View Portfolio Projects</button>
-      <button onclick="location.href='homelab.html'">View Home Lab</button>
     </section>
 
     <section id="skills">
@@ -48,9 +44,6 @@
         <li>Soft Skills: Leadership, Teaching, Customer Support</li>
       </ul>
     </section>
-
-    <!-- you can leave Projects & Home Lab here as fallbacks,
-         or remove them entirely now that you have dedicated pages -->
   </main>
 
   <footer>
@@ -58,3 +51,4 @@
   </footer>
 </body>
 </html>
+
