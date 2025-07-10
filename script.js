@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const body = document.body;
 
   toggleBtn.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
+    // Toggle the “dark” class to switch themes per your CSS variable definitions
+    body.classList.toggle('dark');
   });
 });
