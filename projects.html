@@ -334,13 +334,59 @@
 
     <!-- 4. Applying Filters to SQL Queries -->
     <div class="accordion-item">
-      <div class="accordion-header">Applying Filters to SQL Queries</div>
-      <div class="accordion-content">
-        <p>
-          Filler: Built parameterized queries with WHERE, JOIN, and ORDER BY clauses to extract customer records by region.<br>
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-        </p>
-      </div>
+        <div class="accordion-header">Applying Filters to SQL Queries</div>
+        <div class="accordion-content">
+            <h3>Project Description</h3>
+            <p>
+            In this project, I acted as a security professional investigating potential security threats within a large organization. I used SQL queries with filtering conditions (<code>AND</code>, <code>OR</code>, <code>NOT</code>, <code>LIKE</code>) to analyze login attempts and employee data. The goal was to identify unusual login activity and update machine security for employees in specific departments. Through this process, I demonstrated the ability to filter datasets efficiently to identify potential threats. :contentReference[oaicite:0]{index=0}
+            </p>
+
+            <h3>Retrieve After-Hours Failed Login Attempts</h3>
+            <pre><code>SELECT *
+        FROM log_in_attempts
+        WHERE login_time &gt; '18:00'
+        AND (success = 0 OR success = FALSE);
+        </code></pre>
+
+            <h3>Retrieve Login Attempts on Specific Dates</h3>
+            <pre><code>SELECT *
+        FROM log_in_attempts
+        WHERE login_date = '2022-05-09'
+        OR login_date = '2022-05-08';
+        </code></pre>
+
+            <h3>Retrieve Login Attempts Outside of Mexico</h3>
+            <pre><code>SELECT *
+        FROM log_in_attempts
+        WHERE country NOT LIKE 'MEX%'
+        AND country NOT LIKE 'Mexico%';
+        </code></pre>
+
+            <h3>Retrieve Employees in Marketing</h3>
+            <pre><code>SELECT *
+        FROM employees
+        WHERE department = 'Marketing'
+        AND office LIKE 'East%';
+        </code></pre>
+
+            <h3>Retrieve Employees in Finance or Sales</h3>
+            <pre><code>SELECT *
+        FROM employees
+        WHERE department = 'Finance'
+        OR department = 'Sales';
+        </code></pre>
+
+            <h3>Retrieve All Employees Not in IT</h3>
+            <pre><code>SELECT *
+        FROM employees
+        WHERE department != 'Information Technology';
+        </code></pre>
+
+            <h3>Summary</h3>
+            <p>
+            In this project, I applied SQL filtering techniques to identify login anomalies and assist in machine updates for specific employee groups. Using a variety of operators and the <code>LIKE</code> keyword, I successfully queried relevant data to support security investigations. This exercise demonstrated my proficiency in filtering datasets and using SQL to address real-world cybersecurity issues. :contentReference[oaicite:1]{index=1}
+            </p>
+        </div>
     </div>
 
     <!-- 5. Identifying Vulnerabilities for a Small Business -->
