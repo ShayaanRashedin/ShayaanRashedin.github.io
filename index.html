@@ -10,7 +10,7 @@
 <body>
   <header>
     <h1>Shayaan Rashedin</h1>
-    <p>Aspiring Cybersecurity & IT Professional</p>
+    <p>Aspiring Cybersecurity &amp; IT Professional</p>
     <button id="theme-toggle">Toggle Theme</button>
   </header>
 
@@ -18,10 +18,9 @@
     <ul>
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#homelab">Home Lab</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <!-- we keep anchors for quick scroll, but you can swap these to real pages if you prefer -->
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
     </ul>
   </nav>
 
@@ -31,6 +30,11 @@
       <p>
         I'm a Computer Engineering student at Toronto Metropolitan University passionate about cybersecurity, systems administration, and IT problem solving. I'm actively pursuing a 12–16 month internship in the cybersecurity field and building a home lab to strengthen my practical skills.
       </p>
+    </section>
+
+    <section id="quick-links" class="centered-buttons">
+      <button onclick="location.href='projects.html'">View Portfolio Projects</button>
+      <button onclick="location.href='homelab.html'">View Home Lab</button>
     </section>
 
     <section id="skills">
@@ -45,41 +49,8 @@
       </ul>
     </section>
 
-    <section id="projects">
-      <h2>Projects</h2>
-      <ul>
-        <li><strong>Security Audit for Small Business</strong>: Identified vulnerabilities, configured permissions, and presented findings.</li>
-        <li><strong>SQL Injection Filter</strong>: Applied input validation to mitigate common web vulnerabilities.</li>
-        <li><strong>Incident Handler's Journal</strong>: Logged mock incident responses with indicators, containment, and remediation steps.</li>
-        <li><strong>Network Analysis</strong>: Captured and interpreted packets using Wireshark in a lab environment.</li>
-      </ul>
-    </section>
-
-    <section id="homelab">
-      <h2>Cybersecurity Home Lab</h2>
-      <p>
-        My home lab includes Kali Linux, Metasploitable2, and a pfSense firewall VM running on a spare laptop. I've used this setup to simulate penetration testing scenarios, audit vulnerable services, and log attack traces.
-      </p>
-    </section>
-
-    <section id="education">
-      <h2>Education & Certifications</h2>
-      <ul>
-        <li><strong>Bachelor of Computer Engineering</strong>, Toronto Metropolitan University (2023–Present)</li>
-        <li><strong>Google IT Support Certificate</strong> – Coursera (2025)</li>
-        <li><strong>SciTech Certificate</strong> – Port Credit Secondary School (2023)</li>
-      </ul>
-      <p>
-        <a href="resume.pdf" download>Download My Resume (PDF)</a>
-      </p>
-    </section>
-
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:sr17502005@gmail.com">sr17502005@gmail.com</a></p>
-      <p>GitHub: <a href="https://github.com/ShayaanRashedin" target="_blank">github.com/ShayaanRashedin</a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/shayaanrashedin" target="_blank">linkedin.com/in/shayaanrashedin</a></p>
-    </section>
+    <!-- you can leave Projects & Home Lab here as fallbacks,
+         or remove them entirely now that you have dedicated pages -->
   </main>
 
   <footer>
@@ -87,4 +58,3 @@
   </footer>
 </body>
 </html>
-
