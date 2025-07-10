@@ -1,17 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // ─── Theme toggle ──────────────────────────────────
+  // theme toggle (unchanged)
   const toggleBtn = document.getElementById('theme-toggle');
-  const body = document.body;
-  toggleBtn.addEventListener('click', () => {
-    body.classList.toggle('dark');
-  });
+  toggleBtn.addEventListener('click', () => document.body.classList.toggle('dark'));
 
-  // ─── Accordion toggle ───────────────────────────────
-  const headers = document.querySelectorAll('.accordion-header');
-  headers.forEach(header => {
+  // accordion toggle
+  document.querySelectorAll('.accordion-header').forEach(header => {
     header.addEventListener('click', () => {
-      const item = header.parentElement;      // .accordion-item
-      item.classList.toggle('open');
+      header.parentElement.classList.toggle('open');
     });
   });
 });

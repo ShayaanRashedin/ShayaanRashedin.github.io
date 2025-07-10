@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Portfolio Projects | Shayaan Rashedin</title>
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
@@ -10,56 +10,80 @@
 <body>
   <header>
     <h1>Portfolio Projects</h1>
-    <button onclick="location.href='index.html'">← Back to Home</button>
+    <!-- back button now using .nav-button class -->
+    <button class="nav-button" onclick="location.href='index.html'">
+      ← Back to Home
+    </button>
   </header>
 
   <main>
     <div class="accordion-item">
       <div class="accordion-header">Conducting a Security Audit</div>
       <div class="accordion-content">
-        <p>This security audit project involved assessing an organization’s external-facing infrastructure. I scanned for open ports, identified outdated software versions, and provided remediation recommendations. Sample findings: outdated SSH configuration, missing security patches on web server, and weak TLS ciphers.</p>
+        <p>
+          Filler: In this audit I scanned external hosts, identified outdated services, and recommended patching schedules.  
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </p>
       </div>
     </div>
 
     <div class="accordion-item">
       <div class="accordion-header">Analyzing Network Structure and Security</div>
       <div class="accordion-content">
-        <p>In this project, I mapped out the network topology using NetBox, then used Nmap to discover live hosts and trace routes. I documented VLAN segmentation, firewall rule interactions, and highlighted potential lateral movement paths through misconfigured ACLs.</p>
+        <p>
+          Filler: Mapped VLANs and firewall rules, ran Nmap scans, and documented potential lateral movement paths.  
+          Pellentesque habitant morbi tristique senectus et netus.
+        </p>
       </div>
     </div>
 
     <div class="accordion-item">
       <div class="accordion-header">Using Linux Commands to Manage File Permissions</div>
       <div class="accordion-content">
-        <p>I scripted a set of Bash commands to audit and correct file permissions across a Linux file server. The script checks for world-writable files, enforces minimum permission standards, and logs any changes to a centralized report for review.</p>
+        <p>
+          Filler: Wrote a Bash script to enforce u=rw,g=r,o= permissions across shared directories and logged changes centrally.  
+          Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
       </div>
     </div>
 
     <div class="accordion-item">
       <div class="accordion-header">Applying Filters to SQL Queries</div>
       <div class="accordion-content">
-        <p>This exercise demonstrated how to write parameterized SQL queries to extract only relevant data from a customer database. I applied WHERE clauses, JOIN filters, and used ORDER BY to sort results efficiently, improving query performance by 30% on large datasets.</p>
+        <p>
+          Filler: Built parameterized queries with WHERE, JOIN, and ORDER BY clauses to extract customer records by region.  
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+        </p>
       </div>
     </div>
 
     <div class="accordion-item">
       <div class="accordion-header">Identifying Vulnerabilities for a Small Business</div>
       <div class="accordion-content">
-        <p>For a mock SMB, I ran vulnerability scans with Nessus, categorized findings by severity, and drafted an executive summary. Key issues included default credentials on IoT devices, outdated CMS plugins, and absence of multi-factor authentication for admin accounts.</p>
+        <p>
+          Filler: Ran Nessus scans, ranked findings by CVSS score, and produced an executive summary with remediation steps.  
+          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.
+        </p>
       </div>
     </div>
 
     <div class="accordion-item">
       <div class="accordion-header">Documenting Incidents with an Incident Handler's Journal</div>
       <div class="accordion-content">
-        <p>This journal entry details a simulated phishing incident. It covers detection methods, containment steps, eradication procedures, and post-incident lessons learned. I logged timelines, stakeholders involved, and updated playbooks accordingly.</p>
+        <p>
+          Filler: Simulated phishing incident, logged detection, containment, and lessons learned in a structured playbook entry.  
+          Excepteur sint occaecat cupidatat non proident, sunt in culpa.
+        </p>
       </div>
     </div>
 
     <div class="accordion-item">
       <div class="accordion-header">Importing and Parsing a Text File in a Security-Related Scenario</div>
       <div class="accordion-content">
-        <p>I wrote a Python utility to ingest log files exported from a SIEM, parse out key indicators of compromise, and reformat the data into CSV for further analysis. The script handles edge cases like truncated lines and missing timestamps.</p>
+        <p>
+          Filler: Wrote a Python tool to parse SIEM log exports, extract IoC fields, and output CSV for downstream analysis.  
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </p>
       </div>
     </div>
   </main>
@@ -69,5 +93,3 @@
   </footer>
 </body>
 </html>
-
-
