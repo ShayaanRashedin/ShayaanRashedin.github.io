@@ -1,4 +1,4 @@
-/* ─────────────────── VARIABLES & RESET ─────────────────── */
+/* ─────────── VARIABLES & RESET ─────────── */
 :root {
   --accent-color: #000dff;
   --bg-color: #ffffff;
@@ -18,7 +18,7 @@ body.dark {
   box-sizing: border-box;
 }
 
-/* ─────────────────── BASE STYLES ─────────────────── */
+/* ─────────── BASE STYLES ─────────── */
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -41,7 +41,7 @@ section h2 {
   margin-bottom: 0.5rem;
 }
 
-/* ─────────────────── HEADER & THEME TOGGLE ─────────────────── */
+/* ─────────── HEADER & THEME TOGGLE ─────────── */
 header {
   background-color: var(--header-bg);
   padding: 1rem 2rem;
@@ -77,16 +77,17 @@ header > button#theme-toggle:hover {
   opacity: 0.9;
 }
 
-/* ─────────────────── NAV BUTTONS ─────────────────── */
+/* ─────────── NAV BUTTONS ─────────── */
 nav {
-  height: 60vh;               /* give vertical space to truly center */
+  height: 60vh;
   display: flex;
-  justify-content: center;    /* horizontal centering */
-  align-items: center;        /* vertical centering */
-  gap: 2rem;                  /* space between buttons */
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
 }
 
-nav button {
+nav button,
+.nav-button {
   padding: 1rem 2rem;
   font-size: 1.1rem;
   font-weight: 600;
@@ -99,17 +100,19 @@ nav button {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-nav button:hover {
+nav button:hover,
+.nav-button:hover {
   transform: scale(1.05);
   box-shadow: 0 8px 16px rgba(0,0,0,0.3);
 }
 
-nav button:active {
+nav button:active,
+.nav-button:active {
   transform: scale(0.98);
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-/* ─────────────────── SKILLS GRID ─────────────────── */
+/* ─────────── SKILLS GRID ─────────── */
 #skills ul {
   list-style: none;
   display: grid;
@@ -129,7 +132,7 @@ nav button:active {
   color: var(--accent-color);
 }
 
-/* ─────────────────── FOOTER ─────────────────── */
+/* ─────────── FOOTER ─────────── */
 footer {
   text-align: center;
   margin: 2rem 0;
@@ -137,7 +140,7 @@ footer {
   font-size: 0.9rem;
 }
 
-/* ─────────────────── ACCORDION STYLES ─────────────────── */
+/* ─────────── ACCORDION STYLES ─────────── */
 .accordion-item {
   border-bottom: 1px solid #ccc;
 }
@@ -147,11 +150,26 @@ footer {
   cursor: pointer;
   background-color: var(--header-bg);
   font-weight: 600;
+  position: relative;
   transition: background-color 0.2s ease;
 }
 
 .accordion-header:hover {
   background-color: rgba(0,0,0,0.05);
+}
+
+/* arrow icons */
+.accordion-header::after {
+  content: '▶';
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.2s ease;
+}
+
+.accordion-item.open .accordion-header::after {
+  content: '▼';
 }
 
 .accordion-content {
@@ -161,30 +179,4 @@ footer {
 
 .accordion-item.open .accordion-content {
   display: block;
-}
-
-/* ─────────────────── NAV-BUTTON CLASS (Back to Home) ─────────────────── */
-.nav-button {
-  padding: 1rem 2rem;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-  background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
-  border: none;
-  border-radius: 0.75rem;
-  cursor: pointer;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.nav-button:hover,
-nav button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-}
-
-.nav-button:active,
-nav button:active {
-  transform: scale(0.98);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
