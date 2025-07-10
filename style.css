@@ -1,4 +1,4 @@
-/* ─────────────────── CYBERSECURITY PORTFOLIO THEME ─────────────────── */
+/* ─────────── CYBERSECURITY PORTFOLIO THEME ─────────── */
 
 /* Variables for light/dark mode */
 :root {
@@ -32,7 +32,6 @@ body {
   line-height: 1.6;
 }
 main { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
-
 a, button { font-family: inherit; }
 
 /* Header */
@@ -65,7 +64,10 @@ header p {
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-#theme-toggle:hover { transform: translateY(-2px); box-shadow: 0 6px 8px rgba(0,0,0,0.15); }
+#theme-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+}
 
 /* Sections Titles */
 section h2 {
@@ -120,8 +122,14 @@ button, .nav-button {
   box-shadow: 0 6px 12px rgba(0,0,0,0.15);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-button:hover, .nav-button:hover { transform: scale(1.05); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
-button:active, .nav-button:active { transform: scale(0.98); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+button:hover, .nav-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+button:active, .nav-button:active {
+  transform: scale(0.98);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
 
 /* Accordion / Projects */
 .accordion-item {
@@ -140,7 +148,9 @@ button:active, .nav-button:active { transform: scale(0.98); box-shadow: 0 4px 8p
   background: var(--card-bg);
   transition: background 0.2s ease;
 }
-.accordion-header:hover { background: rgba(15,120,209,0.1); }
+.accordion-header:hover {
+  background: rgba(15,120,209,0.1);
+}
 .accordion-header::after {
   content: '▶';
   position: absolute;
@@ -153,17 +163,20 @@ button:active, .nav-button:active { transform: scale(0.98); box-shadow: 0 4px 8p
 .accordion-item.open .accordion-header::after {
   transform: translateY(-50%) rotate(90deg);
 }
+
+/* Scrollable Content */
 .accordion-content {
   max-height: 0;
   overflow: hidden;
   padding: 0 1.25rem;
-  transition: max-height 0.3s ease, padding 0.3s ease;
+  transition: padding 0.3s ease;
   background: var(--card-bg);
   border-top: 1px solid var(--border-color);
 }
 .accordion-item.open .accordion-content {
   padding: 1rem 1.25rem;
-  max-height: 500px;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 /* Footer */
