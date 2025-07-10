@@ -270,10 +270,65 @@
     <div class="accordion-item">
       <div class="accordion-header">Using Linux Commands to Manage File Permissions</div>
       <div class="accordion-content">
-        <p>
-          Filler: Wrote a Bash script to enforce u=rw,g=r,o= permissions across shared directories and logged changes centrally.<br>
-          Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
+        <h3>Current File Permissions</h3>
+        <p>This document displays the file structure of the <code>/home/researcher2/projects</code> directory and the permissions of the files and subdirectory it contains.</p>
+        <p>In the <code>/home/researcher2/projects</code> directory, there are five files with the following permissions:</p>
+        <ul>
+          <li><code>project_k.txt</code>: User = read, write; Group = read, write; Other = read, write</li>
+          <li><code>project_m.txt</code>: User = read, write; Group = read; Other = none</li>
+          <li><code>project_r.txt</code>: User = read, write; Group = read, write; Other = read</li>
+          <li><code>project_t.txt</code>: User = read, write; Group = read, write; Other = read</li>
+          <li><code>.project_x.txt</code>: User = read, write; Group = write; Other = none</li>
+        </ul>
+        <p>There is also one subdirectory named <code>drafts</code> with permissions:</p>
+        <ul>
+          <li>User = read, write, execute</li>
+          <li>Group = execute</li>
+          <li>Other = none</li>
+        </ul>
+
+        <h3>Project Description</h3>
+        <p>In this activity, I acted as a security professional managing file and directory permissions for a research team. My main goal was to analyze current permissions, determine if they matched authorization policies, and use Linux commands to correct any discrepancies. This ensured that only the appropriate users could access or modify specific files and directories.</p>
+
+        <h3>Check File and Directory Details</h3>
+        <p>To inspect the current file and directory permissions, I used the following command:</p>
+        <pre><code class="bash">ls -la /home/researcher2/projects</code></pre>
+        <p>This lists all files (including hidden), their permission strings, ownerships, and other details, helping identify which needed adjustment.</p>
+
+        <h3>Describe the Permissions String</h3>
+        <p>One example string is:</p>
+        <pre><code class="bash">-rw-rw-r-- 1 researcher2 researcher2 1234 project_k.txt</code></pre>
+        <p>This breaks down as:</p>
+        <ul>
+          <li><code>-</code>: Regular file</li>
+          <li><code>rw-</code>: User (owner) has read/write</li>
+          <li><code>rw-</code>: Group has read/write</li>
+          <li><code>r--</code>: Others have read only</li>
+        </ul>
+
+        <h3>Change File Permissions</h3>
+        <p>The organization prohibits write for "others." To correct <code>project_k.txt</code>:</p>
+        <p><strong>Command used:</strong></p>
+        <pre><code class="bash">chmod o-w /home/researcher2/projects/project_k.txt</code></pre>
+        <p><strong>Result:</strong></p>
+        <pre><code class="bash">-rw-rw-r-- 1 researcher2 researcher2 1234 project_k.txt</code></pre>
+
+        <h3>Change Permissions on Hidden File</h3>
+        <p>For <code>.project_x.txt</code>, only user and group should read:</p>
+        <p><strong>Command used:</strong></p>
+        <pre><code class="bash">chmod 440 /home/researcher2/projects/.project_x.txt</code></pre>
+        <p><strong>Result:</strong></p>
+        <pre><code class="bash">-r--r----- 1 researcher2 researcher2 987 .project_x.txt</code></pre>
+
+        <h3>Change Directory Permissions</h3>
+        <p>To restrict <code>drafts</code> to researcher2 only:</p>
+        <p><strong>Command used:</strong></p>
+        <pre><code class="bash">chmod 700 /home/researcher2/projects/drafts</code></pre>
+        <p><strong>Result:</strong></p>
+        <pre><code class="bash">drwx------ 2 researcher2 researcher2 4096 drafts</code></pre>
+
+        <h3>Summary</h3>
+        <p>In this exercise, I checked file and directory permissions using <code>ls -la</code>, interpreted the permission strings, and modified access controls with <code>chmod</code>. I ensured only authorized users had appropriate rights, revoking unnecessary permissions. This aligned the system with secure access policies and supported organizational data protection efforts.</p>
       </div>
     </div>
 
