@@ -496,16 +496,52 @@
         </div>
     </div>
 
-    <!-- 7. Importing and Parsing a Text File in a Security-Related Scenario -->
+   <!-- 7. Importing and Parsing a Text File in a Security-Related Scenario -->
     <div class="accordion-item">
-      <div class="accordion-header">Importing and Parsing a Text File in a Security-Related Scenario</div>
-      <div class="accordion-content">
-        <p>
-          Filler: Wrote a Python tool to parse SIEM log exports, extract IoC fields, and output CSV for downstream analysis.<br>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </p>
-      </div>
+        <div class="accordion-header">
+            Importing and Parsing a Text File in a Security-Related Scenario
+        </div>
+        <div class="accordion-content">
+            <h3>Project Description</h3>
+            <p>
+            You are a security professional at a healthcare company, tasked with maintaining a list of employee IP addresses that are permitted to access a restricted subnetwork. This list, stored in <code>allow_list.txt</code>, must be regularly updated to remove any IPs identified in a separate <code>remove_list</code> that denotes revoked access. The goal of the algorithm is to identify and remove any IPs listed in the remove list from the allow list file using Python. :contentReference[oaicite:0]{index=0}
+            </p>
+
+            <h3>Open the File in Read Mode</h3>
+            <pre><code>with open("allow_list.txt", "r") as file:
+            ip_addresses = file.read()
+        </code></pre>
+
+            <h3>Split Contents into a List</h3>
+            <pre><code>ip_addresses = ip_addresses.split()
+        </code></pre>
+
+            <h3>Iterate Through the Remove List</h3>
+            <pre><code>remove_list = ["192.168.1.1", "10.0.0.5"]
+        for ip in remove_list:
+            if ip in ip_addresses:
+                ip_addresses.remove(ip)
+        </code></pre>
+
+            <h3>Write the Updated List Back to the File</h3>
+            <pre><code>with open("allow_list.txt", "w") as file:
+            file.write("\n".join(ip_addresses))
+        </code></pre>
+
+            <h3>Summary</h3>
+            <p>
+            This Python algorithm automates the upkeep of an IP allow-list by:
+            <ol>
+                <li>Reading the existing list from <code>allow_list.txt</code>.</li>
+                <li>Parsing it into a Python list for easy manipulation.</li>
+                <li>Removing any addresses found in a predefined <code>remove_list</code>.</li>
+                <li>Writing the cleaned list back to the original file.</li>
+            </ol>
+            By automating these steps, it ensures that only currently authorized IPs retain access, strengthening network security through up-to-date access controls. :contentReference[oaicite:1]{index=1}
+            </p>
+        </div>
     </div>
+
   </main>
 
   <footer>
