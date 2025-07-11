@@ -186,3 +186,39 @@ footer {
   font-size: 0.9rem;
   color: var(--text-color);
 }
+
+/* ─────────── PROFILE PICTURE ─────────── */
+.profile-pic {
+  display: block;
+  margin: 1.5rem auto;
+  max-width: 200px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Ensure the Back button matches nav buttons */
+nav button,
+.nav-button {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+nav button:hover,
+.nav-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+nav button:active,
+.nav-button:active {
+  transform: scale(0.98);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}

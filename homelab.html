@@ -5,27 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Home Lab | Shayaan Rashedin</title>
   <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
 </head>
 <body>
   <header>
     <h1>My Cybersecurity Home Lab</h1>
-    <button onclick="location.href='index.html'">← Back to Home</button>
+    <button id="theme-toggle">Toggle Theme</button>
+    <button class="nav-button" onclick="location.href='index.html'">
+      ← Back to Home
+    </button>
   </header>
 
   <main>
     <p>
       My home lab includes Kali Linux, Metasploitable2, and a pfSense firewall VM running on a spare laptop. I've used this setup to simulate penetration testing scenarios, audit vulnerable services, and log attack traces.
     </p>
-    <p>
-      <strong>Key components:</strong>
-      <ul>
-        <li>Kali Linux (latest rolling release)</li>
-        <li>Metasploitable2 vulnerable VM</li>
-        <li>pfSense firewall with custom rules</li>
-        <li>ELK stack for log aggregation and visualization</li>
-        <li>VirtualBox host on Ubuntu server</li>
-      </ul>
-    </p>
+    <p><strong>Key components:</strong></p>
+    <ul>
+      <li>Kali Linux (latest rolling release)</li>
+      <li>Metasploitable2 vulnerable VM</li>
+      <li>pfSense firewall with custom rules</li>
+      <li>ELK stack for log aggregation and visualization</li>
+      <li>VirtualBox host on Ubuntu server</li>
+    </ul>
     <p>
       Feel free to explore my <a href="https://github.com/ShayaanRashedin/home-lab-configs" target="_blank">GitHub repo</a> for full setup scripts and diagrams.
     </p>
