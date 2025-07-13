@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Home Lab | Shayaan Rashedin</title>
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
 </head>
 <body>
   <header>
-    <h1>My Cybersecurity Home Lab</h1>
+    <h1>Cybersecurity Home Lab</h1>
     <button id="theme-toggle">Toggle Theme</button>
     <button class="nav-button" onclick="location.href='index.html'">
       ← Back to Home
@@ -17,20 +17,54 @@
   </header>
 
   <main>
-    <p>
-      My home lab includes Kali Linux, Metasploitable2, and a pfSense firewall VM running on a spare laptop. I've used this setup to simulate penetration testing scenarios, audit vulnerable services, and log attack traces.
-    </p>
-    <p><strong>Key components:</strong></p>
-    <ul>
-      <li>Kali Linux (latest rolling release)</li>
-      <li>Metasploitable2 vulnerable VM</li>
-      <li>pfSense firewall with custom rules</li>
-      <li>ELK stack for log aggregation and visualization</li>
-      <li>VirtualBox host on Ubuntu server</li>
-    </ul>
-    <p>
-      Feel free to explore my <a href="https://github.com/ShayaanRashedin/home-lab-configs" target="_blank">GitHub repo</a> for full setup scripts and diagrams.
-    </p>
+    <!-- 1. Home Lab Landing Page -->
+    <section id="lab-intro">
+      <h2>Home Lab Overview</h2>
+      <p>
+        To build real-world cybersecurity skills, I created a home lab using <strong>Kali Linux</strong> and <strong>Metasploitable 2</strong> to explore both offensive (red team) and defensive (blue team) techniques. This environment allows me to practice vulnerability scanning, exploitation, web application attacks, log analysis, and intrusion detection using industry-standard tools like Metasploit, Nmap, Burp Suite, Wireshark, ELK, and Security Onion.
+      </p>
+      <p>
+        Each project is documented to show not only how attacks work, but also how to detect and prevent them—demonstrating a full-stack approach to cybersecurity and my growth as a practitioner.
+      </p>
+
+      <!-- Placeholder for your diagram or screenshot -->
+      <div class="lab-diagram-placeholder">
+        <p>Lab Diagram / Setup Screenshot Placeholder</p>
+      </div>
+    </section>
+
+    <!-- Key Projects grid -->
+    <section id="lab-projects">
+      <h2>Key Projects</h2>
+      <div class="project-grid">
+        <!-- Filler project cards -->
+        <div class="project-card">
+          <h3>Project Alpha</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <button onclick="location.href='projects.html#Conducting a Security Audit'">
+            View Project
+          </button>
+        </div>
+
+        <div class="project-card">
+          <h3>Project Beta</h3>
+          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+          <button onclick="location.href='projects.html#Analyzing Network Structure and Security'">
+            View Project
+          </button>
+        </div>
+
+        <div class="project-card">
+          <h3>Project Gamma</h3>
+          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in.</p>
+          <button onclick="location.href='projects.html#Using Linux Commands to Manage File Permissions'">
+            View Project
+          </button>
+        </div>
+
+        <!-- Add more .project-card divs here as you complete new lab tasks -->
+      </div>
+    </section>
   </main>
 
   <footer>
