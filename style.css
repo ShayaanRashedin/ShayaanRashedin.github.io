@@ -285,3 +285,54 @@ nav button:active,
 .project-card button:hover {
   opacity: 0.9;
 }
+
+/* ─────────── IMPROVED PROJECT READABILITY ─────────── */
+.accordion-content {
+  line-height: 1.6;
+}
+
+/* Space out headings inside each project */
+.accordion-content h3,
+.accordion-content h4 {
+  margin: 1rem 0 0.5rem;
+  color: var(--accent-color);
+}
+
+/* Indent all lists and add a little breathing room */
+.accordion-content ul,
+.accordion-content ol {
+  margin: 0.5rem 0 1rem 1.5rem;
+  padding-left: 0;
+}
+
+.accordion-content ul li,
+.accordion-content ol li {
+  margin-bottom: 0.5rem;
+}
+
+/* If you have nested lists, give them extra indent */
+.accordion-content ul ul,
+.accordion-content ol ol,
+.accordion-content ul ol,
+.accordion-content ol ul {
+  margin-left: 1rem;
+}
+
+/* Tables: add padding and spacing */
+.accordion-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.accordion-content th,
+.accordion-content td {
+  text-align: left;
+  padding: 0.5rem;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+/* Paragraphs: give them room to breathe */
+.accordion-content p {
+  margin: 0 0 1rem;
+}
