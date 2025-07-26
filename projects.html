@@ -17,54 +17,187 @@
   </header>
 
   <main>
-    <!-- 1. Conducting a Security Audit -->
-    <div class="accordion-item">
-      <div class="accordion-header">Conducting a Security Audit</div>
-      <div class="accordion-content">
-        <h3>Project Description</h3>
-        <p>
-          In this security audit project, I assessed Botium Toys’ security controls and compliance with key standards (PCI DSS, GDPR, SOC 2), identified critical gaps, and provided prioritized recommendations.
-        </p>
-        <h3>1. Organization Background &amp; Audit Scope</h3>
-        <p>
-          <strong>Botium Toys</strong> is a retail company selling toys online and in physical stores. They manage a mix of digital and physical assets—employee workstations, on-premises servers, an internal network, plus some legacy infrastructure.<br>
-          Customer payments (credit cards) and sensitive personal data (PII/SPII) are processed and stored internally.<br>
-          <em>This audit</em> evaluates current security controls and compliance with PCI DSS, GDPR, and SOC 2 standards.
-        </p>
-        <p>
-          <strong>Scope:</strong> Entire security program—technology, physical security, and processes.<br>
-          <strong>Goals:</strong> Assess controls, identify compliance gaps, and recommend steps to reduce risk.
-        </p>
-        <h3>2. Controls Assessment Checklist</h3>
-        <table class="checklist-table">
-          <thead>
-            <tr><th>Control</th><th>Status</th><th>Notes</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Least Privilege</td><td>❌</td><td>All employees have unrestricted access; implement role-based restrictions.</td></tr>
-            <!-- …other rows… -->
-            <tr><td>Fire Safety Systems</td><td>✅</td><td>Alarms and suppression systems functional.</td></tr>
-          </tbody>
-        </table>
-        <h3>3. Compliance Checklist</h3>
-        <table class="checklist-table">
-          <thead>
-            <tr><th>Standard</th><th>Requirement</th><th>Status</th><th>Notes</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>PCI DSS</td><td>Authorized Access to Card Data</td><td>❌</td><td>All employees can view card data; restrict by role.</td></tr>
-            <!-- …other rows… -->
-            <tr><td>Data Availability</td><td>Authorized Access Only</td><td>❌</td><td>Universal access; limit to authorized roles.</td></tr>
-          </tbody>
-        </table>
-        <h3>4. Recommendations</h3>
-        <ul>
-          <li>Implement role-based access control and enforce least privilege.</li>
-          <!-- …other items… -->
-          <li>Expand security awareness training covering PCI DSS, GDPR, and SOC 2.</li>
-        </ul>
-      </div>
+  <!-- 1. Conducting a Security Audit -->
+  <div class="accordion-item">
+    <div class="accordion-header">Conducting a Security Audit</div>
+    <div class="accordion-content">
+      <h3>Project Description</h3>
+      <p>
+        This cybersecurity audit simulated a real-world risk and compliance assessment for Botium Toys, a retail company handling storefront sales and e-commerce with sensitive customer data. I evaluated existing controls, identified gaps against PCI DSS, GDPR, and SOC 2, and provided prioritized recommendations to strengthen security posture.
+      </p>
+
+      <h3>Scenario</h3>
+      <p>
+        Botium Toys operates both a physical storefront and an online platform, managing PII and credit card data. Their infrastructure includes on-premises servers, employee workstations, legacy hardware, and third-party software. The audit scope covered technology, processes, and policies related to data protection and regulatory compliance.
+      </p>
+
+      <h3>Controls Assessment Checklist</h3>
+      <table class="checklist-table">
+        <thead>
+          <tr>
+            <th>Control</th>
+            <th>Status</th>
+            <th>Explanation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Least Privilege</td>
+            <td>❌</td>
+            <td>All employees have unrestricted access; implement role‑based restrictions.</td>
+          </tr>
+          <tr>
+            <td>Disaster Recovery Plan</td>
+            <td>❌</td>
+            <td>No formal DRP; develop and test a comprehensive plan.</td>
+          </tr>
+          <tr>
+            <td>Password Policies</td>
+            <td>❌</td>
+            <td>Weak standards; enforce complexity, rotation, and lockout.</td>
+          </tr>
+          <tr>
+            <td>Separation of Duties</td>
+            <td>❌</td>
+            <td>Critical functions handled by one person; split responsibilities.</td>
+          </tr>
+          <tr>
+            <td>Firewall</td>
+            <td>✅</td>
+            <td>Properly configured to control inbound/outbound traffic.</td>
+          </tr>
+          <tr>
+            <td>Intrusion Detection System (IDS)</td>
+            <td>❌</td>
+            <td>Missing IDS; install and tune alerts for suspicious activity.</td>
+          </tr>
+          <tr>
+            <td>Backups</td>
+            <td>❌</td>
+            <td>No regular backups; schedule automated backups.</td>
+          </tr>
+          <tr>
+            <td>Antivirus Software</td>
+            <td>✅</td>
+            <td>Up‑to‑date AV deployed and monitored.</td>
+          </tr>
+          <tr>
+            <td>Legacy System Monitoring</td>
+            <td>❌</td>
+            <td>No structured maintenance; document and review legacy platforms.</td>
+          </tr>
+          <tr>
+            <td>Encryption</td>
+            <td>❌</td>
+            <td>Data at rest/in transit is unencrypted; apply full‑disk & data‑level encryption.</td>
+          </tr>
+          <tr>
+            <td>Password Management System</td>
+            <td>❌</td>
+            <td>No centralized vault; adopt a secure password manager.</td>
+          </tr>
+          <tr>
+            <td>Physical Locks</td>
+            <td>✅</td>
+            <td>Facility access controlled by locks.</td>
+          </tr>
+          <tr>
+            <td>CCTV Surveillance</td>
+            <td>✅</td>
+            <td>Cameras operational for deterrence and forensics.</td>
+          </tr>
+          <tr>
+            <td>Fire Safety Systems</td>
+            <td>✅</td>
+            <td>Alarms and suppression systems functional.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Compliance Checklist</h3>
+      <table class="checklist-table">
+        <thead>
+          <tr>
+            <th>Requirement</th>
+            <th>Status</th>
+            <th>Explanation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Authorized access to card data</td>
+            <td>❌</td>
+            <td>All employees can view cardholder data; restrict by role.</td>
+          </tr>
+          <tr>
+            <td>Secure storage & transmission</td>
+            <td>❌</td>
+            <td>Card data stored without encryption.</td>
+          </tr>
+          <tr>
+            <td>Encryption procedures</td>
+            <td>✅</td>
+            <td>Recommend implementing encryption company‑wide.</td>
+          </tr>
+          <tr>
+            <td>Password management policies</td>
+            <td>✅</td>
+            <td>Adopt complexity and renewal policies.</td>
+          </tr>
+          <tr>
+            <td>GDPR data privacy</td>
+            <td>❌</td>
+            <td>PII stored unencrypted; enforce strict access controls.</td>
+          </tr>
+          <tr>
+            <td>GDPR breach notification</td>
+            <td>✅</td>
+            <td>Plan exists to notify within 72 hours.</td>
+          </tr>
+          <tr>
+            <td>Data classification</td>
+            <td>❌</td>
+            <td>No formal classification; implement asset inventory & class scheme.</td>
+          </tr>
+          <tr>
+            <td>Privacy policy enforcement</td>
+            <td>✅</td>
+            <td>Policies in place and applied across departments.</td>
+          </tr>
+          <tr>
+            <td>User access policies</td>
+            <td>❌</td>
+            <td>No formal access policy; establish and enforce role‑based rules.</td>
+          </tr>
+          <tr>
+            <td>Data integrity</td>
+            <td>✅</td>
+            <td>Controls ensure data remains accurate and unaltered.</td>
+          </tr>
+          <tr>
+            <td>Data availability</td>
+            <td>❌</td>
+            <td>Universal access currently; limit to authorized roles.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Recommendations</h3>
+      <ul>
+        <li>Implement role‑based access control (RBAC) and enforce least privilege.</li>
+        <li>Deploy a centralized password management solution.</li>
+        <li>Introduce full‑disk and data‑level encryption.</li>
+        <li>Develop, test, and regularly review a DRP and backup schedule.</li>
+        <li>Install and configure an IDS with alerting.</li>
+        <li>Maintain legacy systems with formal documentation and review.</li>
+        <li>Enforce separation of duties for critical functions.</li>
+        <li>Create a formal data classification and inventory program.</li>
+        <li>Continue privacy & security training for PCI DSS, GDPR & SOC 2 compliance.</li>
+        <li>Expand security awareness training to mitigate phishing risks.</li>
+      </ul>
     </div>
+  </div>
+
 
     <!-- 2. Analyzing Network Structure and Security -->
     <div class="accordion-item">
