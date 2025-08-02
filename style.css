@@ -336,3 +336,19 @@ nav button:active,
 .accordion-content p {
   margin: 0 0 1rem;
 }
+
+/* ─────────── LAB DIAGRAM STYLING ─────────── */
+.lab-images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1rem 0 2rem;
+}
+
+.lab-img {
+  max-width: 45%;
+  height: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+}
