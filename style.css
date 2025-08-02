@@ -343,9 +343,11 @@ nav button:active,
   justify-content: center;
   align-items: flex-start;
   gap: 1.5rem;
-  flex-wrap: wrap;  /* still wrap on narrow screens */
+  flex-wrap: nowrap;    /* force side by side */
+  overflow-x: auto;     /* scroll if viewport is too narrow */
   margin: 1.5rem 0 2rem;
 }
+
 
 .lab-img {
   width: 400px;       /* much larger thumbnail */
