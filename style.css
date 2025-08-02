@@ -338,21 +338,18 @@ nav button:active,
 }
 
 /* ─────────── LAB DIAGRAM THUMBNAILS ─────────── */
-#lab-diagram h2 {
-  margin-top: 2rem;
-}
-
 .lab-images {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   gap: 1rem;
-  flex-wrap: nowrap; /* force side by side */
+  flex-wrap: wrap; /* allow wrapping on very narrow screens */
   margin: 1rem 0 2rem;
 }
 
 .lab-img {
-  width: 180px;        /* fixed thumbnail width */
+  width: 280px;       /* larger thumbnail width */
+  max-width: 45%;     /* shrink on small screens */
   height: auto;
   object-fit: contain;
   border: 1px solid var(--border-color);
@@ -365,4 +362,3 @@ nav button:active,
   transform: translateY(-4px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }
-
