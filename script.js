@@ -31,3 +31,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+// Lightbox functionality
+const lightbox = document.getElementById('lightbox');
+const lbImg    = document.getElementById('lightbox-img');
+
+document.querySelectorAll('.lab-img').forEach(img => {
+  img.addEventListener('click', () => {
+    lbImg.src = img.src;
+    lightbox.style.display = 'flex';
+  });
+});
+
+function closeLightbox() {
+  lightbox.style.display = 'none';
+  lbImg.src = '';
+}

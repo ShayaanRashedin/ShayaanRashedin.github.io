@@ -342,25 +342,41 @@ nav button:active,
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 1.5rem;
-  flex-wrap: nowrap;    /* force side by side */
-  overflow-x: auto;     /* scroll if viewport is too narrow */
+  gap: 1rem;
+  flex-wrap: wrap;       /* wrap onto next line if really narrow */
   margin: 1.5rem 0 2rem;
 }
 
-
 .lab-img {
-  width: 400px;       /* much larger thumbnail */
-  max-width: 90%;     /* never exceed viewport */
-  height: auto;
-  object-fit: contain;
+  width: 48%;             /* roughly half the container minus gap */
+  max-width: 500px;       /* never exceed this */
+  cursor: zoom-in;        /* indicates click-to-enlarge */
   border: 1px solid var(--border-color);
   border-radius: 0.5rem;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .lab-img:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* ─────────── LIGHTBOX STYLES ─────────── */
+#lightbox {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+  cursor: zoom-out;
+  z-index: 1000;
+}
+
+#lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 0.5rem;
 }
