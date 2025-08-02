@@ -342,23 +342,23 @@ nav button:active,
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 1rem;
-  flex-wrap: wrap; /* allow wrapping on very narrow screens */
-  margin: 1rem 0 2rem;
+  gap: 1.5rem;
+  flex-wrap: wrap;  /* still wrap on narrow screens */
+  margin: 1.5rem 0 2rem;
 }
 
 .lab-img {
-  width: 280px;       /* larger thumbnail width */
-  max-width: 45%;     /* shrink on small screens */
+  width: 400px;       /* much larger thumbnail */
+  max-width: 90%;     /* never exceed viewport */
   height: auto;
   object-fit: contain;
   border: 1px solid var(--border-color);
   border-radius: 0.5rem;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .lab-img:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  transform: translateY(-6px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
 }
