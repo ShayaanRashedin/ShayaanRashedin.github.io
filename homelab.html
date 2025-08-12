@@ -4,88 +4,102 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Home Lab | Shayaan Rashedin</title>
+  <meta name="description" content="Two‑VM cybersecurity home lab using Kali Linux and Metasploitable 2 with projects spanning scanning, exploitation, and detection." />
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
 </head>
 <body>
-  <header>
-    <h1>Cybersecurity Home Lab</h1>
-    <button id="theme-toggle">Toggle Theme</button>
-    <button class="nav-button" onclick="location.href='index.html'">
-      ← Back to Home
-    </button>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Homepage">
+        <span class="brand-mark">SR</span>
+        <span class="brand-text">Shayaan Rashedin</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="projects.html">Projects</a>
+        <a class="active" href="homelab.html">Home Lab</a>
+        <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a href="mailto:your.email@example.com">Contact</a>
+      </nav>
+      <button id="theme-toggle" aria-label="Toggle dark mode">Toggle Theme</button>
+    </div>
   </header>
 
-  <main>
-    <!-- 1. Home Lab Landing Page -->
+  <main class="container">
     <section id="lab-intro">
-      <h2>Home Lab Overview</h2>
+      <h1>Cybersecurity Home Lab</h1>
       <p>
-        To build real-world cybersecurity skills, I created a home lab using <strong>Kali Linux</strong> and <strong>Metasploitable 2</strong> to explore both offensive (red team) and defensive (blue team) techniques. This environment allows me to practice vulnerability scanning, exploitation, web application attacks, log analysis, and intrusion detection using industry-standard tools like Metasploit, Nmap, Burp Suite, Wireshark, ELK, and Security Onion.
+        I built a home lab to practice both offensive and defensive skills using <strong>Kali Linux</strong> and <strong>Metasploitable 2</strong> in a safe, isolated environment. The lab supports vulnerability scanning, exploitation practice, traffic capture, and detection/response workflows.
       </p>
-      <p>
-        Each project is documented to show not only how attacks work, but also how to detect and prevent them—demonstrating a full-stack approach to cybersecurity and my growth as a practitioner.
-      </p>
+      <div class="tech-stack">
+        <span>Kali Linux</span><span>Metasploitable 2</span><span>OpenVAS/GVM</span><span>Nmap</span><span>Metasploit</span><span>Wireshark</span><span>Burp Suite</span><span>VirtualBox</span>
+      </div>
+    </section>
 
-      <!-- Lab Setup Screenshot -->
-      <section id="lab-diagram">
-        <h2>Lab Diagram / Setup Screenshot</h2>
-        <div class="lab-images">
-          <img
-            src="./images/Kali_Linux_Image.png"
-            alt="Kali Linux VM Configuration"
-            class="lab-img"
-          />
-          <img
-            src="./images/Metasploitable_Image.png"
-            alt="Metasploitable2 VM Configuration"
-            class="lab-img"
-          />
-        </div>
-      </section>
-
-      <!-- Lightbox overlay -->
-      <div id="lightbox" onclick="closeLightbox()">
+    <section id="lab-diagram">
+      <h2>Topology / Setup</h2>
+      <p class="muted">Click any image to enlarge.</p>
+      <div class="lab-images">
+        <figure>
+          <img src="./images/Kali_Linux_Image.png" alt="Kali Linux VM configuration" class="lab-img" />
+          <figcaption>Kali VM configuration</figcaption>
+        </figure>
+        <figure>
+          <img src="./images/Metasploitable_Image.png" alt="Metasploitable 2 VM configuration" class="lab-img" />
+          <figcaption>Metasploitable 2 VM configuration</figcaption>
+        </figure>
+      </div>
+      <div id="lightbox" role="dialog" aria-modal="true" aria-label="Expanded image" onclick="closeLightbox()">
         <img id="lightbox-img" src="" alt="Expanded screenshot" />
       </div>
     </section>
 
-    <!-- Key Projects grid -->
     <section id="lab-projects">
-      <h2>Key Projects</h2>
+      <h2>Key Projects from the Lab</h2>
       <div class="project-grid">
-        <!-- Filler project cards -->
-        <div class="project-card">
-          <h3>Project Alpha</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <button onclick="location.href='projects.html#Conducting a Security Audit'">
-            View Project
-          </button>
-        </div>
-
-        <div class="project-card">
-          <h3>Project Beta</h3>
-          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-          <button onclick="location.href='projects.html#Analyzing Network Structure and Security'">
-            View Project
-          </button>
-        </div>
-
-        <div class="project-card">
-          <h3>Project Gamma</h3>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in.</p>
-          <button onclick="location.href='projects.html#Using Linux Commands to Manage File Permissions'">
-            View Project
-          </button>
-        </div>
-
-        <!-- Add more .project-card divs here as you complete new lab tasks -->
+        <a class="project-card" href="projects.html#conducting-a-security-audit">
+          <h3>Security Audit</h3>
+          <p>Controls review &amp; recommendations mapped to standards.</p>
+          <div class="tags"><span>Audit</span><span>Compliance</span></div>
+        </a>
+        <a class="project-card" href="projects.html#analyzing-network-structure-and-security">
+          <h3>Network Hardening</h3>
+          <p>DDoS playbook and firewall improvements.</p>
+          <div class="tags"><span>NIST CSF</span><span>Firewall</span></div>
+        </a>
+        <a class="project-card" href="projects.html#using-linux-commands-to-manage-file-permissions">
+          <h3>Linux Permissions</h3>
+          <p>Enforced least privilege across files &amp; directories.</p>
+          <div class="tags"><span>Linux</span><span>chmod</span></div>
+        </a>
+        <a class="project-card" href="projects.html#applying-filters-to-sql-queries">
+          <h3>SQL Detection</h3>
+          <p>Logical filtering to surface login anomalies.</p>
+          <div class="tags"><span>SQL</span><span>Detection</span></div>
+        </a>
+        <a class="project-card" href="projects.html#identifying-vulnerabilities-for-a-small-business">
+          <h3>Vulnerability Assessment</h3>
+          <p>NIST 800‑30 based triage and remediation.</p>
+          <div class="tags"><span>Risk</span><span>NIST</span></div>
+        </a>
+        <a class="project-card" href="projects.html#documenting-incidents-with-an-incident-handlers-journal">
+          <h3>Incident Journal</h3>
+          <p>Ransomware response notes and lessons learned.</p>
+          <div class="tags"><span>IR</span><span>Ransomware</span></div>
+        </a>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 Shayaan Rashedin. All rights reserved.</p>
+    <div class="container footer-inner">
+      <p>© 2025 Shayaan Rashedin</p>
+      <div class="footer-links">
+        <a href="mailto:your.email@example.com">Email</a>
+        <a href="https://www.linkedin.com/in/your-linkedin/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/your-github" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
   </footer>
 </body>
 </html>

@@ -4,55 +4,159 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shayaan Rashedin | Cybersecurity Portfolio</title>
+  <meta name="description" content="Cybersecurity portfolio of Shayaan Rashedin — projects, home lab, and skills across red and blue team fundamentals." />
+  <meta property="og:title" content="Shayaan Rashedin | Cybersecurity Portfolio" />
+  <meta property="og:description" content="Hands-on security projects, home lab (Kali + Metasploitable), and recruiter-ready highlights." />
+  <meta name="theme-color" content="#2176ff" />
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Shayaan Rashedin",
+    "jobTitle": "Cybersecurity Student",
+    "url": "https://example.com",
+    "sameAs": [
+      "https://www.linkedin.com/in/your-linkedin/",
+      "https://github.com/your-github"
+    ]
+  }
+  </script>
 </head>
 <body>
-  <header>
-    <h1>Shayaan Rashedin</h1>
-    <p>Aspiring Cybersecurity &amp; IT Professional</p>
-    <button id="theme-toggle">Toggle Theme</button>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Homepage">
+        <span class="brand-mark">SR</span>
+        <span class="brand-text">Shayaan Rashedin</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="projects.html">Projects</a>
+        <a href="homelab.html">Home Lab</a>
+        <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a href="mailto:your.email@example.com">Contact</a>
+      </nav>
+      <button id="theme-toggle" aria-label="Toggle dark mode">Toggle Theme</button>
+    </div>
   </header>
 
   <main>
-    <section id="about">
-      <h2>About Me</h2>
-      <p>
-        I’m a computer engineering student with a strong interest in cybersecurity and a hands-on approach to solving technical problems. I bring a solid foundation in systems, networks, and security principles, and I’m actively building experience through labs, certifications, and projects. I’m passionate about protecting people and organizations from digital threats and continuously developing the skills needed to contribute to secure, reliable systems. I’m seeking opportunities where I can apply my knowledge, learn from experts, and help strengthen an organization’s cybersecurity posture.
-      </p>
+    <section class="hero container">
+      <div class="hero-text">
+        <h1>Cybersecurity Student</h1>
+        <p class="tagline">Red &amp; Blue Team fundamentals • Hands-on home lab • Recruiter‑ready projects</p>
+        <div class="cta-row">
+          <a class="btn primary" href="projects.html">View Projects</a>
+          <a class="btn secondary" href="homelab.html">Explore Home Lab</a>
+          <a class="btn ghost" href="resume.pdf" target="_blank" rel="noopener">Download Resume</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <img src="./images/Portfolio_Pic.jpg" alt="Portrait of Shayaan Rashedin" class="profile-pic-lg" />
+      </div>
     </section>
 
-    <!-- Profile picture -->
-    <img
-      src="./images/Portfolio_Pic.jpg"
-      alt="Shayaan Rashedin"
-      class="profile-pic"
-    />
-
-    <section id="skills">
-      <h2>Skills</h2>
-      <ul>
-        <li>Operating Systems: Windows, Linux</li>
-        <li>Security Tools: Wireshark, Nmap, VPNs, Hashing, Encryption</li>
-        <li>Programming: Java, C, VHDL, Bash</li>
-        <li>Virtualization: VirtualBox, VMware</li>
-        <li>Networking: Routing, Permissioning, Remote Access</li>
-        <li>Soft Skills: Leadership, Teaching, Customer Support</li>
+    <section id="highlights" class="container">
+      <h2>Highlights</h2>
+      <ul class="highlights">
+        <li>Built a two‑VM home lab (<strong>Kali</strong> + <strong>Metasploitable 2</strong>) for end‑to‑end testing and analysis.</li>
+        <li>Documented security work across audits, vulnerability assessment, incident journaling, and SQL‑based detection.</li>
+        <li>Comfortable with core tools: Nmap, Wireshark, Burp Suite, Metasploit, and OpenVAS/GVM.</li>
+        <li>Studying for <strong>CompTIA Security+</strong>; seeking a 16‑month cybersecurity internship starting May 2026.</li>
       </ul>
     </section>
 
-    <nav>
-      <button onclick="location.href='projects.html'">
-        View Portfolio Projects
-      </button>
-      <button onclick="location.href='homelab.html'">
-        View Home Lab
-      </button>
-    </nav>
+    <section id="skills" class="container">
+      <h2>Skills</h2>
+      <div class="skill-groups">
+        <div class="skill-group">
+          <h3>Security</h3>
+          <ul class="chips">
+            <li>Vulnerability Scanning (GVM)</li>
+            <li>Network Recon (Nmap)</li>
+            <li>Packet Analysis (Wireshark)</li>
+            <li>Web Testing (Burp)</li>
+            <li>Linux Hardening</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Networking</h3>
+          <ul class="chips">
+            <li>TCP/IP</li>
+            <li>Firewalls &amp; ACLs</li>
+            <li>VPN</li>
+            <li>Segmentation</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Programming</h3>
+          <ul class="chips">
+            <li>Bash</li>
+            <li>Java</li>
+            <li>C</li>
+            <li>Python (basics)</li>
+            <li>SQL</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Platforms &amp; Tools</h3>
+          <ul class="chips">
+            <li>Linux</li>
+            <li>Windows</li>
+            <li>VirtualBox</li>
+            <li>VMware</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="project-preview" class="container">
+      <h2>Featured Projects</h2>
+      <div class="project-grid">
+        <a class="project-card" href="projects.html#conducting-a-security-audit">
+          <h3>Security Audit</h3>
+          <p>Gap analysis vs PCI/GDPR/SOC 2 with prioritized recommendations.</p>
+          <div class="tags"><span>Risk &amp; Compliance</span><span>Controls</span></div>
+        </a>
+        <a class="project-card" href="projects.html#analyzing-network-structure-and-security">
+          <h3>Network Hardening</h3>
+          <p>DDoS response and improvements aligned to the NIST CSF.</p>
+          <div class="tags"><span>NIST CSF</span><span>Firewall</span></div>
+        </a>
+        <a class="project-card" href="projects.html#using-linux-commands-to-manage-file-permissions">
+          <h3>Linux Permissions</h3>
+          <p>Audited &amp; corrected file permissions to enforce least privilege.</p>
+          <div class="tags"><span>Linux</span><span>chmod</span></div>
+        </a>
+        <a class="project-card" href="projects.html#applying-filters-to-sql-queries">
+          <h3>SQL Threat Detection</h3>
+          <p>Filtered login data to surface anomalies with SQL predicates.</p>
+          <div class="tags"><span>SQL</span><span>Detection</span></div>
+        </a>
+        <a class="project-card" href="projects.html#identifying-vulnerabilities-for-a-small-business">
+          <h3>Vulnerability Assessment</h3>
+          <p>NIST SP 800‑30 approach and remediation strategy.</p>
+          <div class="tags"><span>NIST 800‑30</span><span>Risk</span></div>
+        </a>
+        <a class="project-card" href="projects.html#documenting-incidents-with-an-incident-handlers-journal">
+          <h3>Incident Journal</h3>
+          <p>Structured response to a phishing‑led ransomware incident.</p>
+          <div class="tags"><span>IR</span><span>Ransomware</span></div>
+        </a>
+      </div>
+    </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 Shayaan Rashedin. All rights reserved.</p>
+    <div class="container footer-inner">
+      <p>© 2025 Shayaan Rashedin</p>
+      <div class="footer-links">
+        <a href="mailto:your.email@example.com">Email</a>
+        <a href="https://www.linkedin.com/in/your-linkedin/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/your-github" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
   </footer>
 </body>
 </html>
