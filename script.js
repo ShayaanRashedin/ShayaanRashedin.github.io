@@ -2,9 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // THEME
   const toggleBtn = document.getElementById('theme-toggle');
   const body = document.body;
-  if (localStorage.getItem('theme') === 'dark') {
-    body.classList.add('dark');
-  }
+  if (localStorage.getItem('theme') === 'dark') body.classList.add('dark');
   if (toggleBtn) {
     toggleBtn.addEventListener('click', () => {
       const isDark = body.classList.toggle('dark');
@@ -12,36 +10,62 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ACCESSIBLE ACCORDION
-  const accordionButtons = document.querySelectorAll('.accordion-header');
-  accordionButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const expanded = btn.getAttribute('aria-expanded') === 'true';
-      // Close any open items for a cleaner experience
-      document.querySelectorAll('.accordion-header[aria-expanded="true"]').forEach(openBtn => {
-        if (openBtn !== btn) {
-          openBtn.setAttribute('aria-expanded', 'false');
-          const regionId = openBtn.getAttribute('aria-controls');
-          const region = document.getElementById(regionId);
-          if (region) region.style.maxHeight = null;
-          openBtn.closest('.accordion-item')?.classList.remove('open');
-        }
-      });
-      btn.setAttribute('aria-expanded', String(!expanded));
-      const region = document.getElementById(btn.getAttribute('aria-controls'));
-      const item = btn.closest('.accordion-item');
-      if (item) item.classList.toggle('open', !expanded);
+  // ───────── Accordion (compatible with simple <div> markup) ─────────
+  const headers = document.querySelectorAll('.accordion-header');
+
+  function getRegion(header) {
+    // If aria-controls exists, prefer it
+    const id = header.getAttribute && header.getAttribute('aria-controls');
+    if (id) {
+      const el = document.getElementById(id);
+      if (el) return el;
+    }
+    // Fallback: next sibling with .accordion-content
+    const sib = header.nextElementSibling;
+    if (sib && sib.classList.contains('accordion-content')) return sib;
+    return null;
+  }
+
+  function closeAll(except) {
+    document.querySelectorAll('.accordion-header').forEach(btn => {
+      if (btn === except) return;
+      const region = getRegion(btn);
+      btn.setAttribute && btn.setAttribute('aria-expanded', 'false');
+      btn.closest('.accordion-item')?.classList.remove('open');
       if (region) {
-        if (!expanded) {
-          region.style.maxHeight = region.scrollHeight + 'px';
-        } else {
-          region.style.maxHeight = null;
-        }
+        region.style.maxHeight = null;
+        region.style.padding = '0 16px';
       }
+    });
+  }
+
+  function toggle(header) {
+    const expanded = header.getAttribute && header.getAttribute('aria-expanded') === 'true';
+    const region = getRegion(header);
+    closeAll(header);
+    header.setAttribute && header.setAttribute('aria-expanded', String(!expanded));
+    header.closest('.accordion-item')?.classList.toggle('open', !expanded);
+    if (region) {
+      if (!expanded) {
+        region.style.maxHeight = region.scrollHeight + 'px';
+        region.style.padding = '16px';
+      } else {
+        region.style.maxHeight = null;
+        region.style.padding = '0 16px';
+      }
+    }
+  }
+
+  headers.forEach(h => {
+    // Make <div> headers keyboard accessible
+    h.setAttribute && h.setAttribute('tabindex', '0');
+    h.addEventListener('click', () => toggle(h));
+    h.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(h); }
     });
   });
 
-  // Smooth anchor scrolling
+  // ───────── Smooth in-page anchor scroll (safe if not present) ─────────
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const id = a.getAttribute('href').slice(1);
@@ -54,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Copy-link buttons (#)
+  // ───────── Copy-link “#” buttons (safe if not present) ─────────
   document.querySelectorAll('.copy-link').forEach(link => {
     link.addEventListener('click', e => {
       const url = location.origin + location.pathname + link.getAttribute('href');
@@ -65,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Lightbox
+  // ───────── Lightbox for Home Lab images (safe if not present) ─────────
   const lightbox = document.getElementById('lightbox');
   const lbImg = document.getElementById('lightbox-img');
   document.querySelectorAll('.lab-img').forEach(img => {
