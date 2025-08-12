@@ -145,3 +145,21 @@ footer { border-top: 1px solid var(--border-color); margin-top: 28px; }
   .hero { grid-template-columns: 1fr; text-align: center; }
   .profile-pic-lg { margin-top: 8px; }
 }
+
+/* Bigger avatar circle + shift framing upward */
+.profile-pic-lg {
+  width: 300px;              /* was ~220px */
+  height: 300px;             /* ensure true circle */
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 15%;  /* nudge view up to include more hairline */
+  border: 4px solid rgba(127,139,255,.22);
+}
+
+/* Keep it reasonable on small screens */
+@media (max-width: 780px) {
+  .profile-pic-lg { width: 240px; height: 240px; object-position: 50% 20%; }
+}
+
+.header-actions { display: flex; gap: 10px; align-items: center; }
+.site-header { position: sticky; top: 0; z-index: 50; }

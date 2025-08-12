@@ -8,13 +8,20 @@
   <script defer src="script.js"></script>
 </head>
 <body>
-  <header>
-    <h1>Portfolio Projects</h1>
-    <button id="theme-toggle">Toggle Theme</button>
-    <button class="nav-button" onclick="location.href='index.html'">
-      ← Back to Home
-    </button>
+ <header class="site-header">
+   <div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="Homepage">
+      <span class="brand-mark">SR</span>
+      <span class="brand-text">Shayaan Rashedin</span>
+    </a>
+
+    <div class="header-actions">
+      <button id="theme-toggle" class="btn secondary">Toggle Theme</button>
+      <a href="index.html" class="btn ghost">← Back to Home</a>
+    </div>
+   </div>
   </header>
+
 
   <main>
   <!-- 1. Conducting a Security Audit -->
