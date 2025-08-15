@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Network Scanning & Reconnaissance | Shayaan Rashedin</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <!-- Same sticky header as other pages -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Homepage">
+        <span class="brand-mark">SR</span>
+        <span class="brand-text">Shayaan Rashedin</span>
+      </a>
+
+      <nav aria-label="Primary">
+        <a href="projects.html">Projects</a>
+        <a href="homelab.html" class="active" aria-current="page">Home Lab</a>
+        <a href="resume.html">Resume</a>
+        <a href="mailto:sr17502005@gmail.com">Contact</a>
+      </nav>
+
+      <button id="theme-toggle" class="btn secondary">Toggle Theme</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav aria-label="Breadcrumb" class="muted" style="margin:12px 0 6px;">
+      <a href="homelab.html">Home Lab</a> › Network Scanning &amp; Reconnaissance
+    </nav>
+
+    <h1>Network Scanning &amp; Reconnaissance</h1>
+    <p class="muted">Coming soon — this page is ready for your full write-up.</p>
+
+    <!-- Suggested scaffold: fill in when you're ready -->
+    <section class="project-body" style="margin:14px 0 24px;">
+      <h2>Objective</h2>
+      <p>Map services on Metasploitable, identify versions/banners, and triage known CVEs.</p>
+
+      <h2>Tools</h2>
+      <ul class="chips">
+        <li>Nmap</li>
+        <li>GVM/OpenVAS</li>
+        <li>Wireshark (optional)</li>
+      </ul>
+
+      <h2>Process (outline)</h2>
+      <ol>
+        <li>Discover target IP and run full port scan with Nmap.</li>
+        <li>Service/version detection and <em>banner grabbing</em>.</li>
+        <li>Research exposed services for known vulnerabilities.</li>
+        <li>Run OpenVAS scan to find CVEs automatically; export report.</li>
+        <li>Prioritize findings and propose next steps.</li>
+      </ol>
+
+      <h2>Results &amp; Notes</h2>
+      <p><!-- Add your results, screenshots, and conclusions here. --></p>
+
+      <h2>Artifacts</h2>
+      <ul>
+        <li><!-- Link to exported OpenVAS report (PDF/HTML) --></li>
+        <li><!-- Link to command log / Nmap output --></li>
+        <li><!-- Screenshots folder if you want --></li>
+      </ul>
+    </section>
+
+    <div class="quick-links" style="margin-top:6px;">
+      <a class="btn secondary sm" href="homelab.html">← Back to Home Lab</a>
+      <a class="btn neutral sm" href="resume.html">View Resume</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <p>© 2025 Shayaan Rashedin</p>
+      <div class="footer-links">
+        <a href="mailto:sr17502005@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/your-linkedin/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/your-github" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
