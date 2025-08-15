@@ -1,5 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
   // THEME
+  // Auto-set active nav link by URL
+const current = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+document.querySelectorAll('.site-header nav a').forEach(a => {
+  const href = (a.getAttribute('href') || '').toLowerCase();
+  if (href && current && href === current) {
+    a.classList.add('active');
+    a.setAttribute('aria-current', 'page');
+  }
+});
+
   const toggleBtn = document.getElementById('theme-toggle');
   const body = document.body;
   if (localStorage.getItem('theme') === 'dark') body.classList.add('dark');

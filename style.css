@@ -163,3 +163,24 @@ footer { border-top: 1px solid var(--border-color); margin-top: 28px; }
 
 .header-actions { display: flex; gap: 10px; align-items: center; }
 .site-header { position: sticky; top: 0; z-index: 50; }
+
+.site-header { 
+  position: sticky; 
+  top: 0; 
+  z-index: 50; 
+  background: var(--header-bg); 
+  border-bottom: 1px solid var(--border-color);
+}
+
+.header-inner { 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  padding: 14px 0; 
+  gap: 16px; 
+}
+
+.site-header nav a.active { 
+  color: var(--primary-color); 
+  font-weight: 700; 
+}
