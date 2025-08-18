@@ -290,3 +290,17 @@ footer { border-top: 1px solid var(--border-color); margin-top: 28px; }
 @media (max-width: 780px) {
   .contact-grid { grid-template-columns: 1fr; }
 }
+
+.evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+.evidence-grid figure { margin: 0; }
+.evidence-grid img {
+  width: 100%; height: auto; display: block;
+  border: 1px solid var(--border-color);
+  border-radius: 12px; background: #fff;
+}
+.table-scroll { overflow-x: auto; }

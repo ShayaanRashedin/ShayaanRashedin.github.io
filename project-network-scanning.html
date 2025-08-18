@@ -36,36 +36,168 @@
     <p class="muted">Coming soon — this page is ready for your full write-up.</p>
 
     <!-- Suggested scaffold: fill in when you're ready -->
-    <section class="project-body" style="margin:14px 0 24px;">
-      <h2>Objective</h2>
-      <p>Map services on Metasploitable, identify versions/banners, and triage known CVEs.</p>
+<section class="project-body" style="margin:14px 0 24px;">
+  <h2>Executive Summary</h2>
+  <p>
+    In an isolated VirtualBox lab, I enumerated a Metasploitable2 target from Kali.
+    I validated reachability, ran full-port and service/version scans with Nmap,
+    grabbed HTTP banners, and executed a GVM/OpenVAS assessment. The target exposed
+    30+ TCP services including legacy daemons (rsh/rexec), weak/default credentials
+    (MySQL, PostgreSQL, VNC), and remote-code-execution paths (vsftpd 2.3.4 backdoor,
+    DistCC, Tomcat AJP “Ghostcat”), consistent with a deliberately vulnerable host.
+  </p>
 
-      <h2>Tools</h2>
-      <ul class="chips">
-        <li>Nmap</li>
-        <li>GVM/OpenVAS</li>
-        <li>Wireshark (optional)</li>
-      </ul>
+  <h2>Lab Topology</h2>
+  <ul>
+    <li><strong>Attacker:</strong> Kali Linux (VirtualBox) – interfaces <code>eth0</code>/<code>eth1</code></li>
+    <li><strong>Target:</strong> Metasploitable2 at <code>192.168.56.101</code> (Host-Only)</li>
+    <li><strong>Safety:</strong> Performed entirely in a closed home lab.</li>
+  </ul>
 
-      <h2>Process (outline)</h2>
-      <ol>
-        <li>Discover target IP and run full port scan with Nmap.</li>
-        <li>Service/version detection and <em>banner grabbing</em>.</li>
-        <li>Research exposed services for known vulnerabilities.</li>
-        <li>Run OpenVAS scan to find CVEs automatically; export report.</li>
-        <li>Prioritize findings and propose next steps.</li>
-      </ol>
+  <h2>Key Commands</h2>
+  <pre><code class="bash"># Discover target & verify reachability
+ping 192.168.56.101
 
-      <h2>Results &amp; Notes</h2>
-      <p><!-- Add your results, screenshots, and conclusions here. --></p>
+# Full TCP scan (all ports)
+nmap -p- -T4 192.168.56.101 -oN scans/full-port-scan.txt
 
-      <h2>Artifacts</h2>
-      <ul>
-        <li><!-- Link to exported OpenVAS report (PDF/HTML) --></li>
-        <li><!-- Link to command log / Nmap output --></li>
-        <li><!-- Screenshots folder if you want --></li>
-      </ul>
-    </section>
+# Service/version + default scripts + OS guess
+nmap -sV -sC -O 192.168.56.101 -oN scans/version-os-scan.txt
+
+# HTTP banner grab (evidence of Apache/PHP)
+curl -I http://192.168.56.101:80/</code></pre>
+
+  <h2>Nmap Highlights</h2>
+  <ul>
+    <li>FTP <strong>21/tcp</strong> – <code>vsftpd 2.3.4</code> (backdoor build), also shell on <strong>6200/tcp</strong></li>
+    <li>SSH <strong>22/tcp</strong> – <code>OpenSSH 4.7p1</code></li>
+    <li>Telnet <strong>23/tcp</strong> – <code>Linux telnetd</code></li>
+    <li>SMTP <strong>25/tcp</strong> – <code>Postfix smtpd</code></li>
+    <li>DNS <strong>53/tcp</strong> – <code>ISC BIND 9.4.2</code></li>
+    <li>HTTP <strong>80/tcp</strong> – <code>Apache/2.2.8 (Ubuntu)</code>, <code>PHP/5.2.4</code></li>
+    <li>SMB <strong>139/445</strong> – <code>Samba 3.X–4.X</code></li>
+    <li>rlogin/rsh/rexec <strong>513/514/512</strong> – legacy remote shells</li>
+    <li>FTP (alt) <strong>2121/tcp</strong> – <code>ProFTPD 1.3.1</code></li>
+    <li>MySQL <strong>3306/tcp</strong> – <code>5.0.51a</code>; PostgreSQL <strong>5432/tcp</strong> – <code>8.3.x</code></li>
+    <li>DistCC <strong>3632/tcp</strong> – remote compilation service</li>
+    <li>VNC <strong>5900/tcp</strong> – Protocol 3.3</li>
+    <li>AJP <strong>8009/tcp</strong> – Tomcat; HTTP alt <strong>8180/tcp</strong> – Tomcat/Coyote JSP</li>
+  </ul>
+
+  <h2>Findings & Remediation (top criticals)</h2>
+  <div class="table-scroll">
+    <table class="checklist-table">
+      <thead>
+        <tr>
+          <th>Service</th><th>Version</th><th>Issue / CVE</th><th>Risk</th><th>Recommended Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>FTP 21/tcp</td><td>vsftpd 2.3.4</td>
+          <td>Backdoored build opens shell on 6200/tcp (CVE-2011-2523)</td>
+          <td>High</td><td>Remove/upgrade vsftpd; verify no rogue 6200 listener.</td>
+        </tr>
+        <tr>
+          <td>MySQL 3306/tcp</td><td>5.0.51a</td>
+          <td>Default/empty root credential detected</td>
+          <td>High</td><td>Set strong root password; restrict to localhost/VPN; upgrade.</td>
+        </tr>
+        <tr>
+          <td>PostgreSQL 5432/tcp</td><td>8.3.1</td>
+          <td>Default creds <code>postgres:postgres</code>; TLS weakness (CCS Injection CVE-2014-0224)</td>
+          <td>High</td><td>Rotate credentials; enforce TLS ≥1.2; patch/upgrade.</td>
+        </tr>
+        <tr>
+          <td>DistCC 3632/tcp</td><td>—</td>
+          <td>Unauth RCE (CVE-2004-2687)</td>
+          <td>High</td><td>Disable service or restrict by ACL; patch.</td>
+        </tr>
+        <tr>
+          <td>Tomcat AJP 8009/tcp</td><td>5.5 (AJP)</td>
+          <td>“Ghostcat” LFI/RCE (CVE-2020-1938)</td>
+          <td>High</td><td>Disable AJP or upgrade Tomcat & require secrets.</td>
+        </tr>
+        <tr>
+          <td>HTTP 80/tcp</td><td>Apache 2.2.8 + PHP 5.2.4</td>
+          <td>CGI arg injection RCE (CVE-2012-1823) + many PHP vulns; PUT/DELETE enabled</td>
+          <td>High</td><td>Upgrade PHP/Apache; disable dangerous HTTP methods; limit DAV.</td>
+        </tr>
+        <tr>
+          <td>VNC 5900/tcp</td><td>Protocol 3.3</td>
+          <td>Weak password “password” accepted</td>
+          <td>High</td><td>Set strong VNC auth; tunnel via SSH/VPN; consider removal.</td>
+        </tr>
+        <tr>
+          <td>rsh/rexec 514/512</td><td>netkit</td>
+          <td>Clear-text remote shells exposed</td>
+          <td>High</td><td>Disable r-services; use SSH only.</td>
+        </tr>
+        <tr>
+          <td>OS</td><td>Ubuntu 8.04</td>
+          <td>End-of-life platform (no security updates)</td>
+          <td>High</td><td>Migrate to a supported LTS; re-baseline hardening.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted" style="margin-top:6px;">
+    Evidence for the items above comes from the OpenVAS/GVM report (19 High, 39 Medium, 4 Low on 192.168.56.101), including
+    vsftpd backdoor (21/6200), default DB credentials (3306/5432), DistCC RCE (3632), Tomcat Ghostcat (8009), PHP CGI RCE and outdated PHP on 80,
+    weak VNC password (5900), r-services exposure (512/514), and OS EOL. :contentReference[oaicite:0]{index=0}
+  </p>
+
+  <h2>Evidence (Screenshots)</h2>
+  <div class="evidence-grid">
+    <figure>
+      <img src="assets/projects/metasploitable2-recon/ifconfig.png" alt="Target ifconfig">
+      <figcaption>Target network configuration (<code>ifconfig</code>)</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/projects/metasploitable2-recon/ip-addr.png" alt="Attacker IP address">
+      <figcaption>Attacker interfaces (<code>ip addr</code>)</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/projects/metasploitable2-recon/ping.png" alt="Ping reachability">
+      <figcaption>ICMP reachability confirmed</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/projects/metasploitable2-recon/nmap-full-1.png" alt="Nmap full-port scan (part 1)">
+      <figcaption>Full-port scan – many legacy services</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/projects/metasploitable2-recon/nmap-full-2.png" alt="Nmap full-port scan (part 2)">
+      <figcaption>Full-port scan – continued</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/projects/metasploitable2-recon/nmap-sv-o-1.png" alt="Nmap -sV -sC -O (part 1)">
+      <figcaption>Service/version/OS detection</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/projects/metasploitable2-recon/nmap-sv-o-2.png" alt="Nmap -sV -sC -O (part 2)">
+      <figcaption>Service/version/OS detection – continued</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/projects/metasploitable2-recon/curl-headers.png" alt="HTTP banner grabbing with curl -I">
+      <figcaption>HTTP banner: Apache/2.2.8 + PHP/5.2.4</figcaption>
+    </figure>
+  </div>
+
+  <h2>Artifacts</h2>
+  <ul class="chips">
+    <li><a href="artifacts/nmap_full_scan.txt" download>Nmap Output</a></li>
+    <li><a href="assets/projects/metasploitable2-recon/openvas-report.pdf" target="_blank">OpenVAS Report (PDF)</a></li>
+  </ul>
+
+  <h2>Next Steps</h2>
+  <ul>
+    <li>Remove/disable unused legacy services; enforce MFA and password rotation.</li>
+    <li>Patch Tomcat/PHP/DBs; restrict DB ports to localhost or VPN subnets.</li>
+    <li>Harden web (disable PUT/DELETE, least-privileged runtime); add IDS/centralized logs.</li>
+    <li>Re-scan to verify remediation and track deltas.</li>
+  </ul>
+</section>
+
 
     <div class="quick-links" style="margin-top:6px;">
       <a class="btn secondary sm" href="homelab.html">← Back to Home Lab</a>
