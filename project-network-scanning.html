@@ -187,28 +187,29 @@ curl -I http://192.168.56.101:80/</code></pre>
 
 <ul class="chips">
   <li>
-    <a href="openvas-report.pdf"
-       target="_blank" rel="noopener">
+    <a href="openvas-report.pdf" target="_blank" rel="noopener">
       OpenVAS Report (PDF)
     </a>
   </li>
+  <!-- Optional:
+  <li><a href="artifacts/nmap_full_scan.txt" download>Nmap Output</a></li>
+  -->
+</ul>
 
-<div class="resume-frame" style="margin-top:10px;">
-  <iframe
-    src="openvas-report.pdf#view=FitH&toolbar=1&navpanes=0"
-    title="OpenVAS report preview"
-    loading="lazy">
-  </iframe>
+<!-- Inline preview with a graceful fallback -->
+<div class="resume-frame" style="margin-top:10px; height:80vh;">
+  <object
+    data="openvas-report.pdf#view=FitH&toolbar=1&navpanes=0"
+    type="application/pdf"
+    width="100%"
+    height="100%">
+    <p>
+      Can’t display the PDF here.
+      <a class="btn primary sm" href="openvas-report.pdf" target="_blank" rel="noopener">Open in a new tab</a>
+    </p>
+  </object>
 </div>
 
-<div class="quick-links" style="margin-top:10px;">
-  <a class="btn primary sm" href="openvas-report.pdf" download>
-    Download Report
-  </a>
-  <a class="btn neutral sm" href="openvas-report.pdf" target="_blank" rel="noopener">
-    Open in New Tab
-  </a>
-</div>
 
   </ul>
 
