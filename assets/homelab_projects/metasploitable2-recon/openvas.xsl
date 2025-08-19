@@ -25,7 +25,7 @@
       </head>
       <body>
         <h1>OpenVAS Report</h1>
-        <p class="meta">Rendered from XML via XSL (no PDF viewer required).</p>
+        <p class="meta">Rendered from XML via XSL.</p>
 
         <!-- quick summary pills (host, totals, time) -->
         <div class="summary">
