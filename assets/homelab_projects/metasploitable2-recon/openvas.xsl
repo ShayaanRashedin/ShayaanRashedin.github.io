@@ -61,7 +61,7 @@
       <body>
         <div class="container">
           <h1>OpenVAS Report</h1>
-          <p class="meta">Rendered from XML via XSL (clean theme, no PDF viewer required).</p>
+          <p class="meta">Rendered from XML via XSL.</p>
 
           <div class="summary">
             <span class="pill"><b>Hosts:</b> <xsl:value-of select="//hosts/count"/></span>
