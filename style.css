@@ -469,45 +469,4 @@ a.tag:link,  a.tag:visited,  a.tag:hover,  a.tag:active {
   box-shadow:none !important;
 }
 
-/* === Universal pill system (catch-all) === */
-:root{
-  --chip-bg: #eef2ff;       /* light theme pill bg */
-  --chip-text: #0f172a;     /* light theme text */
-  --chip-border: #dbe2ff;   /* light theme border */
-}
-.dark{
-  --chip-bg: #1b2337;       /* dark theme pill bg */
-  --chip-text: #e8edff;     /* dark theme text */
-  --chip-border: #2a3656;   /* dark theme border */
-}
 
-/* Any element whose class name contains these keywords becomes a pill */
-:is(a,span,button,div,li)[class*="pill"],
-:is(a,span,button,div,li)[class*="chip"],
-:is(a,span,button,div,li)[class*="badge"],
-:is(a,span,button,div,li)[class*="tag"],
-:is(a,span,button,div,li)[class*="label"],
-:is(a,span,button,div,li)[class*="skill"]{
-  display:inline-flex; align-items:center; gap:6px;
-  padding:8px 14px !important;
-  font-size:14px !important; line-height:1 !important;
-  border-radius:999px !important;
-  background:var(--chip-bg) !important;
-  color:var(--chip-text) !important;
-  border:1px solid var(--chip-border) !important;
-  text-decoration:none !important;
-  box-shadow:none !important;
-}
-
-/* remove bullets if a pill is an <li> */
-:is(ul,ol) > li[class*="pill"],
-:is(ul,ol) > li[class*="chip"],
-:is(ul,ol) > li[class*="tag"],
-:is(ul,ol) > li[class*="badge"]{
-  list-style:none !important;
-}
-
-/* links keep same color in all states */
-a[class*="pill"], a[class*="chip"], a[class*="badge"], a[class*="tag"], a[class*="label"], a[class*="skill"]{
-  color:var(--chip-text) !important;
-}
