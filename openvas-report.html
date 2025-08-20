@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>OpenVAS Report</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* Light/Dark vars – same palette as the project page for consistency */
+    :root{
+      --bg: #f8fafc;
+      --text: #0b1220;
+      --muted-text: #475569;
+      --panel-bg: #ffffff;
+      --card: #ffffff;
+      --border-color: #e5e7eb;
+      --accent: #7aa7ff;
+    }
+    body.dark{
+      --bg: #0b0f17;
+      --text: #e6edf3;
+      --muted-text: #8ea0b6;
+      --panel-bg: #0f1623;
+      --card: #121826;
+      --border-color: #263244;
+      --accent: #9bbcff;
+    }
+    html, body{ background: var(--bg); color: var(--text); }
+
+    main{max-width:1200px;margin:18px auto;padding:0 16px}
+    .wrap{background:var(--panel-bg);border:1px solid var(--border-color);border-radius:16px;padding:16px}
+    .page-title{
+      font-weight:800; line-height:1.2; letter-spacing:-0.02em;
+      font-size: clamp(36px, 5vw, 52px);
+      margin: 6px 0 14px;
+    }
+
+    /* Generic theming override for the XSL output */
+    #report-root, #report-root *{ color: var(--text); }
+    #report-root .badge, #report-root .pill{
+      border:1px solid var(--border-color); background:var(--panel-bg); color:var(--text);
+    }
+    #report-root table{
+      width:100%; border-collapse:collapse; border:1px solid var(--border-color); background:var(--panel-bg);
+    }
+    #report-root thead th{
+      text-align:left; padding:10px; border-bottom:1px solid var(--border-color);
+    }
+    #report-root tbody td{
+      padding:10px; border-top:1px solid var(--border-color);
+    }
+    #report-root .sev-high{ color:#ef4444; }
+    #report-root .sev-med { color:#b45309; }
+    #report-root .sev-low { color:#0f766e; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="wrap">
+      <h1 class="page-title">OpenVAS Report</h1>
+      <div id="report-root">Loading report…</div>
+    </div>
+  </main>
+
+  <script>
+    // Apply theme from localStorage and keep in sync with other tabs
+    function applyTheme(){
+      document.body.classList.toggle('dark', localStorage.getItem('theme') === 'dark');
+    }
+    applyTheme();
+    window.addEventListener('storage', (e)=>{ if(e.key==='theme') applyTheme(); });
+
+    // XSLT transform: XML + XSL -> HTML inside #report-root
+    async function loadReport(){
+      // Adjust these if your files live elsewhere or have different names
+      const xmlPath = 'assets/homelab_projects/metasploitable2-recon/openvas-report.xml';
+      const xslPath = 'assets/homelab_projects/metasploitable2-recon/openvas-report.xsl';
+      try{
+        const [xmlTxt, xslTxt] = await Promise.all([
+          fetch(xmlPath).then(r=>r.text()),
+          fetch(xslPath).then(r=>r.text())
+        ]);
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(xmlTxt, 'text/xml');
+        const xsl = parser.parseFromString(xslTxt, 'text/xml');
+
+        const proc = new XSLTProcessor();
+        proc.importStylesheet(xsl);
+        const result = proc.transformToFragment(xml, document);
+
+        const target = document.getElementById('report-root');
+        target.innerHTML = '';
+        target.appendChild(result);
+      } catch(err){
+        document.getElementById('report-root').textContent =
+          'Could not load report. Check that openvas-report.xml and openvas-report.xsl exist at the configured paths.';
+        console.error(err);
+      }
+    }
+    loadReport();
+  </script>
+</body>
+</html>
