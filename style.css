@@ -339,3 +339,24 @@ footer { border-top: 1px solid var(--border-color); margin-top: 28px; }
   border: 1px solid var(--border-color) !important;
   box-shadow: none !important;
 }
+
+/* ——— Universal chips (consistent look, theme-aware) ——— */
+.chips{display:flex; flex-wrap:wrap; gap:10px}
+
+.chip, .pill{
+  display:inline-flex; align-items:center;
+  padding:6px 12px;                /* one size everywhere */
+  font-size:13px; line-height:1; 
+  border-radius:999px;
+  background:var(--panel);         /* follows theme */
+  color:var(--text);
+  border:1px solid var(--line);
+  box-shadow:none;
+}
+
+/* If any card had custom dark pills, neutralize them */
+.project-card .chip, .project-card .pill{
+  background:var(--panel) !important;
+  color:var(--text) !important;
+  border-color:var(--line) !important;
+}
