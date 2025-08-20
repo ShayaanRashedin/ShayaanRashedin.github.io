@@ -12,6 +12,9 @@
   --card-bg: #ffffff;
   --border-color: rgba(22, 28, 45, 0.12);
   --shadow: 0 8px 20px rgba(0,0,0,0.06);
+  --chip-bg: #eef2ff;          /* soft indigo */
+  --chip-text: #0f172a;        /* near-black */
+  --chip-border: #dbe2ff;      /* subtle border */
 }
 
 body.dark {
@@ -25,6 +28,9 @@ body.dark {
   --card-bg: #141824;
   --border-color: rgba(255, 255, 255, 0.08);
   --shadow: 0 10px 24px rgba(0,0,0,0.35);
+  --chip-bg: #1b2337;          /* deep slate/indigo */
+  --chip-text: #e8edff;        /* near-white */
+  --chip-border: #2a3656; 
 }
 
 /* Reset & base */
@@ -426,5 +432,39 @@ a.tag:link,  a.tag:visited {
   background:var(--panel) !important;
   color:var(--text) !important;
   border-color:var(--line) !important;
+  box-shadow:none !important;
+}
+
+/* —— Universal pill look + colors (final authority) —— */
+.chips{display:flex; flex-wrap:wrap; gap:12px}
+
+.chip, .pill, .badge, .tag, .skill, .skill-pill, .tech-pill, .project-tag {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:8px 14px !important;
+  font-size:14px !important; line-height:1 !important;
+  border-radius:999px !important;
+  text-decoration:none !important;
+
+  background:var(--chip-bg) !important;
+  color:var(--chip-text) !important;
+  border:1px solid var(--chip-border) !important;
+  box-shadow:none !important;
+}
+
+/* links keep same color in all states */
+a.chip:link, a.chip:visited, a.chip:hover, a.chip:active,
+a.pill:link, a.pill:visited, a.pill:hover, a.pill:active,
+a.badge:link, a.badge:visited, a.badge:hover, a.badge:active,
+a.tag:link,  a.tag:visited,  a.tag:hover,  a.tag:active {
+  color:var(--chip-text) !important;
+}
+
+/* wipe any section-specific styles that were tinting chips */
+.project-card .chip, .project-card .pill, .project-card .badge, .project-card .tag,
+.skills-grid  .chip, .skills-grid  .pill, .skills-grid  .badge, .skills-grid  .tag,
+.key-projects .chip, .key-projects .pill, .key-projects .badge, .key-projects .tag {
+  background:var(--chip-bg) !important;
+  color:var(--chip-text) !important;
+  border-color:var(--chip-border) !important;
   box-shadow:none !important;
 }
