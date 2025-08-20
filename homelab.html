@@ -1,56 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Home Lab | Shayaan Rashedin</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact | Shayaan Rashedin</title>
+  <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
 </head>
 <body>
-  <header class="topbar">
-    <div class="inner">
-      <a class="brand" href="index.html"><span class="logo-dot">SR</span> Shayaan Rashedin</a>
-      <nav class="site-nav">
+  <!-- Same sticky header as other pages -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Homepage">
+        <span class="brand-mark">SR</span>
+        <span class="brand-text">Shayaan Rashedin</span>
+      </a>
+
+      <nav aria-label="Primary">
         <a href="projects.html">Projects</a>
         <a href="homelab.html">Home Lab</a>
         <a href="resume.html">Resume</a>
-        <a href="contact.html">Contact</a>
+        <a href="contact.html" class="active" aria-current="page">Contact</a>
       </nav>
-      <div class="right"><button id="theme-toggle" class="btn pill">Toggle Theme</button></div>
+
+      <button id="theme-toggle" class="btn secondary">Toggle Theme</button>
     </div>
   </header>
 
-  <main class="container" style="margin-top:18px">
-    <h1 class="page-title">Key Projects from the Lab</h1>
+  <main class="container">
+    <section class="contact-hero">
+      <h1>Contact</h1>
+      <p class="muted">Best way to reach me is email—feel free to connect on LinkedIn as well.</p>
+    </section>
 
-    <div class="cards">
-      <!-- Recon card -->
-      <div class="card project-card">
-        <h3>Network Scanning &amp; Reconnaissance</h3>
-        <p>Mapped target services with Nmap; identified versions, grabbed banners, and triaged known CVEs with OpenVAS.</p>
-        <div class="chips" style="margin:10px 0 14px">
-          <span class="chip">Nmap</span>
-          <span class="chip">OpenVAS/GVM</span>
-          <span class="chip">Recon</span>
-        </div>
-        <a class="btn primary" href="project-recon.html">View Project</a>
+    <section class="contact-grid">
+      <!-- Left card -->
+      <div class="info-card">
+        <h2>Get in touch</h2>
+        <ul class="contact-list">
+          <li>
+            <span>Email</span>
+            <a class="btn secondary sm"
+               href="mailto:sr17502005@gmail.com?subject=Inquiry%20from%20your%20portfolio">
+              Email Me
+            </a>
+          </li>
+          <li>
+            <span>LinkedIn</span>
+            <a class="btn neutral sm" href="https://www.linkedin.com/in/your-linkedin/" target="_blank" rel="noopener">
+              Open LinkedIn
+            </a>
+          </li>
+          <li>
+            <span>GitHub</span>
+            <a class="btn primary sm" href="https://github.com/your-github" target="_blank" rel="noopener">
+              Open GitHub
+            </a>
+          </li>
+        </ul>
       </div>
 
-      <!-- Exploitation card -->
-      <div class="card project-card">
-        <h3>Metasploitable2 Exploitation</h3>
-        <p>Targeted “easy wins” (vsftpd, UnrealIRCd, distcc) to demonstrate recon → root shell.</p>
-        <div class="chips" style="margin:10px 0 14px">
-          <span class="chip">Metasploit</span>
-          <span class="chip">Nmap</span>
-          <span class="chip">Exploitation</span>
+      <!-- Right card -->
+      <div class="info-card">
+        <h2>At a glance</h2>
+        <ul class="bullets">
+          <li>Third-year Computer Engineering @ Toronto Metropolitan University</li>
+          <li>Cybersecurity focus (home lab: Kali + Metasploitable 2)</li>
+          <li>Seeking a 16-month cybersecurity internship starting May 2026</li>
+        </ul>
+
+        <div class="quick-links" style="margin-top:10px;">
+          <a class="btn neutral sm" href="resume.html">View Resume</a>
+          <a class="btn secondary sm" href="homelab.html">Explore Home Lab</a>
         </div>
-        <a class="btn primary" href="project-metasploitable2-exploit.html">View Project</a>
       </div>
-    </div>
+    </section>
   </main>
 
-  <footer><p>&copy; 2025 Shayaan Rashedin. All rights reserved.</p></footer>
+  <footer>
+    <div class="container footer-inner">
+      <p>© 2025 Shayaan Rashedin</p>
+      <div class="footer-links">
+        <a href="mailto:sr17502005@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/your-linkedin/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/your-github" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

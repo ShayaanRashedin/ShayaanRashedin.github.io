@@ -1,57 +1,117 @@
 document.addEventListener('DOMContentLoaded', () => {
-  /* THEME */
-  const body = document.body;
-  const toggleBtn = document.getElementById('theme-toggle');
-  function applyTheme(){
-    body.classList.toggle('dark', localStorage.getItem('theme') === 'dark');
+  // THEME
+  // Auto-set active nav link by URL
+const current = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+document.querySelectorAll('.site-header nav a').forEach(a => {
+  const href = (a.getAttribute('href') || '').toLowerCase();
+  if (href && current && href === current) {
+    a.classList.add('active');
+    a.setAttribute('aria-current', 'page');
   }
-  applyTheme();
+});
+
+  const toggleBtn = document.getElementById('theme-toggle');
+  const body = document.body;
+  if (localStorage.getItem('theme') === 'dark') body.classList.add('dark');
   if (toggleBtn) {
     toggleBtn.addEventListener('click', () => {
-      const nowDark = !body.classList.contains('dark');
-      localStorage.setItem('theme', nowDark ? 'dark' : 'light');
-      applyTheme();
+      const isDark = body.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
   }
-  window.addEventListener('storage', (e)=>{ if (e.key === 'theme') applyTheme(); });
 
-  /* NAV HIGHLIGHT */
-  const here = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-  document.querySelectorAll('.site-nav a').forEach(a => {
-    const file = (a.getAttribute('href') || '').split('/').pop().toLowerCase();
-    if (file === here) a.setAttribute('aria-current', 'page');
+  // ───────── Accordion (compatible with simple <div> markup) ─────────
+  const headers = document.querySelectorAll('.accordion-header');
+
+  function getRegion(header) {
+    // If aria-controls exists, prefer it
+    const id = header.getAttribute && header.getAttribute('aria-controls');
+    if (id) {
+      const el = document.getElementById(id);
+      if (el) return el;
+    }
+    // Fallback: next sibling with .accordion-content
+    const sib = header.nextElementSibling;
+    if (sib && sib.classList.contains('accordion-content')) return sib;
+    return null;
+  }
+
+  function closeAll(except) {
+    document.querySelectorAll('.accordion-header').forEach(btn => {
+      if (btn === except) return;
+      const region = getRegion(btn);
+      btn.setAttribute && btn.setAttribute('aria-expanded', 'false');
+      btn.closest('.accordion-item')?.classList.remove('open');
+      if (region) {
+        region.style.maxHeight = null;
+        region.style.padding = '0 16px';
+      }
+    });
+  }
+
+  function toggle(header) {
+    const expanded = header.getAttribute && header.getAttribute('aria-expanded') === 'true';
+    const region = getRegion(header);
+    closeAll(header);
+    header.setAttribute && header.setAttribute('aria-expanded', String(!expanded));
+    header.closest('.accordion-item')?.classList.toggle('open', !expanded);
+    if (region) {
+      if (!expanded) {
+        region.style.maxHeight = region.scrollHeight + 'px';
+        region.style.padding = '16px';
+      } else {
+        region.style.maxHeight = null;
+        region.style.padding = '0 16px';
+      }
+    }
+  }
+
+  headers.forEach(h => {
+    // Make <div> headers keyboard accessible
+    h.setAttribute && h.setAttribute('tabindex', '0');
+    h.addEventListener('click', () => toggle(h));
+    h.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(h); }
+    });
   });
 
-  /* LIGHTBOX for .lab-img */
-  const lightbox = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lightbox-img');
-  if (lightbox && lbImg){
-    document.querySelectorAll('img.lab-img').forEach(img => {
-      img.addEventListener('click', ()=>{
-        lbImg.src = img.src;
-        lightbox.style.display = 'flex';
+  // ───────── Smooth in-page anchor scroll (safe if not present) ─────────
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if (el) {
+        e.preventDefault();
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + id);
+      }
+    });
+  });
+
+  // ───────── Copy-link “#” buttons (safe if not present) ─────────
+  document.querySelectorAll('.copy-link').forEach(link => {
+    link.addEventListener('click', e => {
+      const url = location.origin + location.pathname + link.getAttribute('href');
+      navigator.clipboard.writeText(url).then(() => {
+        link.textContent = '✔';
+        setTimeout(() => (link.textContent = '#'), 800);
       });
     });
-    window.closeLightbox = function(){ lbImg.src = ''; lightbox.style.display = 'none'; };
-    lightbox.addEventListener('click', closeLightbox);
-  }
-
-  /* ACCORDION (if present; keeps your projects.html working) */
-  const headers = document.querySelectorAll('.accordion-header');
-  function getRegion(h){ const sib=h?.nextElementSibling; return (sib && sib.classList.contains('accordion-content'))? sib : null; }
-  function toggle(h){
-    const region=getRegion(h); if(!region) return;
-    const open=h.getAttribute('aria-expanded')==='true';
-    document.querySelectorAll('.accordion-item').forEach(it=>{
-      const hd=it.querySelector('.accordion-header'); const rg=getRegion(hd);
-      if(hd!==h){ hd?.setAttribute('aria-expanded','false'); it.classList.remove('open'); if(rg){rg.style.maxHeight=null; rg.style.padding='0 16px';} }
-    });
-    h.setAttribute('aria-expanded', String(!open));
-    h.closest('.accordion-item')?.classList.toggle('open', !open);
-    if(!open){ region.style.maxHeight = region.scrollHeight+'px'; region.style.padding='16px'; }
-    else{ region.style.maxHeight=null; region.style.padding='0 16px'; }
-  }
-  headers.forEach(h=>{ h.setAttribute('tabindex','0'); h.addEventListener('click',()=>toggle(h));
-    h.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle(h);} });
   });
+
+  // ───────── Lightbox for Home Lab images (safe if not present) ─────────
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  document.querySelectorAll('.lab-img').forEach(img => {
+    img.addEventListener('click', () => {
+      if (!lightbox || !lbImg) return;
+      lbImg.src = img.src;
+      lightbox.style.display = 'flex';
+    });
+  });
+  window.closeLightbox = function () {
+    if (!lightbox || !lbImg) return;
+    lightbox.style.display = 'none';
+    lbImg.src = '';
+  };
 });
