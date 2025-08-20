@@ -310,3 +310,24 @@ footer { border-top: 1px solid var(--border-color); margin-top: 28px; }
 
 .report-frame{height:80vh;width:100%;border:1px solid var(--border-color);border-radius:12px;overflow:hidden;background:#fff}
 .report-frame iframe{width:100%;height:100%;border:0;display:block}
+
+/* Page titles (shared) */
+.page-title{
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-size: clamp(32px, 4vw, 44px); /* mobile → desktop */
+  margin: 8px 0 6px;
+}
+
+/* Chips (reuse the same look as Recon card) */
+.chips{ display:flex; gap:10px; flex-wrap:wrap; margin:10px 0; }
+.chip{
+  display:inline-block;
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid var(--border-color,#263244);
+  background:var(--pill-bg,#0f172a);
+  color:var(--chip-text,#d7e0ea);
+  font-size:14px;
+}
