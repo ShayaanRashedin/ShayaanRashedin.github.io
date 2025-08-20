@@ -6,52 +6,25 @@
   <title>OpenVAS Report</title>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    /* Light/Dark vars – same palette as the project page for consistency */
     :root{
-      --bg: #f8fafc;
-      --text: #0b1220;
-      --muted-text: #475569;
-      --panel-bg: #ffffff;
-      --card: #ffffff;
-      --border-color: #e5e7eb;
-      --accent: #7aa7ff;
+      --bg:#f8fafc; --text:#0b1220; --muted:#475569;
+      --panel-bg:#ffffff; --card:#ffffff; --bd:#e5e7eb; --accent:#7aa7ff;
     }
     body.dark{
-      --bg: #0b0f17;
-      --text: #e6edf3;
-      --muted-text: #8ea0b6;
-      --panel-bg: #0f1623;
-      --card: #121826;
-      --border-color: #263244;
-      --accent: #9bbcff;
+      --bg:#0b0f17; --text:#e6edf3; --muted:#8ea0b6;
+      --panel-bg:#0f1623; --card:#121826; --bd:#263244; --accent:#9bbcff;
     }
-    html, body{ background: var(--bg); color: var(--text); }
-
+    html,body{background:var(--bg);color:var(--text)}
     main{max-width:1200px;margin:18px auto;padding:0 16px}
-    .wrap{background:var(--panel-bg);border:1px solid var(--border-color);border-radius:16px;padding:16px}
-    .page-title{
-      font-weight:800; line-height:1.2; letter-spacing:-0.02em;
-      font-size: clamp(36px, 5vw, 52px);
-      margin: 6px 0 14px;
-    }
-
-    /* Generic theming override for the XSL output */
-    #report-root, #report-root *{ color: var(--text); }
-    #report-root .badge, #report-root .pill{
-      border:1px solid var(--border-color); background:var(--panel-bg); color:var(--text);
-    }
-    #report-root table{
-      width:100%; border-collapse:collapse; border:1px solid var(--border-color); background:var(--panel-bg);
-    }
-    #report-root thead th{
-      text-align:left; padding:10px; border-bottom:1px solid var(--border-color);
-    }
-    #report-root tbody td{
-      padding:10px; border-top:1px solid var(--border-color);
-    }
-    #report-root .sev-high{ color:#ef4444; }
-    #report-root .sev-med { color:#b45309; }
-    #report-root .sev-low { color:#0f766e; }
+    .wrap{background:var(--panel-bg);border:1px solid var(--bd);border-radius:16px;padding:16px}
+    .page-title{font-weight:800;line-height:1.2;letter-spacing:-.02em;font-size:clamp(36px,5vw,52px);margin:6px 0 14px}
+    #report-root, #report-root *{color:var(--text)}
+    #report-root table{width:100%;border-collapse:collapse;border:1px solid var(--bd);background:var(--panel-bg)}
+    #report-root thead th{padding:10px;text-align:left;border-bottom:1px solid var(--bd)}
+    #report-root tbody td{padding:10px;border-top:1px solid var(--bd);vertical-align:top}
+    #report-root .pill{display:inline-block;padding:6px 10px;border:1px solid var(--bd);border-radius:999px;background:var(--panel-bg);margin:0 8px 8px 0;font-size:13px}
+    #report-root .sev-high{color:#ef4444} #report-root .sev-med{color:#b45309} #report-root .sev-low{color:#0f766e}
+    .facts{margin-bottom:10px}
   </style>
 </head>
 <body>
@@ -62,38 +35,100 @@
     </div>
   </main>
 
-  <script>
-    // Apply theme from localStorage and keep in sync with other tabs
-    function applyTheme(){
-      document.body.classList.toggle('dark', localStorage.getItem('theme') === 'dark');
-    }
-    applyTheme();
-    window.addEventListener('storage', (e)=>{ if(e.key==='theme') applyTheme(); });
+  <!-- Fallback XSL (used only if the external XSL file is missing) -->
+  <script id="fallback-xsl" type="application/xml">
+    <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+      <xsl:output method="html" omit-xml-declaration="yes" />
+      <xsl:template match="/">
+        <div>
+          <div class="facts">
+            <span class="pill">Hosts: <xsl:value-of select="count(/report/report/hosts/host)"/></span>
+            <span class="pill">Total vulns: <xsl:value-of select="/report/report/result_count"/></span>
+            <span class="pill">Scan start: <xsl:value-of select="/report/report/scan_start"/></span>
+            <span class="pill">Timezone: <xsl:value-of select="/report/report/timezone_abbrev"/></span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Finding</th>
+                <th>Host:Port</th>
+                <th>Severity</th>
+                <th>Family</th>
+              </tr>
+            </thead>
+            <tbody>
+              <xsl:for-each select="/report/report/results/result">
+                <tr>
+                  <td>
+                    <div style="font-weight:600"><xsl:value-of select="name"/></div>
+                    <div style="font-size:12px;color:gray">
+                      ID: <xsl:value-of select="nvt/@oid"/>
+                    </div>
+                  </td>
+                  <td>
+                    <xsl:value-of select="host"/>:<xsl:value-of select="port"/>
+                  </td>
+                  <td>
+                    <span>
+                      <span class="sev-">
+                        <xsl:attribute name="class">
+                          <xsl:text>sev-</xsl:text>
+                          <xsl:value-of select="translate(threat,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+                        </xsl:attribute>
+                        <xsl:value-of select="threat"/>
+                      </span>
+                      <xsl:text> (</xsl:text><xsl:value-of select="severity"/><xsl:text>)</xsl:text>
+                    </span>
+                  </td>
+                  <td><xsl:value-of select="nvt/family"/></td>
+                </tr>
+              </xsl:for-each>
+            </tbody>
+          </table>
+        </div>
+      </xsl:template>
+    </xsl:stylesheet>
+  </script>
 
-    // XSLT transform: XML + XSL -> HTML inside #report-root
+  <script>
+    // Keep theme in sync with the rest of the site
+    function applyTheme(){ document.body.classList.toggle('dark', localStorage.getItem('theme') === 'dark'); }
+    applyTheme(); window.addEventListener('storage', e => { if(e.key==='theme') applyTheme(); });
+
     async function loadReport(){
-      // Adjust these if your files live elsewhere or have different names
+      // Adjust these if your files live elsewhere
       const xmlPath = 'assets/homelab_projects/metasploitable2-recon/openvas-report.xml';
       const xslPath = 'assets/homelab_projects/metasploitable2-recon/openvas-report.xsl';
+
       try{
-        const [xmlTxt, xslTxt] = await Promise.all([
-          fetch(xmlPath).then(r=>r.text()),
-          fetch(xslPath).then(r=>r.text())
+        const [xmlTxt, xslResp] = await Promise.all([
+          fetch(xmlPath).then(r => { if(!r.ok) throw new Error('XML not found'); return r.text(); }),
+          fetch(xslPath).catch(()=>null)  // may fail if you didn't add an XSL file
         ]);
+
         const parser = new DOMParser();
         const xml = parser.parseFromString(xmlTxt, 'text/xml');
-        const xsl = parser.parseFromString(xslTxt, 'text/xml');
+
+        // Use external XSL if it loaded; otherwise fall back to the embedded one
+        let xslDoc;
+        if (xslResp && xslResp.ok){
+          const xslTxt = await xslResp.text();
+          xslDoc = parser.parseFromString(xslTxt, 'text/xml');
+        } else {
+          const fallback = document.getElementById('fallback-xsl').textContent.trim();
+          xslDoc = parser.parseFromString(fallback, 'text/xml');
+        }
 
         const proc = new XSLTProcessor();
-        proc.importStylesheet(xsl);
-        const result = proc.transformToFragment(xml, document);
+        proc.importStylesheet(xslDoc);
+        const frag = proc.transformToFragment(xml, document);
 
         const target = document.getElementById('report-root');
         target.innerHTML = '';
-        target.appendChild(result);
-      } catch(err){
+        target.appendChild(frag);
+      } catch (err){
         document.getElementById('report-root').textContent =
-          'Could not load report. Check that openvas-report.xml and openvas-report.xsl exist at the configured paths.';
+          'Could not load report. Check that openvas-report.xml exists at the configured path.';
         console.error(err);
       }
     }
