@@ -378,3 +378,53 @@ footer { border-top: 1px solid var(--border-color); margin-top: 28px; }
   border:1px solid var(--line);
   border-radius:16px;
 }
+
+/* ========== UNIVERSAL PILL SYSTEM (put at the very end) ========== */
+
+/* Container utility */
+.chips { display:flex; flex-wrap:wrap; gap:12px; }
+
+/* One style for every pill-like thing across the site */
+.chip, .pill, .badge, .tag, .skill, .skill-pill, .tech-pill, .project-tag {
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 14px !important;           /* same size everywhere */
+  font-size:14px !important;
+  line-height:1 !important;
+  border-radius:999px !important;
+  text-decoration:none !important;
+
+  /* theme-aware colors */
+  background:var(--panel) !important;
+  color:var(--text) !important;
+  border:1px solid var(--line) !important;
+
+  box-shadow:none !important;
+  transform:translateZ(0);
+}
+
+/* Links should keep text color */
+a.chip:link, a.chip:visited,
+a.pill:link, a.pill:visited,
+a.badge:link, a.badge:visited,
+a.tag:link,  a.tag:visited {
+  color:var(--text) !important;
+}
+
+/* Subtle hover for all tags everywhere */
+.chip:hover, .pill:hover, .badge:hover, .tag:hover,
+.skill:hover, .skill-pill:hover, .tech-pill:hover, .project-tag:hover {
+  transform:translateY(-1px);
+  box-shadow:0 6px 20px rgba(0,0,0,.08);
+}
+
+/* If any card/page had its own special chip styles, neutralize them */
+.project-card .chip, .project-card .pill, .project-card .badge, .project-card .tag,
+.skills-grid  .chip, .skills-grid  .pill, .skills-grid  .badge, .skills-grid  .tag,
+.key-projects .chip, .key-projects .pill, .key-projects .badge, .key-projects .tag {
+  background:var(--panel) !important;
+  color:var(--text) !important;
+  border-color:var(--line) !important;
+  box-shadow:none !important;
+}
