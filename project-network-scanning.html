@@ -147,41 +147,42 @@ curl -I http://192.168.56.101:80/</code></pre>
     weak VNC password (5900), r-services exposure (512/514), and OS EOL.
   </p>
 
-  <h2>Evidence (Screenshots)</h2>
-  <div class="evidence-grid">
-    <figure>
-      <img src="assets/homelab_projects/metasploitable2-recon/ifconfig.png" alt="Target ifconfig">
-      <figcaption>Target network configuration (<code>ifconfig</code>)</figcaption>
-    </figure>
-    <figure>
-      <img src="assets/homelab_projects/metasploitable2-recon/ip-addr.png" alt="Attacker IP address">
-      <figcaption>Attacker interfaces (<code>ip addr</code>)</figcaption>
-    </figure>
-    <figure>
-      <img src="assets/homelab_projects/metasploitable2-recon/ping.png" alt="Ping reachability">
-      <figcaption>ICMP reachability confirmed</figcaption>
-    </figure>
-    <figure>
-      <img src="assets/homelab_projects/metasploitable2-recon/nmap-full-1.png" alt="Nmap full-port scan (part 1)">
-      <figcaption>Full-port scan – many legacy services</figcaption>
-    </figure>
-    <figure>
-      <img src="assets/homelab_projects/metasploitable2-recon/nmap-full-2.png" alt="Nmap full-port scan (part 2)">
-      <figcaption>Full-port scan – continued</figcaption>
-    </figure>
-    <figure>
-      <img src="assets/homelab_projects/metasploitable2-recon/nmap-sv-o-1.png" alt="Nmap -sV -sC -O (part 1)">
-      <figcaption>Service/version/OS detection</figcaption>
-    </figure>
-    <figure>
-      <img src="assets/homelab_projects/metasploitable2-recon/nmap-sv-o-2.png" alt="Nmap -sV -sC -O (part 2)">
-      <figcaption>Service/version/OS detection – continued</figcaption>
-    </figure>
-    <figure>
-      <img src="assets/homelab_projects/metasploitable2-recon/curl-headers.png" alt="HTTP banner grabbing with curl -I">
-      <figcaption>HTTP banner: Apache/2.2.8 + PHP/5.2.4</figcaption>
-    </figure>
-  </div>
+<h2>Evidence (Screenshots)</h2>
+<div class="evidence-grid">
+  <figure>
+    <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/ifconfig.png" alt="Target ifconfig">
+    <figcaption>Target network configuration (<code>ifconfig</code>)</figcaption>
+  </figure>
+  <figure>
+    <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/ip-addr.png" alt="Attacker IP address">
+    <figcaption>Attacker interfaces (<code>ip addr</code>)</figcaption>
+  </figure>
+  <figure>
+    <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/ping.png" alt="Ping reachability">
+    <figcaption>ICMP reachability confirmed</figcaption>
+  </figure>
+  <figure>
+    <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/nmap-full-1.png" alt="Nmap full-port scan (part 1)">
+    <figcaption>Full-port scan – many legacy services</figcaption>
+  </figure>
+  <figure>
+    <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/nmap-full-2.png" alt="Nmap full-port scan (part 2)">
+    <figcaption>Full-port scan – continued</figcaption>
+  </figure>
+  <figure>
+    <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/nmap-sv-o-1.png" alt="Nmap -sV -sC -O (part 1)">
+    <figcaption>Service/version/OS detection</figcaption>
+  </figure>
+  <figure>
+    <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/nmap-sv-o-2.png" alt="Nmap -sV -sC -O (part 2)">
+    <figcaption>Service/version/OS detection – continued</figcaption>
+  </figure>
+  <figure>
+    <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/curl-headers.png" alt="HTTP banner grabbing with curl -I">
+    <figcaption>HTTP banner: Apache/2.2.8 + PHP/5.2.4</figcaption>
+  </figure>
+</div>
+
 
 <h2>Artifact</h2>
 
@@ -225,5 +226,10 @@ curl -I http://192.168.56.101:80/</code></pre>
       </div>
     </div>
   </footer>
+  <!-- Lightbox used by script.js -->
+<div id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img" alt="expanded image">
+</div>
+
 </body>
 </html>
