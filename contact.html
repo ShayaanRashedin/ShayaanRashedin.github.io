@@ -4,76 +4,172 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact | Shayaan Rashedin</title>
+  <meta name="description" content="Contact Shayaan Rashedin — cybersecurity student seeking a 16-month internship starting May 2026. Email, LinkedIn, GitHub, and resume links." />
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
+
+  <!-- Page-scoped styles: tidy grid, cards, and readable spacing -->
+  <style>
+    .contact-hero { margin: 28px 0 10px; }
+    .contact-hero h1 { margin: 0 0 10px; }
+    .meta-line { color: var(--muted-text, #64748b); }
+
+    .cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 6px; }
+    .btn.sm { padding: 10px 14px; border-radius: 10px; font-size: 0.95rem; }
+
+    .contact-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      margin-top: 14px;
+    }
+    .contact-card {
+      background: var(--card-bg, #fff);
+      border: 1px solid var(--border-color, #e2e8f0);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: var(--shadow, 0 6px 18px rgba(0,0,0,.08));
+    }
+    .contact-card h3 { margin-top: 0; margin-bottom: 8px; }
+    .contact-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+    .contact-list li { display: flex; align-items: center; gap: 10px; }
+    .contact-list .label { width: 110px; color: var(--muted-text, #64748b); }
+    .contact-list .value a { text-decoration: underline; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tags span { font-size: .85rem; background: rgba(0,0,0,.06); color: inherit; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--border-color, #e2e8f0); }
+    body.dark .tags span { background: rgba(255,255,255,.06); }
+
+    .divider { height: 1px; background: var(--border-color, #e2e8f0); margin: 18px 0; }
+
+    /* Nice mailto preview on hover */
+    a[href^="mailto:"] { text-decoration: none; border-bottom: 1px dashed var(--border-color, #e2e8f0); }
+    a[href^="mailto:"]:hover { border-bottom-style: solid; }
+
+    /* Compact helper text */
+    .small { font-size: .92rem; color: var(--muted-text, #64748b); }
+
+    /* Layout container tweaks */
+    .container.narrow { max-width: 900px; }
+  </style>
+
+  <!-- Structured data to help recruiter tools -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Shayaan Rashedin",
+    "jobTitle": "Cybersecurity Intern (Candidate)",
+    "email": "mailto:sr17502005@gmail.com",
+    "url": "https://shayaanrashedin.github.io",
+    "sameAs": [
+      "https://www.linkedin.com/in/your-linkedin/",
+      "https://github.com/your-github"
+    ],
+    "address": { "@type": "PostalAddress", "addressLocality": "Toronto", "addressRegion": "ON", "addressCountry": "CA" }
+  }
+  </script>
 </head>
 <body>
-  <!-- Same sticky header as other pages -->
+  <!-- Site header (keeps active link highlighting via script.js) -->
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html" aria-label="Homepage">
         <span class="brand-mark">SR</span>
         <span class="brand-text">Shayaan Rashedin</span>
       </a>
-
       <nav aria-label="Primary">
         <a href="projects.html">Projects</a>
         <a href="homelab.html">Home Lab</a>
         <a href="resume.html">Resume</a>
-        <a href="contact.html" class="active" aria-current="page">Contact</a>
+        <a href="contact.html">Contact</a>
       </nav>
-
-      <button id="theme-toggle" class="btn secondary">Toggle Theme</button>
+      <button id="theme-toggle" aria-label="Toggle dark mode">Toggle Theme</button>
     </div>
   </header>
 
-  <main class="container">
+  <main class="container narrow">
     <section class="contact-hero">
-      <h1 class="page-title">Contact</h1>
-      <p class="muted">Best way to reach me is email—feel free to connect on LinkedIn as well.</p>
+      <h1>Contact Shayaan</h1>
+      <p class="meta-line">Targeting a <strong>16-month Cybersecurity Internship</strong> starting <strong>May 2026</strong> • Open to GTA (in-person), hybrid, or remote</p>
+
+      <div class="cta-row">
+        <a class="btn primary sm"
+           href="mailto:sr17502005@gmail.com?subject=Interview%20Opportunity%20%E2%80%94%20Cybersecurity%20Intern%20(16-month%20May%202026)">
+          Email Me
+        </a>
+        <a class="btn neutral sm" href="resume.html">View Resume</a>
+        <a class="btn secondary sm" href="https://www.linkedin.com/in/your-linkedin/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn secondary sm" href="https://github.com/your-github" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <p class="small">Prefer a quick intro? A two-line note with your role, stack, and timeline is perfect—I’ll reply promptly.</p>
     </section>
 
     <section class="contact-grid">
-      <!-- Left card -->
-      <div class="info-card">
-        <h2>Get in touch</h2>
+      <div class="contact-card" aria-labelledby="direct-contact">
+        <h3 id="direct-contact">Direct Contact</h3>
         <ul class="contact-list">
           <li>
-            <span>Email</span>
-            <a class="btn secondary sm"
-               href="mailto:sr17502005@gmail.com?subject=Inquiry%20from%20your%20portfolio">
-              Email Me
-            </a>
+            <span class="label">Email</span>
+            <span class="value"><a href="mailto:sr17502005@gmail.com">sr17502005@gmail.com</a></span>
           </li>
           <li>
-            <span>LinkedIn</span>
-            <a class="btn neutral sm" href="https://www.linkedin.com/in/your-linkedin/" target="_blank" rel="noopener">
-              Open LinkedIn
-            </a>
+            <span class="label">Location</span>
+            <span class="value">Toronto, ON (America/Toronto)</span>
           </li>
           <li>
-            <span>GitHub</span>
-            <a class="btn primary sm" href="https://github.com/your-github" target="_blank" rel="noopener">
-              Open GitHub
-            </a>
+            <span class="label">Response</span>
+            <span class="value">Typically within 24 hours</span>
           </li>
         </ul>
-      </div>
-
-      <!-- Right card -->
-      <div class="info-card">
-        <h2>At a glance</h2>
-        <ul class="bullets">
-          <li>Third-year Computer Engineering @ Toronto Metropolitan University</li>
-          <li>Cybersecurity focus (home lab: Kali + Metasploitable 2)</li>
-          <li>Seeking a 16-month cybersecurity internship starting May 2026</li>
-        </ul>
-
-        <div class="quick-links" style="margin-top:10px;">
-          <a class="btn neutral sm" href="resume.html">View Resume</a>
-          <a class="btn secondary sm" href="homelab.html">Explore Home Lab</a>
+        <div class="divider"></div>
+        <div class="tags" aria-label="Focus areas">
+          <span>Offensive &amp; Defensive</span>
+          <span>Kali / Metasploitable2</span>
+          <span>Nmap / Metasploit</span>
+          <span>OpenVAS / GVM</span>
+          <span>Wireshark</span>
+          <span>Linux</span>
+          <span>SQL</span>
         </div>
       </div>
+
+      <div class="contact-card" aria-labelledby="recruiter-pack">
+        <h3 id="recruiter-pack">Recruiter Pack</h3>
+        <p class="small">Quick links to the materials you’ll want first:</p>
+        <ul class="contact-list">
+          <li><span class="label">Resume</span><span class="value"><a href="resume.html">View Resume</a></span></li>
+          <li><span class="label">Projects</span><span class="value"><a href="projects.html">Project Gallery</a></span></li>
+          <li><span class="label">Home Lab</span><span class="value"><a href="homelab.html">Kali ↔ Metasploitable2</a></span></li>
+          <li><span class="label">Portfolio</span><span class="value"><a href="index.html">Homepage</a></span></li>
+        </ul>
+        <div class="divider"></div>
+        <p class="small">
+          Highlights: Recon (Nmap + OpenVAS), Exploitation (vsftpd/UnrealIRCd/distcc), MySQL proof artifact, log analysis, Linux hardening.
+        </p>
+      </div>
+
+      <div class="contact-card" aria-labelledby="role-fit">
+        <h3 id="role-fit">Role Fit</h3>
+        <p class="small">I’m a third-year Computer Engineering student (TMU) focused on cybersecurity, with a hands-on home lab and Google Professional Certificates. Currently studying for CompTIA Security+.</p>
+        <ul class="contact-list">
+          <li><span class="label">Timeline</span><span class="value">May 2026 → Aug 2027 (16 months)</span></li>
+          <li><span class="label">Work Modes</span><span class="value">GTA in-person • Hybrid • Remote</span></li>
+          <li><span class="label">Areas</span><span class="value">SecOps • AppSec • SOC • Red/Blue Team</span></li>
+        </ul>
+        <div class="divider"></div>
+        <div class="cta-row">
+          <a class="btn primary sm"
+             href="mailto:sr17502005@gmail.com?subject=Interview%20Opportunity%20%E2%80%94%20Cybersecurity%20Intern%20(16-month%20May%202026)">
+            Email to Schedule
+          </a>
+          <a class="btn neutral sm" href="projects.html">See Projects</a>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin: 22px 0 6px;">
+      <a class="btn neutral sm" href="index.html">← Back to Home</a>
     </section>
   </main>
 
