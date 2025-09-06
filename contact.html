@@ -4,75 +4,66 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact | Shayaan Rashedin</title>
+  <meta name="description" content="Email, LinkedIn, and GitHub for Shayaan Rashedin." />
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
+  <style>
+    .contact-simple { text-align: center; margin: 36px 0; }
+    .contact-simple h1 { margin-bottom: 8px; }
+    .contact-simple .meta-line { color: var(--muted-text, #64748b); }
+    .contact-simple .cta-row { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:14px; }
+    .btn.sm { padding: 10px 14px; border-radius: 10px; font-size: 0.95rem; }
+  </style>
 </head>
 <body>
-  <!-- Same sticky header as other pages -->
+  <!-- Header (matches the rest of the site) -->
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html" aria-label="Homepage">
         <span class="brand-mark">SR</span>
         <span class="brand-text">Shayaan Rashedin</span>
       </a>
-
       <nav aria-label="Primary">
         <a href="projects.html">Projects</a>
         <a href="homelab.html">Home Lab</a>
         <a href="resume.html">Resume</a>
-        <a href="contact.html" class="active" aria-current="page">Contact</a>
+        <a href="contact.html">Contact</a>
       </nav>
-
-      <button id="theme-toggle" class="btn secondary">Toggle Theme</button>
+      <button id="theme-toggle" aria-label="Toggle dark mode">Toggle Theme</button>
     </div>
   </header>
 
   <main class="container">
-    <section class="contact-hero">
-      <h1 class="page-title">Contact</h1>
-      <p class="muted">Best way to reach me is email—feel free to connect on LinkedIn as well.</p>
-    </section>
+    <section class="contact-simple">
+      <h1>Contact</h1>
+      <p class="meta-line">Reach me directly via email, or connect on LinkedIn and GitHub.</p>
 
-    <section class="contact-grid">
-      <!-- Left card -->
-      <div class="info-card">
-        <h2>Get in touch</h2>
-        <ul class="contact-list">
-          <li>
-            <span>Email</span>
-            <a class="btn secondary sm"
-               href="mailto:sr17502005@gmail.com?subject=Inquiry%20from%20your%20portfolio">
-              Email Me
-            </a>
-          </li>
-          <li>
-            <span>LinkedIn</span>
-            <a class="btn neutral sm" href="https://www.linkedin.com/in/your-linkedin/" target="_blank" rel="noopener">
-              Open LinkedIn
-            </a>
-          </li>
-          <li>
-            <span>GitHub</span>
-            <a class="btn primary sm" href="https://github.com/your-github" target="_blank" rel="noopener">
-              Open GitHub
-            </a>
-          </li>
-        </ul>
+      <p style="margin-top:10px;">
+        <strong>Email:</strong>
+        <a href="mailto:sr17502005@gmail.com">sr17502005@gmail.com</a>
+      </p>
+
+      <div class="cta-row">
+        <a class="btn primary sm"
+           href="mailto:sr17502005@gmail.com?subject=Interview%20Opportunity%20%E2%80%94%20Cybersecurity%20Intern%20(16-month%20May%202026)">
+          Email Me
+        </a>
+        <a class="btn secondary sm"
+           href="https://www.linkedin.com/in/REPLACE_WITH_LINKEDIN_URL/"
+           target="_blank" rel="noopener"
+           aria-label="Open LinkedIn profile">
+          LinkedIn
+        </a>
+        <a class="btn neutral sm"
+           href="https://github.com/shayaanrashedin"
+           target="_blank" rel="noopener"
+           aria-label="Open GitHub profile">
+          GitHub
+        </a>
       </div>
 
-      <!-- Right card -->
-      <div class="info-card">
-        <h2>At a glance</h2>
-        <ul class="bullets">
-          <li>Third-year Computer Engineering @ Toronto Metropolitan University</li>
-          <li>Cybersecurity focus (home lab: Kali + Metasploitable 2)</li>
-          <li>Seeking a 16-month cybersecurity internship starting May 2026</li>
-        </ul>
-
-        <div class="quick-links" style="margin-top:10px;">
-          <a class="btn neutral sm" href="resume.html">View Resume</a>
-          <a class="btn secondary sm" href="homelab.html">Explore Home Lab</a>
-        </div>
+      <div style="margin-top:18px;">
+        <a class="btn neutral sm" href="index.html">← Back to Home</a>
       </div>
     </section>
   </main>
@@ -82,10 +73,7 @@
       <p>© 2025 Shayaan Rashedin</p>
       <div class="footer-links">
         <a href="mailto:sr17502005@gmail.com">Email</a>
-        <a href="https://www.linkedin.com/in/your-linkedin/" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://github.com/your-github" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/REPLACE_WITH_LINKEDIN_URL/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/shayaanrashedin" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
-  </footer>
-</body>
-</html>
