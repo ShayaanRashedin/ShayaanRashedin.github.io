@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SIEM: Brute-Force Detection with Splunk | Shayaan Rashedin</title>
+  <meta name="description" content="Detecting SSH/Telnet brute-force against Metasploitable2 using Splunk on Ubuntu. Includes data onboarding, SPL detections, alerting, and MITRE mapping." />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="Homepage">
+      <span class="brand-mark">SR</span>
+      <span class="brand-text">Shayaan Rashedin</span>
+    </a>
+    <nav aria-label="Primary">
+      <a href="projects.html">Projects</a>
+      <a href="homelab.html" class="active" aria-current="page">Home Lab</a>
+      <a href="resume.html">Resume</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <button id="theme-toggle" class="btn secondary">Toggle Theme</button>
+  </div>
+</header>
+
+<main class="container article">
+  <header class="page-header">
+    <p class="eyebrow">Home Lab • SIEM</p>
+    <h1>Brute-Force Detection with Splunk</h1>
+    <p class="lead">
+      I simulated external brute-force activity from <strong>Kali Linux</strong> targeting <strong>Metasploitable2</strong> and built detections in <strong>Splunk</strong> (running on Ubuntu).
+      This project covers <em>data collection</em>, <em>detection logic</em>, <em>alerting</em>, and <em>response</em>, mapped to <strong>MITRE ATT&CK T1110 – Brute Force</strong>.
+    </p>
+    <div class="tags"><span>Splunk</span><span>Hydra</span><span>Ubuntu</span><span>Metasploitable2</span><span>MITRE ATT&CK</span></div>
+  </header>
+
+  <section>
+    <h2>Architecture</h2>
+    <ul class="bulleted">
+      <li><strong>Attacker:</strong> Kali (Hydra)</li>
+      <li><strong>Target:</strong> Metasploitable2 (SSH/Telnet enabled)</li>
+      <li><strong>SIEM:</strong> Splunk Enterprise on Ubuntu (indexes <code>/var/log/auth.log</code> from Metasploitable2 via Universal Forwarder)</li>
+      <li><strong>Network:</strong> Host-only (192.168.56.0/24) via VirtualBox</li>
+    </ul>
+    <figure class="figure">
+      <img src="images/siem/siem-topology.png" alt="Kali → Metasploitable2 → Splunk (Ubuntu) topology" />
+      <figcaption>Lab topology and log flow.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>Data Onboarding</h2>
+    <p>On Metasploitable2, I installed the Splunk Universal Forwarder and monitored <code>/var/log/auth.log</code> and <code>/var/log/syslog</code>. Key steps:</p>
+<pre><code># On Metasploitable2 (as root)
+dpkg -i splunkforwarder-*.deb
+/opt/splunkforwarder/bin/splunk enable boot-start --accept-license
+/opt/splunkforwarder/bin/splunk add forward-server &lt;SPLUNK_UBUNTU_IP&gt;:9997 -auth admin:changeme
+/opt/splunkforwarder/bin/splunk add monitor /var/log/auth.log
+/opt/splunkforwarder/bin/splunk add monitor /var/log/syslog
+/opt/splunkforwarder/bin/splunk restart</code></pre>
+
+    <p>On the Splunk server (Ubuntu):</p>
+<pre><code># Open receiving port and verify data
+/opt/splunk/bin/splunk enable listen 9997 -auth admin:changeme
+/opt/splunk/bin/splunk list forward-server</code></pre>
+  </section>
+
+  <section>
+    <h2>Attack Simulation</h2>
+    <p>From Kali, I executed repeated login attempts with <code>hydra</code> to generate failed-auth noise followed by a success:</p>
+<pre><code># SSH brute-force (username list + password list)
+hydra -L users.txt -P rockyou.txt ssh://192.168.56.101 -t 4 -I -o hydra_ssh.txt
+
+# Telnet brute-force (for comparison)
+hydra -L users.txt -P rockyou.txt telnet://192.168.56.101 -t 4 -I -o hydra_telnet.txt</code></pre>
+    <figure class="figure">
+      <img src="images/siem/hydra-ssh.png" alt="Hydra SSH brute force output" />
+      <figcaption>Hydra generating failed and (eventual) successful logins.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>Detection Logic (SPL)</h2>
+    <p>Two SPL searches highlight suspicious authentication activity.</p>
+
+    <h3>1) Multiple Failed SSH Logins from a Single Source</h3>
+<pre><code>index=* sourcetype=linux_secure (sshd OR sshd\[\*])
+("Failed password" OR "authentication failure")
+| stats count as failed by src, user
+| where failed &gt;= 10
+| sort -failed</code></pre>
+
+    <h3>2) Password Spraying (Many Users, One Source)</h3>
+<pre><code>index=* sourcetype=linux_secure ("Failed password" OR "authentication failure")
+| rex field=_raw "rhost=(?&lt;src&gt;[0-9\.]+)"
+| stats dc(user) as users_touched, count as failed by src
+| where users_touched &gt;= 5 AND failed &gt;= 20
+| sort -failed</code></pre>
+
+    <figure class="figure">
+      <img src="images/siem/splunk-failed-logins.png" alt="Splunk search results showing spikes of failed SSH logins" />
+      <figcaption>SPL results aggregating failed logins by source and user.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>Alerting</h2>
+    <p>I saved the first SPL as an alert and configured notifications.</p>
+    <ol>
+      <li><strong>Type:</strong> Scheduled (Every 5 minutes)</li>
+      <li><strong>Condition:</strong> If result count &gt; 0</li>
+      <li><strong>Throttle:</strong> 60 minutes per <code>src</code></li>
+      <li><strong>Actions:</strong> Send email / webhook (simulated), add to Incident Review</li>
+    </ol>
+    <figure class="figure">
+      <img src="images/siem/alert-config.png" alt="Splunk alert configuration form" />
+      <figcaption>Alert configured to fire on brute-force spikes.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>Response &amp; Hardening</h2>
+    <ul class="bulleted">
+      <li>Captured the IOC (<code>src</code> IP) and blocked at host firewall.</li>
+      <li>Enabled SSH rate-limiting via <code>fail2ban</code> and adjusted <code>MaxAuthTries</code>, login banners, and lockout policy.</li>
+      <li>Switched to key-based auth; disabled Telnet service.</li>
+      <li>Wrote a short post-incident summary and preserved logs for lessons learned.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>MITRE ATT&amp;CK Mapping</h2>
+    <table class="checklist-table">
+      <thead><tr><th>Technique</th><th>ID</th><th>Where Observed</th></tr></thead>
+      <tbody>
+        <tr><td>Brute Force</td><td>T1110</td><td>Hydra against SSH/Telnet</td></tr>
+        <tr><td>Valid Accounts</td><td>T1078</td><td>Post-success login evidence</td></tr>
+        <tr><td>Exfiltration Over C2 Channel</td><td>T1041</td><td>Not in scope (future work)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Evidence &amp; Screenshots</h2>
+    <div class="gallery">
+      <img src="images/siem/hydra-ssh.png" alt="Hydra output" class="lab-img" />
+      <img src="images/siem/splunk-failed-logins.png" alt="Splunk failed logins chart" class="lab-img" />
+      <img src="images/siem/alert-fired.png" alt="Alert triggered in Splunk" class="lab-img" />
+    </div>
+    <p class="muted">Place your real screenshots in <code>/images/siem/</code> using the same filenames to auto-populate this page.</p>
+  </section>
+
+  <footer class="page-footer">
+    <a class="btn secondary" href="homelab.html">← Back to Home Lab</a>
+    <a class="btn primary" href="contact.html">Get in touch</a>
+  </footer>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="year"></span> Shayaan Rashedin — Cybersecurity Portfolio</p>
+  </div>
+</footer>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
