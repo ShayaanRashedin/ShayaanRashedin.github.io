@@ -102,15 +102,72 @@ sudo /opt/splunk/bin/splunk list forward-server
     </ol>
   </section>
 
-  <section>
-    <h2>Response &amp; Hardening</h2>
-    <ul class="bulleted">
-      <li>Capture IOC (attacker IP) and block at host firewall.</li>
-      <li>Enable rate-limiting/lockout (e.g., <code>fail2ban</code>), adjust <code>MaxAuthTries</code>, disable Telnet.</li>
-      <li>Prefer key-based auth; tighten password policy and banners.</li>
-      <li>Document incident summary and preserve logs for lessons learned.</li>
-    </ul>
-  </section>
+<section id="incident-report">
+  <h2>Incident Report – FTP Brute Force Attempt (IR-2025-0915-FTPBF)</h2>
+  <p class="muted">Simulated brute-force activity documented end-to-end; summarized from my formal incident report.</p>
+
+  <h3>Executive Summary</h3>
+  <p>
+    On September 15, 2025, a brute-force attack was simulated against the FTP service on the Metasploitable2 host
+    (<code>192.168.56.101</code>). Kali Linux (Hydra) generated repeated authentication failures that were ingested into Splunk via
+    syslog and the Universal Forwarder. A custom detection flagged &gt;10 failed logins in 5-minute windows, and an alert titled
+    <em>“FTP Brute Force Detection”</em> was created to auto-notify. This demonstrates end-to-end SIEM functionality: ingestion,
+    detection, alerting, and reporting.
+  </p>
+
+  <h3>Environment</h3>
+  <ul class="bulleted">
+    <li><strong>Attacker:</strong> Kali Linux VM</li>
+    <li><strong>Target:</strong> Metasploitable2 VM (<code>192.168.56.101</code>, FTP active)</li>
+    <li><strong>SIEM:</strong> Splunk Enterprise on Ubuntu (receiving UDP <code>514</code> syslog and TCP <code>9997</code> forwarder data)</li>
+    <li><strong>Data Sources:</strong> Metasploitable2 syslog forwarding; Universal Forwarder monitoring <code>/var/log/syslog</code> and <code>/var/log/auth.log</code></li>
+  </ul>
+
+  <h3>Attack Simulation</h3>
+  <pre><code>hydra -l msfadmin -P /usr/share/wordlists/rockyou.txt ftp://192.168.56.101 -t 4 -V</code></pre>
+  <p>
+    Syslog recorded <code>pam_unix(ftp:auth): authentication failure</code> entries and collapsed repeats as
+    <em>“last message repeated N times”</em>.
+  </p>
+
+  <h3>Detection</h3>
+  <p><strong>Raw evidence:</strong> Authentication failures visible in Splunk (<code>sourcetype=syslog</code>), including repeat-suppressed messages.</p>
+  <p><strong>SPL (5-minute bins):</strong></p>
+  <pre><code>index=main sourcetype=syslog host=192.168.56.101 ("pam_unix(ftp:auth): authentication failure" OR "last message repeated")
+| eval base_fail=if(match(_raw,"pam_unix\\(ftp:auth\\): authentication failure"),1,0)
+| rex field=_raw "last message repeated (?&lt;rep&gt;\\d+) times"
+| eval fail_events=coalesce(rep, base_fail)
+| bin _time span=5m
+| stats sum(fail_events) as failures by host _time
+| where failures &gt; 10</code></pre>
+  <p><strong>Result:</strong> Between 19:45 and 20:00 EDT, Splunk detected roughly 200–330 failures per 5-minute window.</p>
+
+  <h3>Alerting</h3>
+  <ul class="bulleted">
+    <li><strong>Title:</strong> FTP Brute Force Detection</li>
+    <li><strong>Schedule:</strong> Real-time / per-result (demo) or hourly during normal ops</li>
+    <li><strong>Trigger:</strong> Number of Results &gt; 0</li>
+    <li><strong>Action:</strong> Add to Triggered Alerts; optional email/webhook</li>
+  </ul>
+
+  <h3>Impact &amp; Severity</h3>
+  <ul class="bulleted">
+    <li><strong>System:</strong> Metasploitable2 (FTP)</li>
+    <li><strong>Scope:</strong> Authentication attempts only; no successful login achieved in this simulation</li>
+    <li><strong>Severity:</strong> Medium (controlled lab)</li>
+  </ul>
+
+  <h3>Recommendations</h3>
+  <ol>
+    <li>Disable FTP or replace with SFTP/SSH; enforce strong password policies and MFA.</li>
+    <li>Deploy rate-limiting/lockout (e.g., Fail2Ban); disable Telnet.</li>
+    <li>Expand detections to SSH; add dashboards for failed logins by host/source/time.</li>
+    <li>Response playbook: validate, confirm attacking source, block IP, escalate if success occurs.</li>
+  </ol>
+
+  <p class="muted">Full write-up PDF: <a href="FTP_Brute_Force_Incident_Report.pdf" download>Download</a></p>
+</section>
+
 
   <section>
     <h2>MITRE ATT&amp;CK Mapping</h2>
