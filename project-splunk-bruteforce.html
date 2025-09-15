@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SIEM: Brute-Force Detection with Splunk | Shayaan Rashedin</title>
-  <meta name="description" content="Detecting SSH/Telnet brute-force against Metasploitable2 using Splunk on Ubuntu. Includes data onboarding, SPL detections, alerting, and MITRE mapping." />
+  <meta name="description" content="Detecting brute-force activity against Metasploitable2 using Splunk on Ubuntu. Includes data onboarding, SPL detections that handle 'last message repeated', alerting, MITRE mapping, and hardening." />
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
 </head>
@@ -30,103 +30,85 @@
     <p class="eyebrow">Home Lab • SIEM</p>
     <h1>Brute-Force Detection with Splunk</h1>
     <p class="lead">
-      I simulated external brute-force activity from <strong>Kali Linux</strong> targeting <strong>Metasploitable2</strong> and built detections in <strong>Splunk</strong> (running on Ubuntu).
-      This project covers <em>data collection</em>, <em>detection logic</em>, <em>alerting</em>, and <em>response</em>, mapped to <strong>MITRE ATT&CK T1110 – Brute Force</strong>.
+      I simulated brute-force activity from <strong>Kali Linux</strong> against <strong>Metasploitable2</strong> and built detections in <strong>Splunk</strong> (running on Ubuntu).
+      The project covers <em>data collection</em>, <em>detection logic</em> (including collapsed syslog repeats), <em>alerting</em>, and <em>response</em>, mapped to <strong>MITRE ATT&CK T1110 – Brute Force</strong>.
     </p>
-    <div class="tags"><span>Splunk</span><span>Hydra</span><span>Ubuntu</span><span>Metasploitable2</span><span>MITRE ATT&CK</span></div>
+    <div class="tags"><span>Splunk</span><span>Hydra</span><span>Metasploitable2</span><span>Ubuntu</span><span>MITRE ATT&CK</span></div>
   </header>
 
   <section>
     <h2>Architecture</h2>
     <ul class="bulleted">
-      <li><strong>Attacker:</strong> Kali (Hydra)</li>
-      <li><strong>Target:</strong> Metasploitable2 (SSH/Telnet enabled)</li>
-      <li><strong>SIEM:</strong> Splunk Enterprise on Ubuntu (indexes <code>/var/log/auth.log</code> from Metasploitable2 via Universal Forwarder)</li>
-      <li><strong>Network:</strong> Host-only (192.168.56.0/24) via VirtualBox</li>
+      <li><strong>Attacker:</strong> Kali Linux (Hydra)</li>
+      <li><strong>Target:</strong> Metasploitable2 (FTP/SSH/Telnet enabled)</li>
+      <li><strong>SIEM:</strong> Splunk Enterprise on Ubuntu</li>
+      <li><strong>Ingestion:</strong> Syslog over UDP <code>514</code> and Splunk Universal Forwarder over TCP <code>9997</code></li>
+      <li><strong>Network:</strong> VirtualBox host-only <code>192.168.56.0/24</code></li>
     </ul>
-    <figure class="figure">
-      <img src="images/siem/siem-topology.png" alt="Kali → Metasploitable2 → Splunk (Ubuntu) topology" />
-      <figcaption>Lab topology and log flow.</figcaption>
-    </figure>
   </section>
 
   <section>
     <h2>Data Onboarding</h2>
-    <p>On Metasploitable2, I installed the Splunk Universal Forwarder and monitored <code>/var/log/auth.log</code> and <code>/var/log/syslog</code>. Key steps:</p>
-<pre><code># On Metasploitable2 (as root)
-dpkg -i splunkforwarder-*.deb
-/opt/splunkforwarder/bin/splunk enable boot-start --accept-license
-/opt/splunkforwarder/bin/splunk add forward-server &lt;SPLUNK_UBUNTU_IP&gt;:9997 -auth admin:changeme
-/opt/splunkforwarder/bin/splunk add monitor /var/log/auth.log
-/opt/splunkforwarder/bin/splunk add monitor /var/log/syslog
-/opt/splunkforwarder/bin/splunk restart</code></pre>
-
-    <p>On the Splunk server (Ubuntu):</p>
-<pre><code># Open receiving port and verify data
-/opt/splunk/bin/splunk enable listen 9997 -auth admin:changeme
-/opt/splunk/bin/splunk list forward-server</code></pre>
+    <p><strong>On Metasploitable2</strong> (and/or the host sending logs), the Splunk Universal Forwarder monitors <code>/var/log/syslog</code> and <code>/var/log/auth.log</code> and forwards to the Splunk server:</p>
+<pre><code># Forwarder: register and monitor (example)
+sudo /opt/splunkforwarder/bin/splunk add forward-server 192.168.56.107:9997 -auth admin:changeme
+sudo /opt/splunkforwarder/bin/splunk add monitor /var/log/syslog
+sudo /opt/splunkforwarder/bin/splunk add monitor /var/log/auth.log
+sudo /opt/splunkforwarder/bin/splunk restart
+</code></pre>
+    <p><strong>On the Splunk server</strong> (Ubuntu), open the receiver and confirm:</p>
+<pre><code>sudo /opt/splunk/bin/splunk enable listen 9997 -auth admin:changeme
+sudo /opt/splunk/bin/splunk list forward-server
+</code></pre>
   </section>
 
   <section>
     <h2>Attack Simulation</h2>
-    <p>From Kali, I executed repeated login attempts with <code>hydra</code> to generate failed-auth noise followed by a success:</p>
-<pre><code># SSH brute-force (username list + password list)
-hydra -L users.txt -P rockyou.txt ssh://192.168.56.101 -t 4 -I -o hydra_ssh.txt
-
-# Telnet brute-force (for comparison)
-hydra -L users.txt -P rockyou.txt telnet://192.168.56.101 -t 4 -I -o hydra_telnet.txt</code></pre>
-    <figure class="figure">
-      <img src="images/siem/hydra-ssh.png" alt="Hydra SSH brute force output" />
-      <figcaption>Hydra generating failed and (eventual) successful logins.</figcaption>
-    </figure>
+    <p>To generate brute-force noise, I used <code>hydra</code> from Kali against the target’s FTP service:</p>
+<pre><code>hydra -l msfadmin -P /usr/share/wordlists/rockyou.txt \
+  ftp://192.168.56.101 -t 4 -V
+</code></pre>
+    <p>This produces repeated authentication failures (and occasionally collapsed “last message repeated N times” lines) in syslog.</p>
   </section>
 
   <section>
     <h2>Detection Logic (SPL)</h2>
-    <p>Two SPL searches highlight suspicious authentication activity.</p>
+    <p>
+      FTP brute-force leaves <code>pam_unix(ftp:auth)</code> failures in <code>syslog</code>. Because the logger can collapse repeats into
+      <em>“last message repeated N times”</em>, the SPL sums both the base failures and the collapsed repeats, then bins into 5-minute windows and alerts when the sum exceeds a threshold.
+    </p>
 
-    <h3>1) Multiple Failed SSH Logins from a Single Source</h3>
-<pre><code>index=* sourcetype=linux_secure (sshd OR sshd\[\*])
-("Failed password" OR "authentication failure")
-| stats count as failed by src, user
-| where failed &gt;= 10
-| sort -failed</code></pre>
+<pre><code>index=main sourcetype=syslog host=192.168.56.101 ("pam_unix(ftp:auth): authentication failure" OR "last message repeated")
+| eval base_fail=if(match(_raw,"pam_unix\\(ftp:auth\\): authentication failure"), 1, 0)
+| rex field=_raw "last message repeated (?&lt;rep&gt;\\d+) times"
+| eval fail_events=coalesce(rep, base_fail)
+| bin _time span=5m
+| stats sum(fail_events) as failures by host _time
+| where failures &gt; 10
+| sort _time
+</code></pre>
 
-    <h3>2) Password Spraying (Many Users, One Source)</h3>
-<pre><code>index=* sourcetype=linux_secure ("Failed password" OR "authentication failure")
-| rex field=_raw "rhost=(?&lt;src&gt;[0-9\.]+)"
-| stats dc(user) as users_touched, count as failed by src
-| where users_touched &gt;= 5 AND failed &gt;= 20
-| sort -failed</code></pre>
-
-    <figure class="figure">
-      <img src="images/siem/splunk-failed-logins.png" alt="Splunk search results showing spikes of failed SSH logins" />
-      <figcaption>SPL results aggregating failed logins by source and user.</figcaption>
-    </figure>
+    <p>To pivot this to SSH, replace <code>ftp:auth</code> with <code>sshd</code> and point to <code>auth.log</code> if applicable.</p>
   </section>
 
   <section>
     <h2>Alerting</h2>
-    <p>I saved the first SPL as an alert and configured notifications.</p>
     <ol>
-      <li><strong>Type:</strong> Scheduled (Every 5 minutes)</li>
-      <li><strong>Condition:</strong> If result count &gt; 0</li>
-      <li><strong>Throttle:</strong> 60 minutes per <code>src</code></li>
-      <li><strong>Actions:</strong> Send email / webhook (simulated), add to Incident Review</li>
+      <li><strong>Save As → Alert</strong> (from the SPL above)</li>
+      <li><strong>Type:</strong> Scheduled — e.g., Run every hour (or every 5–10 minutes during testing)</li>
+      <li><strong>Trigger condition:</strong> Number of Results &gt; 0</li>
+      <li><strong>Throttle:</strong> Optional (e.g., 60m) per <code>host</code> or <code>src</code></li>
+      <li><strong>Actions:</strong> Add to Triggered Alerts (and optionally email/webhook)</li>
     </ol>
-    <figure class="figure">
-      <img src="images/siem/alert-config.png" alt="Splunk alert configuration form" />
-      <figcaption>Alert configured to fire on brute-force spikes.</figcaption>
-    </figure>
   </section>
 
   <section>
     <h2>Response &amp; Hardening</h2>
     <ul class="bulleted">
-      <li>Captured the IOC (<code>src</code> IP) and blocked at host firewall.</li>
-      <li>Enabled SSH rate-limiting via <code>fail2ban</code> and adjusted <code>MaxAuthTries</code>, login banners, and lockout policy.</li>
-      <li>Switched to key-based auth; disabled Telnet service.</li>
-      <li>Wrote a short post-incident summary and preserved logs for lessons learned.</li>
+      <li>Capture IOC (attacker IP) and block at host firewall.</li>
+      <li>Enable rate-limiting/lockout (e.g., <code>fail2ban</code>), adjust <code>MaxAuthTries</code>, disable Telnet.</li>
+      <li>Prefer key-based auth; tighten password policy and banners.</li>
+      <li>Document incident summary and preserve logs for lessons learned.</li>
     </ul>
   </section>
 
@@ -135,21 +117,64 @@ hydra -L users.txt -P rockyou.txt telnet://192.168.56.101 -t 4 -I -o hydra_telne
     <table class="checklist-table">
       <thead><tr><th>Technique</th><th>ID</th><th>Where Observed</th></tr></thead>
       <tbody>
-        <tr><td>Brute Force</td><td>T1110</td><td>Hydra against SSH/Telnet</td></tr>
-        <tr><td>Valid Accounts</td><td>T1078</td><td>Post-success login evidence</td></tr>
-        <tr><td>Exfiltration Over C2 Channel</td><td>T1041</td><td>Not in scope (future work)</td></tr>
+        <tr><td>Brute Force</td><td>T1110</td><td>Hydra against FTP (Metasploitable2)</td></tr>
+        <tr><td>Valid Accounts</td><td>T1078</td><td>Potential post-success login</td></tr>
       </tbody>
     </table>
   </section>
 
   <section>
-    <h2>Evidence &amp; Screenshots</h2>
-    <div class="gallery">
-      <img src="images/siem/hydra-ssh.png" alt="Hydra output" class="lab-img" />
-      <img src="images/siem/splunk-failed-logins.png" alt="Splunk failed logins chart" class="lab-img" />
-      <img src="images/siem/alert-fired.png" alt="Alert triggered in Splunk" class="lab-img" />
-    </div>
-    <p class="muted">Place your real screenshots in <code>/images/siem/</code> using the same filenames to auto-populate this page.</p>
+    <h2>Evidence Walkthrough</h2>
+
+    <figure class="figure">
+      <img src="images/siem/ports-listening.png" alt="Splunk server listening on UDP 514 and TCP 9997" class="lab-img" />
+      <figcaption><strong>Splunk inputs open:</strong> UDP <code>514</code> for syslog and TCP <code>9997</code> for Universal Forwarder data on the Ubuntu Splunk VM.</figcaption>
+    </figure>
+
+    <figure class="figure">
+      <img src="images/siem/forward-server.png" alt="Forwarder shows active forward to 192.168.56.107:9997" class="lab-img" />
+      <figcaption><strong>Universal Forwarder wired up:</strong> forwarder registered to <code>192.168.56.107:9997</code> (active).</figcaption>
+    </figure>
+
+    <figure class="figure">
+      <img src="images/siem/forwarder-monitors.png" alt="Forwarder monitors auth.log, syslog, and Splunk internal logs" class="lab-img" />
+      <figcaption><strong>Monitored paths:</strong> <code>/var/log/auth.log</code>, <code>/var/log/syslog</code>, and internal Splunk logs verified with <code>splunk list monitor</code>.</figcaption>
+    </figure>
+
+    <figure class="figure">
+      <img src="images/siem/metasploitable-syslogconf.png" alt="Metasploitable2 syslog.conf forwards to Splunk" class="lab-img" />
+      <figcaption><strong>Metasploitable2 syslog forwarding:</strong> <code>/etc/syslog.conf</code> forwards to the Splunk server (ultimately landing as <code>source=udp:514</code>).</figcaption>
+    </figure>
+
+    <figure class="figure">
+      <img src="images/siem/splunk-host-cyberlab-events.png" alt="Splunk Search shows baseline ingestion from host cyberlab" class="lab-img" />
+      <figcaption><strong>Baseline ingestion:</strong> events indexed from Kali (<em>host=cyberlab</em>).</figcaption>
+    </figure>
+
+    <figure class="figure">
+      <img src="images/siem/splunk-stats-host-source.png" alt="Splunk stats by host and source including udp:514 from 192.168.56.101" class="lab-img" />
+      <figcaption><strong>Metasploitable2 arriving via syslog:</strong> <code>index=main sourcetype=syslog | stats count by host source</code> shows <code>host=192.168.56.101</code>, <code>source=udp:514</code>.</figcaption>
+    </figure>
+
+    <figure class="figure">
+      <img src="images/siem/hydra-ftp-bruteforce.png" alt="Hydra FTP brute force against 192.168.56.101" class="lab-img" />
+      <figcaption><strong>Attack generation:</strong> Hydra FTP brute-force using <code>rockyou.txt</code> to create bursts of failed logins.</figcaption>
+    </figure>
+
+    <figure class="figure">
+      <img src="images/siem/splunk-ftp-authfail-events.png" alt="Splunk event list shows pam_unix ftp:auth authentication failure" class="lab-img" />
+      <figcaption><strong>Ground truth in logs:</strong> <code>pam_unix(ftp:auth): authentication failure</code> lines visible.</figcaption>
+    </figure>
+
+    <figure class="figure">
+      <img src="images/siem/splunk-detection-stats.png" alt="SPL detection summary showing failures per 5-minute bins" class="lab-img" />
+      <figcaption><strong>Detection output:</strong> 5-minute bins with summed failures &gt; 10 surfaced for alerting.</figcaption>
+    </figure>
+
+    <figure class="figure">
+      <img src="images/siem/splunk-alert-config.png" alt="Splunk scheduled alert configuration" class="lab-img" />
+      <figcaption><strong>Alerting UI:</strong> Scheduled alert with trigger on result count &gt; 0; throttle can be added per <code>host</code> or <code>src</code>.</figcaption>
+    </figure>
   </section>
 
   <footer class="page-footer">
