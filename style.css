@@ -544,3 +544,55 @@ a.tag:link,  a.tag:visited,  a.tag:hover,  a.tag:active {
 
 /* If you include tables or wide elements inside dropdowns */
 .accordion-content .table-scroll { overflow-x: auto; }
+
+/* ===== Accordion polish / prevent cut-off ===== */
+.accordion { margin: 14px 0 18px; }
+
+.accordion-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  /* do NOT hide overflow here; the panel manages its own overflow */
+}
+
+.accordion-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 16px; font-weight: 700; cursor: pointer; user-select: none;
+  background: var(--card-bg);
+  border-radius: 14px;
+}
+
+.accordion-header:hover { background: rgba(127,139,255,0.08); }
+
+.accordion-header::after {
+  content: '▸';
+  margin-left: auto;
+  color: var(--primary-color);
+  transition: transform .2s ease;
+}
+
+.accordion-item.open .accordion-header::after,
+.accordion-header[aria-expanded="true"]::after {
+  transform: rotate(90deg);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;                    /* managed by JS when open */
+  padding: 0 16px;                     /* JS switches to 16px when open */
+  transition: max-height .25s ease;
+  border-top: 1px solid var(--border-color);
+  background: var(--card-bg);
+  will-change: max-height, padding;
+}
+
+/* Long code inside panels: scroll instead of clip */
+.accordion-content pre {
+  margin: 0; padding: 12px 14px;
+  background: rgba(148,163,184,.14);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  overflow: auto;
+  white-space: pre;
+}

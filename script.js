@@ -116,30 +116,95 @@ document.querySelectorAll('.site-header nav a').forEach(a => {
   };
 });
 
-// --- Keep accordion heights correct on resize/content changes ---
+// ───────── Robust Accordion ─────────
 (function () {
   const headers = document.querySelectorAll('.accordion-header');
 
+  function getRegion(header) {
+    const id = header.getAttribute('aria-controls');
+    if (id) return document.getElementById(id);
+    const sib = header.nextElementSibling;
+    return sib && sib.classList.contains('accordion-content') ? sib : null;
+  }
+
+  function openPanel(header, region) {
+    // Start from current content height
+    region.style.display = 'block';
+    region.style.overflow = 'hidden';
+    region.style.maxHeight = region.scrollHeight + 'px';
+    region.style.padding = '16px';
+
+    header.setAttribute('aria-expanded', 'true');
+    header.closest('.accordion-item')?.classList.add('open');
+
+    // After the expand transition, let the panel size itself (prevents clipping on 2nd open)
+    const done = () => {
+      region.style.maxHeight = 'none';
+      region.style.overflow = 'visible';
+      region.removeEventListener('transitionend', done);
+    };
+    region.addEventListener('transitionend', done);
+  }
+
+  function closePanel(header, region) {
+    // If currently auto-sized, lock to pixel height first
+    region.style.overflow = 'hidden';
+    const h = region.scrollHeight;
+    region.style.maxHeight = h + 'px';
+    // force reflow so the browser registers the height before collapsing
+    // eslint-disable-next-line no-unused-expressions
+    region.offsetHeight;
+    region.style.maxHeight = '0px';
+    region.style.padding = '0 16px';
+
+    header.setAttribute('aria-expanded', 'false');
+    header.closest('.accordion-item')?.classList.remove('open');
+
+    const done = () => {
+      region.style.display = '';
+      region.removeEventListener('transitionend', done);
+    };
+    region.addEventListener('transitionend', done);
+  }
+
+  function toggle(header) {
+    const region = getRegion(header);
+    if (!region) return;
+    const expanded = header.getAttribute('aria-expanded') === 'true';
+    expanded ? closePanel(header, region) : openPanel(header, region);
+  }
+
+  headers.forEach(h => {
+    // initial state
+    const region = getRegion(h);
+    h.setAttribute('tabindex', '0');
+    h.setAttribute('aria-expanded', h.getAttribute('aria-expanded') || 'false');
+    if (region) {
+      region.style.maxHeight = '0px';
+      region.style.padding = '0 16px';
+    }
+    h.addEventListener('click', () => toggle(h));
+    h.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(h); }
+    });
+  });
+
+  // Re-measure open panels on resize/theme change so nothing clips
   function refreshOpenHeights() {
-    headers.forEach(h => {
-      const expanded = h.getAttribute('aria-expanded') === 'true';
-      if (!expanded) return;
-      const regionId = h.getAttribute('aria-controls');
-      const region = regionId ? document.getElementById(regionId) : (h.nextElementSibling?.classList.contains('accordion-content') ? h.nextElementSibling : null);
+    document.querySelectorAll('.accordion-header[aria-expanded="true"]').forEach(h => {
+      const region = getRegion(h);
       if (!region) return;
-      // Force recalc of maxHeight to fit full content
-      region.style.maxHeight = region.scrollHeight + 'px';
+      // temporarily set to 'auto' to get true height, then freeze again
+      region.style.maxHeight = 'none';
+      const hgt = region.scrollHeight;
+      region.style.maxHeight = hgt + 'px';
+      // let it stay auto-sized after transition
+      const done = () => { region.style.maxHeight = 'none'; region.removeEventListener('transitionend', done); };
+      region.addEventListener('transitionend', done);
     });
   }
-
-  // Re-measure when window resizes (fonts wrap differently)
   window.addEventListener('resize', refreshOpenHeights);
-
-  // Optional: when fonts finish loading or theme toggles
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(refreshOpenHeights);
-  }
   const themeBtn = document.getElementById('theme-toggle');
-  if (themeBtn) themeBtn.addEventListener('click', () => setTimeout(refreshOpenHeights, 200));
+  if (themeBtn) themeBtn.addEventListener('click', () => setTimeout(refreshOpenHeights, 220));
 })();
 
