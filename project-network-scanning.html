@@ -8,7 +8,7 @@
   <script defer src="script.js"></script>
 </head>
 <body>
-  <!-- Consistent global header -->
+  <!-- Global header -->
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html" aria-label="Homepage">
@@ -25,143 +25,243 @@
     </div>
   </header>
 
-  <main class="container">
-    <!-- Hero section -->
+  <main class="container project-body">
+    <!-- Hero -->
     <section class="proj-hero">
       <h1 class="page-title">Network Scanning & Reconnaissance</h1>
-      <p class="meta-line">End-to-end workflow: host discovery, port/service enumeration, and vulnerability triage with OpenVAS.</p>
+      <p class="meta-line">Case study: mapping exposed services, enumerating versions, and assessing vulnerabilities in a controlled lab environment.</p>
       <div class="chip-row">
-        <span class="chip">Tools: Nmap, OpenVAS</span>
+        <span class="chip">Tools: Nmap, curl, OpenVAS</span>
         <span class="chip">Target: Metasploitable2</span>
         <span class="chip">Attacker: Kali Linux</span>
-        <span class="chip">Outcome: Service map + CVE triage</span>
+        <span class="chip">Scope: Service discovery + vulnerability assessment</span>
       </div>
     </section>
 
-    <!-- Two-column layout -->
-    <section class="two-col">
-      <!-- Left column -->
-      <div>
-        <div class="callout">
-          <h3>Objective</h3>
-          <p>Map exposed services on the Metasploitable2 target VM and assess vulnerabilities using both manual scans and automated tools.</p>
+    <!-- Overview -->
+    <section>
+      <h2>Project Overview</h2>
+      <p>
+        This project demonstrates the <strong>network reconnaissance workflow</strong> used in penetration testing and vulnerability
+        management. The objective was to identify all exposed services on a Metasploitable2 target VM, fingerprint versions, and assess
+        vulnerabilities without performing exploitation.
+      </p>
 
-          <h3>Outcome</h3>
-          <ul>
-            <li>Confirmed connectivity between attacker and target VMs.</li>
-            <li>Enumerated open ports, services, and versions with Nmap.</li>
-            <li>Identified vulnerabilities (CVEs) using OpenVAS.</li>
-            <li>Documented remediation recommendations.</li>
-          </ul>
+      <h3>Lab Topology</h3>
+      <pre><code>
++------------------+           +-----------------------+
+|   Kali Linux     |           |   Metasploitable2     |
+|  Attacker (192.168.56.101)   |   Target (192.168.56.102) |
+|                  |  Host-only|                       |
++------------------+   Network +-----------------------+
+      </code></pre>
 
-          <div class="actions">
-            <a class="btn primary" href="openvas-report.html" target="_blank" rel="noopener">View OpenVAS Report</a>
-            <a class="btn neutral" href="homelab.html">Back to Home Lab</a>
-          </div>
-        </div>
+      <ul>
+        <li><strong>Virtualization:</strong> VirtualBox (isolated host-only network)</li>
+        <li><strong>Attacker VM:</strong> Kali Linux 2024.2</li>
+        <li><strong>Target VM:</strong> Metasploitable2 (intentionally vulnerable)</li>
+        <li><strong>Scanner:</strong> OpenVAS/GVM running on Kali</li>
+      </ul>
+    </section>
 
-        <!-- Steps -->
-        <div class="steps">
-          <h3>Step 1 — Environment & Connectivity</h3>
-          <p>Verified attacker IP address and confirmed reachability to target via ICMP ping.</p>
-          <div class="evidence-grid">
-            <figure>
-              <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/ifconfig.png" alt="ifconfig on attacker"
-                   onclick="openLightbox(this)" />
-              <figcaption>Attacker IP via <code>ifconfig</code></figcaption>
-            </figure>
-            <figure>
-              <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/ping.png" alt="ping target"
-                   onclick="openLightbox(this)" />
-              <figcaption>Reachability confirmed with <code>ping</code></figcaption>
-            </figure>
-          </div>
+    <!-- Setup -->
+    <section>
+      <h2>Setup & Environment</h2>
+      <p>
+        Both machines were configured on a <code>192.168.56.0/24</code> host-only subnet with no Internet connectivity.
+        This prevents accidental traffic leaks while ensuring bidirectional communication.
+      </p>
 
-          <h3>Step 2 — Full TCP Port Scan</h3>
-          <p>Ran an Nmap full TCP port sweep to enumerate listening services.</p>
-          <div class="evidence-grid">
-            <figure>
-              <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/nmap-full-1.png" alt="nmap full scan part 1"
-                   onclick="openLightbox(this)" />
-              <figcaption><code>nmap -p- &lt;target-ip&gt;</code> (first results)</figcaption>
-            </figure>
-            <figure>
-              <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/nmap-full-2.png" alt="nmap full scan part 2"
-                   onclick="openLightbox(this)" />
-              <figcaption><code>nmap -p- &lt;target-ip&gt;</code> (continued)</figcaption>
-            </figure>
-          </div>
+      <details>
+        <summary><strong>Configuration Snippets</strong></summary>
+        <pre><code># Kali Linux (attacker)
+ip addr show
+# Output excerpt:
+2: eth1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500
+    inet 192.168.56.101/24 brd 192.168.56.255 scope global eth1
 
-          <h3>Step 3 — Service & OS Detection</h3>
-          <p>Performed version detection and OS fingerprinting to gather banner information and match to CVEs.</p>
-          <div class="evidence-grid">
-            <figure>
-              <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/nmap-sv-o-1.png" alt="nmap -sV -O part 1"
-                   onclick="openLightbox(this)" />
-              <figcaption><code>nmap -sV -O &lt;target-ip&gt;</code> (service detection)</figcaption>
-            </figure>
-            <figure>
-              <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/nmap-sv-o-2.png" alt="nmap -sV -O part 2"
-                   onclick="openLightbox(this)" />
-              <figcaption><code>nmap -sV -O &lt;target-ip&gt;</code> (OS fingerprinting)</figcaption>
-            </figure>
-          </div>
+# Metasploitable2 (target)
+ifconfig eth0
+# Output excerpt:
+eth0  inet addr:192.168.56.102  Bcast:192.168.56.255  Mask:255.255.255.0
 
-          <h3>Step 4 — Banner Grab & HTTP Headers</h3>
-          <p>Grabbed headers from web service to validate version and confirm attack surface.</p>
-          <div class="evidence-grid">
-            <figure>
-              <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/curl-headers.png" alt="curl headers"
-                   onclick="openLightbox(this)" />
-              <figcaption><code>curl -I http://&lt;target-ip&gt;</code> — HTTP headers</figcaption>
-            </figure>
-          </div>
+# VirtualBox network config:
+Adapter 1: Host-only Adapter (vboxnet0)
+Subnet: 192.168.56.0/24
+DHCP: Disabled
+        </code></pre>
+      </details>
 
-          <h3>Step 5 — Vulnerability Scan (OpenVAS)</h3>
-          <p>Automated vulnerability assessment with OpenVAS. 578 findings, triaged by severity.</p>
-          <div class="report-frame">
-            <iframe src="openvas-report.html"></iframe>
-          </div>
-        </div>
+      <div class="evidence-grid">
+        <figure>
+          <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/ifconfig.png" alt="ifconfig output"
+               onclick="openLightbox(this)" />
+          <figcaption>Screenshot 01 — Attacker IP address (<code>ifconfig</code>)</figcaption>
+        </figure>
+        <figure>
+          <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/ping.png" alt="ping target"
+               onclick="openLightbox(this)" />
+          <figcaption>Screenshot 02 — Connectivity test via <code>ping</code></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Discovery -->
+    <section>
+      <h2>Discovery & Reconnaissance</h2>
+      <p>
+        The reconnaissance phase followed a structured methodology:
+      </p>
+      <ol>
+        <li>Host discovery (ICMP, ARP)</li>
+        <li>Full TCP port scan (<code>-p-</code>)</li>
+        <li>Service/version detection (<code>-sV</code>)</li>
+        <li>OS fingerprinting (<code>-O</code>)</li>
+        <li>Application-layer banner grabbing (<code>curl</code>)</li>
+      </ol>
+
+      <details>
+        <summary><strong>Commands Used</strong></summary>
+        <ul>
+          <li><code>nmap -sn 192.168.56.0/24</code> (ping sweep)</li>
+          <li><code>nmap -p- 192.168.56.102 -T4 -oN nmap-full.txt</code> (full port scan)</li>
+          <li><code>nmap -sV -O 192.168.56.102 -oN nmap-services.txt</code> (service & OS detection)</li>
+          <li><code>curl -I http://192.168.56.102</code> (HTTP header grab)</li>
+        </ul>
+      </details>
+
+      <div class="evidence-grid">
+        <figure>
+          <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/nmap-full-1.png" alt="nmap full scan part 1"
+               onclick="openLightbox(this)" />
+          <figcaption>Screenshot 03 — Nmap full TCP scan (part 1)</figcaption>
+        </figure>
+        <figure>
+          <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/nmap-full-2.png" alt="nmap full scan part 2"
+               onclick="openLightbox(this)" />
+          <figcaption>Screenshot 04 — Nmap full TCP scan (part 2)</figcaption>
+        </figure>
+        <figure>
+          <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/nmap-sv-o-1.png" alt="nmap service detection part 1"
+               onclick="openLightbox(this)" />
+          <figcaption>Screenshot 05 — Nmap service detection</figcaption>
+        </figure>
+        <figure>
+          <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/curl-headers.png" alt="curl headers"
+               onclick="openLightbox(this)" />
+          <figcaption>Screenshot 06 — HTTP header enumeration (<code>curl -I</code>)</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Vulnerability scanning -->
+    <section>
+      <h2>Vulnerability Scanning & Reporting</h2>
+      <p>
+        To complement manual scanning, I used <strong>OpenVAS (Greenbone Vulnerability Manager)</strong>. A full &quot;Full and Fast&quot; scan profile was launched
+        against <code>192.168.56.102</code>.
+      </p>
+
+      <details>
+        <summary><strong>Commands & Workflow</strong></summary>
+        <pre><code># Start scanner services
+gvm-start
+
+# Create target
+gvm-cli --xml '&lt;create_target&gt;&lt;name&gt;Metasploitable2&lt;/name&gt;&lt;hosts&gt;192.168.56.102&lt;/hosts&gt;&lt;/create_target&gt;'
+
+# Run "Full and Fast" scan
+gvm-cli --xml '&lt;create_task&gt;...&lt;/create_task&gt;'
+
+# Export report
+omp -R --xml="&lt;get_reports report_id=&quot;...&quot; format_id=&quot;XML&quot;/&gt;" &gt; openvas-report.xml
+        </code></pre>
+      </details>
+
+      <p>The XML report was styled into a recruiter-readable HTML view:</p>
+      <div class="report-frame">
+        <iframe src="openvas-report.html"></iframe>
       </div>
 
-      <!-- Right column -->
-      <aside>
-        <div class="callout">
-          <h3>Lab Topology</h3>
-          <ul>
-            <li>Attacker: Kali Linux</li>
-            <li>Target: Metasploitable2</li>
-            <li>SIEM: Ubuntu (Splunk)</li>
-            <li>Network: VirtualBox (Host-only)</li>
-          </ul>
+      <h3>Summary of Findings</h3>
+      <div class="table-scroll">
+        <table class="checklist-table">
+          <thead>
+            <tr>
+              <th>IP</th>
+              <th>Port</th>
+              <th>Service</th>
+              <th>Severity</th>
+              <th>CVE</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>192.168.56.102</td>
+              <td>21/tcp</td>
+              <td>vsftpd 2.3.4</td>
+              <td><span class="badge sev-high">High</span></td>
+              <td><a href="https://nvd.nist.gov/vuln/detail/CVE-2011-2523" target="_blank">CVE-2011-2523</a></td>
+              <td>Backdoor vulnerability (unauthenticated)</td>
+            </tr>
+            <tr>
+              <td>192.168.56.102</td>
+              <td>3306/tcp</td>
+              <td>MySQL 5.0.51a</td>
+              <td><span class="badge sev-high">High</span></td>
+              <td><a href="https://nvd.nist.gov/vuln/detail/CVE-2009-2446" target="_blank">CVE-2009-2446</a></td>
+              <td>Weak default configuration, remote access possible</td>
+            </tr>
+            <tr>
+              <td>192.168.56.102</td>
+              <td>23/tcp</td>
+              <td>Telnet</td>
+              <td><span class="badge sev-med">Medium</span></td>
+              <td>N/A</td>
+              <td>Insecure legacy protocol, susceptible to brute force</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-          <h3>Key Skills</h3>
-          <div class="chip-row">
-            <span class="chip">Nmap</span>
-            <span class="chip">OpenVAS</span>
-            <span class="chip">Enumeration</span>
-            <span class="chip">Banner Grabbing</span>
-            <span class="chip">Vulnerability Management</span>
-          </div>
+    <!-- Analysis -->
+    <section>
+      <h2>Evidence & Analysis</h2>
+      <p>
+        The reconnaissance confirmed multiple legacy services exposed. Key observations:
+      </p>
+      <ul>
+        <li><strong>FTP (21/tcp):</strong> Running vulnerable vsftpd 2.3.4 (backdoored release).</li>
+        <li><strong>MySQL (3306/tcp):</strong> Allowed unauthenticated TCP connections, version outdated.</li>
+        <li><strong>Telnet (23/tcp):</strong> Accepts plaintext login, default accounts likely present.</li>
+        <li><strong>HTTP (80/tcp):</strong> Apache headers confirm unpatched version.</li>
+      </ul>
+    </section>
 
-          <h3>Severity</h3>
-          <p>
-            <span class="badge sev-high">High</span>
-            <span class="badge sev-med">Medium</span>
-            <span class="badge sev-low">Low</span>
-          </p>
-        </div>
+    <!-- Risk & Remediation -->
+    <section>
+      <h2>Risk Assessment & Remediation Recommendations</h2>
+      <ul>
+        <li><strong>High priority:</strong> Remove or patch vsftpd, upgrade MySQL, disable Telnet entirely.</li>
+        <li><strong>Medium priority:</strong> Harden Apache config, restrict access to non-essential services.</li>
+        <li><strong>Quick wins:</strong> Apply firewall rules to restrict external exposure; enforce SSH with key-based auth only.</li>
+        <li><strong>Long-term:</strong> Migrate away from deprecated services, implement regular vulnerability scans.</li>
+      </ul>
+    </section>
 
-        <div class="callout" style="margin-top:14px;">
-          <h3>Artifacts</h3>
-          <ul class="chips">
-            <li><a class="chip" href="openvas-report.html" target="_blank" rel="noopener">OpenVAS XML</a></li>
-            <li><a class="chip" href="assets/homelab_projects/metasploitable2-recon/nmap-full-1.png" target="_blank">Nmap scan output</a></li>
-          </ul>
-          <p class="meta-line">All scans performed in a closed lab environment on intentionally vulnerable systems.</p>
-        </div>
-      </aside>
+    <!-- Next steps -->
+    <section>
+      <h2>Next Steps & Learning Outcomes</h2>
+      <p>
+        This project provided hands-on experience with reconnaissance workflows and reinforced the importance of systematic scanning.
+      </p>
+      <ul>
+        <li><strong>Next steps:</strong> Expand into authenticated scans, integrate results into SIEM, and perform web app testing.</li>
+        <li><strong>Skills demonstrated:</strong> Nmap usage, network enumeration, vulnerability scanning, risk triage, technical documentation.</li>
+        <li><strong>Recruiter takeaway:</strong> Demonstrates practical security assessment methodology, ability to document findings, and communication of risks/remediations in a clear, professional format.</li>
+      </ul>
     </section>
 
     <!-- Back link -->
@@ -170,7 +270,7 @@
     </section>
   </main>
 
-  <!-- Global footer -->
+  <!-- Footer -->
   <footer>
     <div class="footer-inner container">
       <p>&copy; 2025 Shayaan Rashedin. All rights reserved.</p>
