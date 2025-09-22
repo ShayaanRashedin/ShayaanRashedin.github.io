@@ -8,206 +8,227 @@
   <script defer src="script.js"></script>
 </head>
 <body>
-<header class="site-header">
-  <div class="container header-inner">
-    <a class="brand" href="index.html" aria-label="Homepage">
-      <span class="brand-mark">SR</span>
-      <span class="brand-text">Shayaan Rashedin</span>
-    </a>
-    <nav aria-label="Primary">
-      <a href="projects.html">Projects</a>
-      <a href="homelab.html" class="active">Home Lab</a>
-      <a href="resume.html">Resume</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-    <button id="theme-toggle" class="btn sm">Toggle Theme</button>
-  </div>
-</header>
-
-<main class="container project-body">
-  <section class="proj-hero">
-    <h1 class="page-title">SIEM: Brute-Force Detection (Splunk)</h1>
-    <p class="meta-line">Detecting simulated FTP brute-force attacks with Splunk forwarders, syslog ingestion, SPL correlation, and scheduled alerts.</p>
-    <div class="chip-row">
-      <span class="chip">Tools: Splunk, Universal Forwarder, Hydra</span>
-      <span class="chip">Target: Metasploitable2 (192.168.56.101)</span>
-      <span class="chip">Attacker: Kali (192.168.56.102)</span>
-      <span class="chip">SIEM: Splunk (192.168.56.107)</span>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Homepage">
+        <span class="brand-mark">SR</span>
+        <span class="brand-text">Shayaan Rashedin</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="projects.html">Projects</a>
+        <a href="homelab.html" class="active" aria-current="page">Home Lab</a>
+        <a href="resume.html">Resume</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button id="theme-toggle" class="btn sm">Toggle Theme</button>
     </div>
-  </section>
+  </header>
 
-  <section>
-    <h2>Project Overview</h2>
-    <p>This lab simulated an FTP brute-force attack against Metasploitable2 using Hydra, forwarded system logs to Splunk via a Universal Forwarder, and built correlation searches and alerts to detect the attack. The workflow demonstrates end-to-end blue-team monitoring: log forwarding, search query design, alert tuning, and evidence capture.</p>
-  </section>
+  <main class="container project-body">
+    <section class="proj-hero">
+      <h1 class="page-title">SIEM: Brute-Force Detection (Splunk)</h1>
+      <p class="meta-line">Detecting simulated FTP brute-force attacks with Splunk forwarders, syslog ingestion, SPL correlation, and scheduled alerts.</p>
 
-  <section>
-    <h2>Setup &amp; Environment</h2>
-    <p>Splunk Universal Forwarder installed on Kali and Metasploitable2, forwarding syslog to the main Splunk server at <code>192.168.56.107:9997</code> and UDP 514 for syslog.</p>
-    <div class="evidence-grid">
-      <figure>
-        <img src="assets/homelab_projects/siem-bruteforce/forwarder-monitors.png" class="lab-img" alt="Splunk forwarder monitored logs" />
-        <figcaption>Figure 01 — Splunk Universal Forwarder monitored log files.</figcaption>
-      </figure>
-      <figure>
-        <img src="assets/homelab_projects/siem-bruteforce/forward-server.png" class="lab-img" alt="Splunk forward server" />
-        <figcaption>Figure 02 — Forward-server configured to <code>192.168.56.107:9997</code>.</figcaption>
-      </figure>
-      <figure>
-        <img src="assets/homelab_projects/siem-bruteforce/metasploitable-syslogconf.png" class="lab-img" alt="Syslog config on Metasploitable2" />
-        <figcaption>Figure 03 — Metasploitable2 <code>/etc/syslog.conf</code> forwarding to Splunk.</figcaption>
-      </figure>
-      <figure>
-        <img src="assets/homelab_projects/siem-bruteforce/ports-listening.png" class="lab-img" alt="Listening ports" />
-        <figcaption>Figure 04 — Splunk server listening on UDP 514 (syslog) and TCP 9997 (forwarder ingestion).</figcaption>
-      </figure>
-    </div>
-  </section>
+      <div class="chip-row">
+        <span class="chip">Tools: Splunk Enterprise, Universal Forwarder, Hydra</span>
+        <span class="chip">Attacker: Kali (192.168.56.102)</span>
+        <span class="chip">Target: Metasploitable2 (192.168.56.101)</span>
+        <span class="chip">SIEM: Splunk (192.168.56.107)</span>
+      </div>
+    </section>
 
-  <section>
-    <h2>Attack Simulation</h2>
-    <p>Hydra was used to launch an FTP brute-force attempt against Metasploitable2 at <code>192.168.56.101:21</code> using the <code>rockyou.txt</code> wordlist.</p>
-    <div class="evidence-grid">
-      <figure>
-        <img src="assets/homelab_projects/siem-bruteforce/hydra-ftp-bruteforce.png" class="lab-img" alt="Hydra brute force attempt" />
-        <figcaption>Figure 05 — Hydra brute-force attempting multiple passwords for user <code>msfadmin</code>.</figcaption>
-      </figure>
-    </div>
-    <div class="accordion">
-      <div class="accordion-item">
-        <div class="accordion-header" aria-controls="cmd-hydra" aria-expanded="false">Commands — Hydra brute-force</div>
-        <div id="cmd-hydra" class="accordion-content">
-<pre><code>hydra -l msfadmin -P /usr/share/wordlists/rockyou.txt ftp://192.168.56.101 -t 4 -V</code></pre>
+    <section>
+      <h2>Project Overview</h2>
+      <p>This case study demonstrates an end-to-end blue team workflow: forwarding host logs to Splunk, simulating an FTP brute-force with Hydra, writing SPL to detect aggregated authentication failures, and configuring an alert to notify on suspicious activity.</p>
+    </section>
+
+    <section>
+      <h2>Setup &amp; Environment</h2>
+      <p>Environment used for this exercise (all VMs on an isolated host-only VirtualBox network):</p>
+      <ul>
+        <li>Kali (attacker) — 192.168.56.102 — Hydra/forwarder check.</li>
+        <li>Metasploitable2 (target) — 192.168.56.101 — FTP service + syslog forwarded.</li>
+        <li>Splunk Enterprise (SIEM) — 192.168.56.107 — receiving forwarder traffic on TCP 9997 and syslog on UDP 514.</li>
+      </ul>
+
+      <div class="evidence-grid">
+        <figure>
+          <img class="lab-img" src="images/siem/forwarder-monitors.png" alt="Splunk forwarder monitored logs" />
+          <figcaption>Figure 01 — Splunk Universal Forwarder monitored directories &amp; monitored files (example).</figcaption>
+        </figure>
+
+        <figure>
+          <img class="lab-img" src="images/siem/forward-server.png" alt="Splunk forward server configuration" />
+          <figcaption>Figure 02 — Forward-server configured (example): forward to <code>192.168.56.107:9997</code>.</figcaption>
+        </figure>
+
+        <figure>
+          <img class="lab-img" src="images/siem/metasploitable-syslogconf.png" alt="Metasploitable syslog configuration" />
+          <figcaption>Figure 03 — Metasploitable2 <code>/etc/syslog.conf</code> excerpt showing forwarding to Splunk syslog receiver.</figcaption>
+        </figure>
+
+        <figure>
+          <img class="lab-img" src="images/siem/ports-listening.png" alt="Splunk listening ports" />
+          <figcaption>Figure 04 — Splunk server listening: UDP <code>514</code> (syslog) and TCP <code>9997</code> (forwarder ingestion).</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section>
+      <h2>Attack Simulation</h2>
+      <p>I simulated a credential-stuffing / brute-force attack against the FTP service on Metasploitable2 using Hydra and the common <code>rockyou.txt</code> wordlist. Purpose: create realistic noisy authentication failures so Splunk can correlate and alert.</p>
+
+      <div class="evidence-grid">
+        <figure>
+          <img class="lab-img" src="images/siem/hydra-ftp-bruteforce.png" alt="Hydra brute force against FTP" />
+          <figcaption>Figure 05 — Hydra performing a multi-threaded brute-force against <code>msfadmin@192.168.56.101</code>.</figcaption>
+        </figure>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-item">
+          <div class="accordion-header" aria-controls="hydra-cmd" aria-expanded="false">Commands — Attack invocation</div>
+          <div id="hydra-cmd" class="accordion-content">
+<pre><code># Hydra brute force (attacker VM)
+hydra -l msfadmin -P /usr/share/wordlists/rockyou.txt ftp://192.168.56.101 -t 4 -V
+</code></pre>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section>
-    <h2>Detection &amp; Analysis</h2>
-    <p>Syslog and Splunk forwarders captured repeated authentication failures. Custom SPL queries aggregated failures by host and time window.</p>
-    <div class="evidence-grid">
-      <figure>
-        <img src="assets/homelab_projects/siem-bruteforce/splunk-ftp-authfail-events.png" class="lab-img" alt="Splunk FTP auth failures" />
-        <figcaption>Figure 06 — Authentication failures ingested into Splunk from <code>192.168.56.101</code>.</figcaption>
-      </figure>
-      <figure>
-        <img src="assets/homelab_projects/siem-bruteforce/splunk-detection-stats.png" class="lab-img" alt="Splunk stats correlation" />
-        <figcaption>Figure 07 — SPL query aggregating failures in 5-minute buckets.</figcaption>
-      </figure>
-      <figure>
-        <img src="assets/homelab_projects/siem-bruteforce/splunk-host-cyberlab-events.png" class="lab-img" alt="Splunk events from cyberlab host" />
-        <figcaption>Figure 08 — Events ingested from Kali (cyberlab) and Metasploitable2 hosts.</figcaption>
-      </figure>
-      <figure>
-        <img src="assets/homelab_projects/siem-bruteforce/splunk-stats-host-source.png" class="lab-img" alt="Splunk host source stats" />
-        <figcaption>Figure 09 — Event counts by host and source confirm log forwarding coverage.</figcaption>
-      </figure>
-    </div>
+    <section>
+      <h2>Detection &amp; Analysis</h2>
+      <p>Splunk ingestion included both forwarded syslog (UDP/514) and file-based logs from the Universal Forwarder. The detection logic aggregates auth failures into 5-minute buckets, counts them, then flags hosts with counts above the threshold.</p>
 
-    <div class="accordion">
-      <div class="accordion-item">
-        <div class="accordion-header" aria-controls="cmd-splunk-spl" aria-expanded="false">Commands — SPL correlation query</div>
-        <div id="cmd-splunk-spl" class="accordion-content">
-<pre><code>index=main sourcetype=syslog host=192.168.56.101 
+      <div class="evidence-grid">
+        <figure>
+          <img class="lab-img" src="images/siem/splunk-ftp-authfail-events.png" alt="FTP auth failure events in Splunk" />
+          <figcaption>Figure 06 — Raw authentication failure events in Splunk for host <code>192.168.56.101</code>.</figcaption>
+        </figure>
+
+        <figure>
+          <img class="lab-img" src="images/siem/splunk-detection-stats.png" alt="Splunk detection statistics" />
+          <figcaption>Figure 07 — SPL aggregation showing failures in time buckets (used to trigger alert).</figcaption>
+        </figure>
+
+        <figure>
+          <img class="lab-img" src="images/siem/splunk-host-cyberlab-events.png" alt="Events from cyberlab host" />
+          <figcaption>Figure 08 — Example of events from the attacker host (cyberlab) and target host.</figcaption>
+        </figure>
+
+        <figure>
+          <img class="lab-img" src="images/siem/splunk-stats-host-source.png" alt="Splunk stats grouped by host and source" />
+          <figcaption>Figure 09 — Event counts by host &amp; source confirm forwarding coverage and visibility.</figcaption>
+        </figure>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-item">
+          <div class="accordion-header" aria-controls="spl-query" aria-expanded="false">Commands — SPL correlation query</div>
+          <div id="spl-query" class="accordion-content">
+<pre><code>index=main sourcetype=syslog host=192.168.56.101
 ("pam_unix(ftp:auth): authentication failure" OR "last message repeated")
 | eval base_fail=if(match(_raw,"pam_unix\(ftp:auth\)"),1,0)
 | rex field=_raw "last message repeated (?&lt;rep&gt;\d+) times"
 | eval fail_events=coalesce(rep, base_fail)
 | bin _time span=5m
 | stats sum(fail_events) as failures by host _time
-| where failures &gt; 10</code></pre>
+| where failures &gt; 10
+</code></pre>
+          </div>
         </div>
       </div>
+    </section>
+
+    <section>
+      <h2>Alerting</h2>
+      <p>I configured a Splunk alert to trigger on the above search when the condition is met (more than 10 failures in the window). The alert was configured to run hourly and to add matches to triggered alerts (you can add email/Slack actions as required).</p>
+
+      <div class="evidence-grid">
+        <figure>
+          <img class="lab-img" src="images/siem/splunk-alert-config.png" alt="Splunk alert configuration" />
+          <figcaption>Figure 10 — Splunk alert configuration UI (thresholds, schedule, actions).</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section>
+      <h2>Findings &amp; Evidence Summary</h2>
+      <table class="checklist-table">
+        <thead>
+          <tr><th>Finding</th><th>Source</th><th>Severity (lab)</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>FTP brute-force attempts</td>
+            <td>Hydra (attacker) → Metasploitable2</td>
+            <td>High</td>
+            <td>Large number of failed logins were observed and correlated by Splunk.</td>
+          </tr>
+
+          <tr>
+            <td>Syslog forwarded successfully</td>
+            <td>Universal Forwarder → Splunk</td>
+            <td>Medium</td>
+            <td>Syslog events (UDP 514) and forwarder ingestion (TCP 9997) provided full visibility.</td>
+          </tr>
+
+          <tr>
+            <td>Alert triggered on threshold</td>
+            <td>Splunk scheduled alert</td>
+            <td>Medium</td>
+            <td>Alert correctly captured the condition; notification actions are recommended.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Remediation &amp; Defensive Recommendations</h2>
+      <ul>
+        <li><strong>Enforce account lockout & rate-limiting:</strong> Block or escalate after N failed attempts.</li>
+        <li><strong>Host hardening:</strong> Disable legacy plaintext services (FTP/Telnet) in favor of secure alternatives (SFTP/SSH with keys).</li>
+        <li><strong>Network controls:</strong> Apply firewall rules to limit administrative service access to management subnets or jump hosts.</li>
+        <li><strong>SIEM tuning:</strong> Add enrichment (geo/IP reputation), tune thresholds to reduce false positives and add automated response (e.g., block via firewall API).</li>
+        <li><strong>Credential hygiene:</strong> Rotate default passwords; use MFA where possible.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>MITRE ATT&amp;CK Mapping</h2>
+      <table class="checklist-table">
+        <thead><tr><th>Technique</th><th>Example mapping</th></tr></thead>
+        <tbody>
+          <tr><td>T1110 — Brute Force</td><td>Hydra attempts on FTP (msfadmin)</td></tr>
+          <tr><td>T1078 — Valid Accounts</td><td>Attempts to authenticate as known user</td></tr>
+          <tr><td>T1040 — Network Sniffing</td><td>Visibility provided by forwarded syslog to SIEM</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Reflection &amp; Recruiter Takeaways</h2>
+      <ul>
+        <li><strong>Skills demonstrated:</strong> Splunk forwarder ops, syslog configuration, SPL authoring, and alert design for operational detection.</li>
+        <li><strong>Outcome:</strong> Real-time detection of brute-force activity with evidence & remediation steps — demonstrates blue-team readiness.</li>
+      </ul>
+    </section>
+
+    <section style="margin:28px 0 8px;">
+      <a class="btn neutral" href="homelab.html">← Back to Home Lab</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner container">
+      <p>&copy; 2025 Shayaan Rashedin. All rights reserved.</p>
     </div>
-  </section>
+  </footer>
 
-  <section>
-    <h2>Alerting</h2>
-    <p>A Splunk scheduled alert was configured to trigger when more than 10 FTP authentication failures occurred in a 1-hour window.</p>
-    <div class="evidence-grid">
-      <figure>
-        <img src="assets/homelab_projects/siem-bruteforce/splunk-alert-config.png" class="lab-img" alt="Splunk alert configuration" />
-        <figcaption>Figure 10 — Alert configured for hourly thresholds of failed FTP logins.</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <section>
-    <h2>Analysis &amp; Findings</h2>
-    <table class="checklist-table">
-      <thead>
-        <tr><th>Evidence</th><th>Source</th><th>Impact (lab)</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Brute-force attempts with Hydra</td>
-          <td>Kali attacker → FTP on Metasploitable2</td>
-          <td>High volume of login failures detected</td>
-        </tr>
-        <tr>
-          <td>Syslog and Splunk logs</td>
-          <td>Forwarded from Metasploitable2 and Kali</td>
-          <td>Captured repeated authentication failures</td>
-        </tr>
-        <tr>
-          <td>Splunk SPL correlation</td>
-          <td>Custom query aggregating failures</td>
-          <td>Accurately flagged attack conditions</td>
-        </tr>
-        <tr>
-          <td>Splunk scheduled alert</td>
-          <td>Threshold >10 failures/hour</td>
-          <td>Automated detection triggered</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-  <section>
-    <h2>Remediation &amp; Defensive Recommendations</h2>
-    <ul>
-      <li><strong>Account lockout policy:</strong> Lock accounts after repeated failed attempts.</li>
-      <li><strong>Use fail2ban or equivalent:</strong> Block brute-force IPs at host level.</li>
-      <li><strong>Strengthen authentication:</strong> Enforce complex passwords, enable multi-factor authentication.</li>
-      <li><strong>SIEM alert tuning:</strong> Adjust thresholds, add email/pager notification, and correlate with firewall logs.</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>MITRE ATT&amp;CK Mapping</h2>
-    <table class="checklist-table">
-      <thead><tr><th>Technique</th><th>Notes</th></tr></thead>
-      <tbody>
-        <tr><td>T1110 — Brute Force</td><td>FTP brute-force via Hydra.</td></tr>
-        <tr><td>T1078 — Valid Accounts</td><td>Attempted compromise of valid msfadmin account.</td></tr>
-        <tr><td>T1040 — Network Sniffing</td><td>Logs captured via syslog forwarder.</td></tr>
-        <tr><td>T1589 — Gather Victim Identity</td><td>Username enumeration as part of brute force.</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-  <section>
-    <h2>Reflection &amp; Recruiter Takeaways</h2>
-    <ul>
-      <li><strong>Skills:</strong> Configuring Splunk forwarders, ingesting syslog, building SPL queries, and designing alerts.</li>
-      <li><strong>Outcome:</strong> Demonstrated blue-team capability to detect brute-force in real time with evidence and remediation guidance.</li>
-    </ul>
-  </section>
-
-  <section style="margin: 28px 0 8px;">
-    <a class="btn neutral" href="homelab.html">← Back to Home Lab</a>
-  </section>
-</main>
-
-<footer>
-  <div class="footer-inner container">
-    <p>&copy; 2025 Shayaan Rashedin. All rights reserved.</p>
+  <!-- Lightbox (used by script.js) -->
+  <div id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" alt="expanded figure" />
   </div>
-</footer>
-
-<div id="lightbox" onclick="closeLightbox()">
-  <img id="lightbox-img" alt="expanded figure" />
-</div>
 </body>
 </html>
