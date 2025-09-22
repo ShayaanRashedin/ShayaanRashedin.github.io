@@ -29,7 +29,7 @@
     <!-- Hero -->
     <section class="proj-hero">
       <h1 class="page-title">Network Scanning & Reconnaissance</h1>
-      <p class="meta-line">Case study: mapping exposed services, enumerating versions, and assessing vulnerabilities in a controlled lab (no exploitation performed).</p>
+      <p class="meta-line">Mapping exposed services, enumerating versions, and assessing vulnerabilities in a controlled lab (no exploitation performed).</p>
       <div class="chip-row">
         <span class="chip">Tools: Nmap, curl, OpenVAS/GVM</span>
         <span class="chip">Target: Metasploitable2</span>
@@ -67,12 +67,12 @@
 ip addr show
 # Excerpt:
 # 2: eth1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500
-#     inet 192.168.56.101/24 brd 192.168.56.255 scope global eth1
+#     inet 192.168.56.102/24 brd 192.168.56.255 scope global eth1
 
 # Target (Metasploitable2) — legacy tools still present
 ifconfig
 # Excerpt:
-# eth0  inet addr:192.168.56.102  Bcast:192.168.56.255  Mask:255.255.255.0
+# eth0  inet addr:192.168.56.101  Bcast:192.168.56.255  Mask:255.255.255.0
 
 # (VirtualBox) Host-Only adapter
 # Adapter: vboxnet0  | Subnet: 192.168.56.0/24 | DHCP: disabled
@@ -107,7 +107,7 @@ ifconfig
       <details class="accordion">
         <summary class="accordion-header">Commands used (host discovery)</summary>
         <div class="accordion-content">
-          <pre><code>ping -c 6 192.168.56.102
+          <pre><code>ping 192.168.56.101
 # Rationale: fail-fast confirmation that the target responds before we invest in enumeration.
           </code></pre>
         </div>
@@ -129,7 +129,7 @@ ifconfig
       <details class="accordion">
         <summary class="accordion-header">Commands used (full TCP scan)</summary>
         <div class="accordion-content">
-          <pre><code>nmap -sS -p- -T4 -oN nmap-full.txt 192.168.56.102
+          <pre><code>nmap -sS -p- -T4 -oN nmap-full.txt 192.168.56.101
 # -sS: TCP SYN
 # -p-: scan all 65,535 ports
 # -T4: faster timing for local lab while keeping reliability
@@ -159,7 +159,7 @@ ifconfig
       <details class="accordion">
         <summary class="accordion-header">Commands used (service & OS)</summary>
         <div class="accordion-content">
-          <pre><code>nmap -sV -sC -O -oN nmap-services-os.txt 192.168.56.102
+          <pre><code>nmap -sV -sC -O -oN nmap-services-os.txt 192.168.56.101
 # -sV: service version detection
 # -sC: default NSE scripts (safe)
 # -O : OS fingerprinting
@@ -327,7 +327,6 @@ gvm-start
       <ul>
         <li><strong>Follow-ups:</strong> authenticated scanning, web application tests, permissioned exploitation for proof-of-impact, SIEM correlation.</li>
         <li><strong>Skills demonstrated:</strong> methodical reconnaissance, Nmap mastery, vulnerability assessment, reporting &amp; communication.</li>
-        <li><strong>Recruiter takeaway:</strong> clear process thinking, evidence handling, and risk-to-remediation mapping without over-claiming impact.</li>
       </ul>
     </section>
 
