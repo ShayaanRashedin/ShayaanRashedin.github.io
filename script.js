@@ -115,3 +115,31 @@ document.querySelectorAll('.site-header nav a').forEach(a => {
     lbImg.src = '';
   };
 });
+
+// --- Keep accordion heights correct on resize/content changes ---
+(function () {
+  const headers = document.querySelectorAll('.accordion-header');
+
+  function refreshOpenHeights() {
+    headers.forEach(h => {
+      const expanded = h.getAttribute('aria-expanded') === 'true';
+      if (!expanded) return;
+      const regionId = h.getAttribute('aria-controls');
+      const region = regionId ? document.getElementById(regionId) : (h.nextElementSibling?.classList.contains('accordion-content') ? h.nextElementSibling : null);
+      if (!region) return;
+      // Force recalc of maxHeight to fit full content
+      region.style.maxHeight = region.scrollHeight + 'px';
+    });
+  }
+
+  // Re-measure when window resizes (fonts wrap differently)
+  window.addEventListener('resize', refreshOpenHeights);
+
+  // Optional: when fonts finish loading or theme toggles
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(refreshOpenHeights);
+  }
+  const themeBtn = document.getElementById('theme-toggle');
+  if (themeBtn) themeBtn.addEventListener('click', () => setTimeout(refreshOpenHeights, 200));
+})();
+

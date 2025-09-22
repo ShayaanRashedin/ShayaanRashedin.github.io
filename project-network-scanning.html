@@ -61,9 +61,13 @@
         addresses on <code>192.168.56.0/24</code>. Below are the exact interface checks used to confirm addressing.
       </p>
 
-      <details>
-        <summary><strong>Configuration snippets</strong></summary>
-        <pre><code># Attacker (Kali) — verify interface addressing
+<div class="accordion">
+  <div class="accordion-item">
+    <div class="accordion-header" aria-controls="cfg-snippets" aria-expanded="false">
+      <span>Configuration snippets</span>
+    </div>
+    <div id="cfg-snippets" class="accordion-content">
+      <pre><code># Attacker (Kali) — verify interface addressing
 ip addr show
 # Excerpt:
 # 2: eth1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500
@@ -76,8 +80,11 @@ ifconfig
 
 # (VirtualBox) Host-Only adapter
 # Adapter: vboxnet0  | Subnet: 192.168.56.0/24 | DHCP: disabled
-        </code></pre>
-      </details>
+</code></pre>
+    </div>
+  </div>
+</div>
+
 
       <div class="evidence-grid">
         <figure>
@@ -104,14 +111,18 @@ ifconfig
       <!-- Host discovery -->
       <h3>Phase A — Host Discovery</h3>
       <p>Simple ICMP reachability check to validate L3 path before scanning.</p>
-      <details class="accordion">
-        <summary class="accordion-header">Commands used (host discovery)</summary>
-        <div class="accordion-content">
-          <pre><code>ping 192.168.56.101
-# Rationale: fail-fast confirmation that the target responds before we invest in enumeration.
-          </code></pre>
-        </div>
-      </details>
+<div class="accordion">
+  <div class="accordion-item">
+    <div class="accordion-header" aria-controls="disc-host" aria-expanded="false">
+      <span>Commands used — Host discovery</span>
+    </div>
+    <div id="disc-host" class="accordion-content">
+      <pre><code>ping 192.168.56.101
+# Rationale: quick L3 reachability check before deeper scans.</code></pre>
+    </div>
+  </div>
+</div>
+
       <div class="evidence-grid">
         <figure>
           <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/ping.png" alt="ICMP ping to target"
@@ -126,17 +137,21 @@ ifconfig
         A SYN scan across the full TCP range identifies all listening services to scope subsequent enumeration. Timing
         template kept modest for accuracy on a local VM network.
       </p>
-      <details class="accordion">
-        <summary class="accordion-header">Commands used (full TCP scan)</summary>
-        <div class="accordion-content">
-          <pre><code>nmap -sS -p- -T4 -oN nmap-full.txt 192.168.56.101
-# -sS: TCP SYN
-# -p-: scan all 65,535 ports
-# -T4: faster timing for local lab while keeping reliability
-# -oN: normal output saved for reporting
-          </code></pre>
-        </div>
-      </details>
+      <div class="accordion">
+  <div class="accordion-item">
+    <div class="accordion-header" aria-controls="disc-fulltcp" aria-expanded="false">
+      <span>Commands used — Full TCP scan</span>
+    </div>
+    <div id="disc-fulltcp" class="accordion-content">
+      <pre><code>nmap -sS -p- -T4 -oN nmap-full.txt 192.168.56.101
+# -sS: SYN scan
+# -p-: all 65535 TCP ports
+# -T4: faster timing (safe on local lab)
+# -oN: save normal output for evidence</code></pre>
+    </div>
+  </div>
+</div>
+
       <div class="evidence-grid">
         <figure>
           <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/nmap-full-1.png" alt="Nmap full TCP ports (part 1)"
@@ -156,17 +171,21 @@ ifconfig
         Service version detection provides banner strings that map to known vulnerabilities; OS fingerprinting validates
         platform assumptions for later remediation planning.
       </p>
-      <details class="accordion">
-        <summary class="accordion-header">Commands used (service & OS)</summary>
-        <div class="accordion-content">
-          <pre><code>nmap -sV -sC -O -oN nmap-services-os.txt 192.168.56.101
-# -sV: service version detection
-# -sC: default NSE scripts (safe)
+<div class="accordion">
+  <div class="accordion-item">
+    <div class="accordion-header" aria-controls="enum-sv-os" aria-expanded="false">
+      <span>Commands used — Service &amp; OS enumeration</span>
+    </div>
+    <div id="enum-sv-os" class="accordion-content">
+      <pre><code>nmap -sV -sC -O -oN nmap-services-os.txt 192.168.56.101
+# -sV: service/version detection
+# -sC: default safe scripts (NSE)
 # -O : OS fingerprinting
-# -oN: saved output for evidence
-          </code></pre>
-        </div>
-      </details>
+# -oN: save output for reporting</code></pre>
+    </div>
+  </div>
+</div>
+
       <div class="evidence-grid">
         <figure>
           <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/nmap-sv-o-1.png" alt="Nmap -sV output (part 1)"
@@ -186,14 +205,18 @@ ifconfig
         HTTP headers provide fast confirmation of web stack components (server/PHP). This is useful to corroborate Nmap
         results and quickly check for end-of-life versions.
       </p>
-      <details class="accordion">
-        <summary class="accordion-header">Command used (HTTP headers)</summary>
-        <div class="accordion-content">
-          <pre><code>curl -I http://192.168.56.102
-# Rationale: non-invasive banner grab that confirms Apache/PHP versions.
-          </code></pre>
-        </div>
-      </details>
+<div class="accordion">
+  <div class="accordion-item">
+    <div class="accordion-header" aria-controls="enum-http" aria-expanded="false">
+      <span>Command used — HTTP headers</span>
+    </div>
+    <div id="enum-http" class="accordion-content">
+      <pre><code>curl -I http://192.168.56.101
+# Rationale: non-invasive banner grab to confirm web stack versions.</code></pre>
+    </div>
+  </div>
+</div>
+
       <div class="evidence-grid">
         <figure>
           <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/curl-headers.png" alt="HTTP headers via curl -I"
@@ -211,22 +234,32 @@ ifconfig
         references. The scanner was executed locally in the lab; only the target host was in scope.
       </p>
 
-      <details class="accordion">
-        <summary class="accordion-header">Commands &amp; workflow</summary>
-        <div class="accordion-content">
-          <pre><code># Start Greenbone stack (varies by install)
+      <div class="accordion">
+  <div class="accordion-item">
+    <div class="accordion-header" aria-controls="openvas-wf" aria-expanded="false">
+      <span>Commands &amp; workflow — OpenVAS / GVM</span>
+    </div>
+    <div id="openvas-wf" class="accordion-content">
+      <pre><code># Start Greenbone stack (varies by install)
 gvm-start
 
-# (Example) Create target and launch task via CLI/API
-# (IDs vary; shown here as process overview)
-# ... create_target, create_task, start_task ...
+# Example flow (IDs differ per environment):
+# 1) Create target
+# gvm-cli --xml '&lt;create_target&gt;&lt;name&gt;Metasploitable2&lt;/name&gt;&lt;hosts&gt;192.168.56.101&lt;/hosts&gt;&lt;/create_target&gt;'
 
-# Export report as XML (the site themes it via XSL to HTML)
-# Example: omp/gvmd export (implementation-dependent)
-# omp -R --xml "&lt;get_reports report_id='REPORT_ID' format_id='XML' /&gt;" &gt; openvas-report.xml
-          </code></pre>
-        </div>
-      </details>
+# 2) Create task with "Full and Fast" config and the target ID
+# gvm-cli --xml '&lt;create_task&gt;...&lt;/create_task&gt;'
+
+# 3) Start task and monitor until done
+# gvm-cli --xml '&lt;start_task task_id="..." /&gt;'
+
+# 4) Export report as XML (this site themes XML via XSL to HTML)
+# omp -R --xml="&lt;get_reports report_id=&quot;...&quot; format_id=&quot;XML&quot;/&gt;" &gt; openvas-report.xml
+</code></pre>
+    </div>
+  </div>
+</div>
+
 
       <p class="muted">The XML report is rendered on this site using your existing XSL theme.</p>
       <div class="report-frame">
