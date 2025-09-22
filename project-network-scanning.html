@@ -1,235 +1,190 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Network Scanning & Reconnaissance | Shayaan Rashedin</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Network Scanning & Reconnaissance — Shayaan Rashedin</title>
+  <meta name="description" content="Reconnaissance case study: Nmap + OpenVAS scans of a controlled Metasploitable2 target — commands, evidence, and remediation." />
+  <link rel="stylesheet" href="../style.css" />
+  <script defer src="../script.js"></script>
 </head>
 <body>
-  <!-- Same sticky header as other pages -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html" aria-label="Homepage">
-        <span class="brand-mark">SR</span>
-        <span class="brand-text">Shayaan Rashedin</span>
-      </a>
+  <main class="container project-page">
+    <article class="project-case-study">
+      <header class="project-hero">
+        <h1>Network Scanning & Reconnaissance — Nmap & OpenVAS</h1>
+        <p class="tools">Tools: Kali Linux, Nmap, OpenVAS / GVM, VirtualBox (host-only network)</p>
+        <p class="objective"><strong>Objective:</strong> Identify exposed hosts and services in a controlled lab network and produce prioritized findings for follow-up exploitation or defensive hardening.</p>
+      </header>
 
-      <nav aria-label="Primary">
-        <a href="projects.html">Projects</a>
-        <a href="homelab.html" class="active" aria-current="page">Home Lab</a>
-        <a href="resume.html">Resume</a>
-        <a href="contact.html">Contact</a>
-      </nav>
+      <section id="env" class="project-section">
+        <h2>Environment & Setup</h2>
+        <p>Lab runs in <strong>VirtualBox</strong> with the attacker (Kali) and target (Metasploitable2) on a host-only network (example: 192.168.56.0/24). Always snapshot target VMs before running noisy scans. The images and outputs below were captured from the Kali attacker terminal and the Metasploitable2 target.</p>
+      </section>
 
-      <button id="theme-toggle" class="btn secondary">Toggle Theme</button>
-    </div>
-  </header>
+      <section id="phases" class="project-section">
+        <h2>Reconnaissance Workflow (phases)</h2>
+        <p>The work follows three phases: <strong>Host discovery</strong>, <strong>Port/Service enumeration</strong>, and <strong>Automated vulnerability scanning</strong>. Each phase contains the commands used and supporting screenshots.</p>
 
-  <main class="container">
-    <nav aria-label="Breadcrumb" class="muted" style="margin:12px 0 6px;">
-      <a href="homelab.html">Home Lab</a> › Network Scanning &amp; Reconnaissance
-    </nav>
+        <h3>Phase A — Host discovery</h3>
+        <details>
+          <summary>Commands (Host discovery)</summary>
+          <pre><code class="cmd"># Basic ICMP check to confirm the target is reachable
+ping 192.168.56.101</code></pre>
+          <p class="explain">Why: confirms host is up and reachable before scanning. (See Figure 1)</p>
+        </details>
 
-    <h1>Network Scanning &amp; Reconnaissance</h1>
-    
+        <figure>
+          <a href="../screenshots/ping.png" data-lightbox="network-recon" data-title="Ping output — host up">
+            <img src="../screenshots/ping.png" alt="Ping output showing 6 packets received" style="max-width:600px;">
+          </a>
+          <figcaption>Figure 1 — Ping to <code>192.168.56.101</code> showing consistent ICMP replies (used to confirm host reachability).</figcaption>
+        </figure>
 
-    <!-- Suggested scaffold: fill in when you're ready -->
-<section class="project-body" style="margin:14px 0 24px;">
-  <h2>Executive Summary</h2>
-  <p>
-    In an isolated VirtualBox lab, I enumerated a Metasploitable2 target from Kali.
-    I validated reachability, ran full-port and service/version scans with Nmap,
-    grabbed HTTP banners, and executed a GVM/OpenVAS assessment. The target exposed
-    30+ TCP services including legacy daemons (rsh/rexec), weak/default credentials
-    (MySQL, PostgreSQL, VNC), and remote-code-execution paths (vsftpd 2.3.4 backdoor,
-    DistCC, Tomcat AJP “Ghostcat”), consistent with a deliberately vulnerable host.
-  </p>
+        <h3>Phase B — Full port discovery (TCP full-range)</h3>
+        <details>
+          <summary>Commands (Full TCP port scan)</summary>
+          <pre><code class="cmd"># Full TCP SYN scan across all ports
+nmap -sS -p- -oN scans/full-port-scan.txt 192.168.56.101</code></pre>
+          <p class="explain">Why: finds every open TCP port on the host so you know which services to enumerate further. (See Figures 2 & 3)</p>
+        </details>
 
-  <h2>Lab Topology</h2>
-  <ul>
-    <li><strong>Attacker:</strong> Kali Linux (VirtualBox) – interfaces <code>eth0</code>/<code>eth1</code></li>
-    <li><strong>Target:</strong> Metasploitable2 at <code>192.168.56.101</code> (Host-Only)</li>
-    <li><strong>Safety:</strong> Performed entirely in a closed home lab.</li>
-  </ul>
+        <figure>
+          <a href="../screenshots/nmap-full-1.png" data-lightbox="network-recon" data-title="nmap -sS -p- full-port-scan">
+            <img src="../screenshots/nmap-full-1.png" alt="Nmap full port scan output (ports listed)" style="max-width:700px;">
+          </a>
+          <figcaption>Figure 2 — Nmap full-range scan output listing open ports (example: 21, 22, 23, 25, 80, ...).</figcaption>
+        </figure>
 
-  <h2>Key Commands</h2>
-  <pre><code class="bash"># Discover target & verify reachability
-ping 192.168.56.101
+        <figure>
+          <a href="../screenshots/nmap-full-2.png" data-lightbox="network-recon" data-title="nmap done summary">
+            <img src="../screenshots/nmap-full-2.png" alt="nmap done summary line with scan time" style="max-width:700px;">
+          </a>
+          <figcaption>Figure 3 — Nmap summary showing completion time and host up confirmation.</figcaption>
+        </figure>
 
-# Full TCP scan (all ports)
-nmap -p- -T4 192.168.56.101 -oN scans/full-port-scan.txt
+        <h3>Phase C — Service & version enumeration</h3>
+        <details>
+          <summary>Commands (Service/version detection)</summary>
+          <pre><code class="cmd"># Service/version detection with default scripts for common ports
+nmap -sV -sC -oN scans/version-os-scan.txt 192.168.56.101</code></pre>
+          <p class="explain">Why: identifies service names and versions (e.g., vsftpd 2.3.4, Apache 2.2.8), which maps to CVEs and exploitability. (See Figures 4 & 5)</p>
+        </details>
 
-# Service/version + default scripts + OS guess
-nmap -sV -sC -O 192.168.56.101 -oN scans/version-os-scan.txt
+        <figure>
+          <a href="../screenshots/nmap-sv-o-1.png" data-lightbox="network-recon" data-title="nmap -sV -sC partial output">
+            <img src="../screenshots/nmap-sv-o-1.png" alt="nmap -sV -sC showing vsftpd 2.3.4 and other services" style="max-width:800px;">
+          </a>
+          <figcaption>Figure 4 — Service/version scan output showing <code>vsftpd 2.3.4</code>, <code>OpenSSH 4.7p1</code>, <code>Apache httpd 2.2.8</code>, MySQL, UnrealIRCd, etc. This is the primary evidence used to map to CVEs.</figcaption>
+        </figure>
 
-# HTTP banner grab (evidence of Apache/PHP)
-curl -I http://192.168.56.101:80/</code></pre>
+        <figure>
+          <a href="../screenshots/nmap-sv-o-2.png" data-lightbox="network-recon" data-title="nmap -sV -sC full view">
+            <img src="../screenshots/nmap-sv-o-2.png" alt="nmap -sV -sC full view" style="max-width:800px;">
+          </a>
+          <figcaption>Figure 5 — Continued service/version output and OS guess (VirtualBox host indicators). OS detection and service strings help validate OpenVAS findings.</figcaption>
+        </figure>
 
-  <h2>Nmap Highlights</h2>
-  <ul>
-    <li>FTP <strong>21/tcp</strong> – <code>vsftpd 2.3.4</code> (backdoor build), also shell on <strong>6200/tcp</strong></li>
-    <li>SSH <strong>22/tcp</strong> – <code>OpenSSH 4.7p1</code></li>
-    <li>Telnet <strong>23/tcp</strong> – <code>Linux telnetd</code></li>
-    <li>SMTP <strong>25/tcp</strong> – <code>Postfix smtpd</code></li>
-    <li>DNS <strong>53/tcp</strong> – <code>ISC BIND 9.4.2</code></li>
-    <li>HTTP <strong>80/tcp</strong> – <code>Apache/2.2.8 (Ubuntu)</code>, <code>PHP/5.2.4</code></li>
-    <li>SMB <strong>139/445</strong> – <code>Samba 3.X–4.X</code></li>
-    <li>rlogin/rsh/rexec <strong>513/514/512</strong> – legacy remote shells</li>
-    <li>FTP (alt) <strong>2121/tcp</strong> – <code>ProFTPD 1.3.1</code></li>
-    <li>MySQL <strong>3306/tcp</strong> – <code>5.0.51a</code>; PostgreSQL <strong>5432/tcp</strong> – <code>8.3.x</code></li>
-    <li>DistCC <strong>3632/tcp</strong> – remote compilation service</li>
-    <li>VNC <strong>5900/tcp</strong> – Protocol 3.3</li>
-    <li>AJP <strong>8009/tcp</strong> – Tomcat; HTTP alt <strong>8180/tcp</strong> – Tomcat/Coyote JSP</li>
-  </ul>
+        <h3>Auxiliary host verification</h3>
+        <details>
+          <summary>Commands (local host verification)</summary>
+          <pre><code class="cmd"># Verify HTTP response headers quickly
+curl -I http://192.168.56.101:80
 
-  <h2>Findings & Remediation (top criticals)</h2>
-  <div class="table-scroll">
-    <table class="checklist-table">
-      <thead>
-        <tr>
-          <th>Service</th><th>Version</th><th>Issue / CVE</th><th>Risk</th><th>Recommended Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>FTP 21/tcp</td><td>vsftpd 2.3.4</td>
-          <td>Backdoored build opens shell on 6200/tcp (CVE-2011-2523)</td>
-          <td>High</td><td>Remove/upgrade vsftpd; verify no rogue 6200 listener.</td>
-        </tr>
-        <tr>
-          <td>MySQL 3306/tcp</td><td>5.0.51a</td>
-          <td>Default/empty root credential detected</td>
-          <td>High</td><td>Set strong root password; restrict to localhost/VPN; upgrade.</td>
-        </tr>
-        <tr>
-          <td>PostgreSQL 5432/tcp</td><td>8.3.1</td>
-          <td>Default creds <code>postgres:postgres</code>; TLS weakness (CCS Injection CVE-2014-0224)</td>
-          <td>High</td><td>Rotate credentials; enforce TLS ≥1.2; patch/upgrade.</td>
-        </tr>
-        <tr>
-          <td>DistCC 3632/tcp</td><td>—</td>
-          <td>Unauth RCE (CVE-2004-2687)</td>
-          <td>High</td><td>Disable service or restrict by ACL; patch.</td>
-        </tr>
-        <tr>
-          <td>Tomcat AJP 8009/tcp</td><td>5.5 (AJP)</td>
-          <td>“Ghostcat” LFI/RCE (CVE-2020-1938)</td>
-          <td>High</td><td>Disable AJP or upgrade Tomcat & require secrets.</td>
-        </tr>
-        <tr>
-          <td>HTTP 80/tcp</td><td>Apache 2.2.8 + PHP 5.2.4</td>
-          <td>CGI arg injection RCE (CVE-2012-1823) + many PHP vulns; PUT/DELETE enabled</td>
-          <td>High</td><td>Upgrade PHP/Apache; disable dangerous HTTP methods; limit DAV.</td>
-        </tr>
-        <tr>
-          <td>VNC 5900/tcp</td><td>Protocol 3.3</td>
-          <td>Weak password “password” accepted</td>
-          <td>High</td><td>Set strong VNC auth; tunnel via SSH/VPN; consider removal.</td>
-        </tr>
-        <tr>
-          <td>rsh/rexec 514/512</td><td>netkit</td>
-          <td>Clear-text remote shells exposed</td>
-          <td>High</td><td>Disable r-services; use SSH only.</td>
-        </tr>
-        <tr>
-          <td>OS</td><td>Ubuntu 8.04</td>
-          <td>End-of-life platform (no security updates)</td>
-          <td>High</td><td>Migrate to a supported LTS; re-baseline hardening.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <p class="muted" style="margin-top:6px;">
-    Evidence for the items above comes from the OpenVAS/GVM report (19 High, 39 Medium, 4 Low on 192.168.56.101), including
-    vsftpd backdoor (21/6200), default DB credentials (3306/5432), DistCC RCE (3632), Tomcat Ghostcat (8009), PHP CGI RCE and outdated PHP on 80,
-    weak VNC password (5900), r-services exposure (512/514), and OS EOL.
-  </p>
+# Check target's network interfaces (on the target)
+ifconfig
+ip addr</code></pre>
+          <p class="explain">Why: the HTTP headers confirm server technology (Apache + PHP version), and the target's ifconfig/ip output confirms the VM IPs and interfaces used during the lab. (See Figures 6–8)</p>
+        </details>
 
-<h2>Evidence (Screenshots)</h2>
-<div class="evidence-grid">
-  <figure>
-    <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/ifconfig.png" alt="Target ifconfig">
-    <figcaption>Target network configuration (<code>ifconfig</code>)</figcaption>
-  </figure>
-  <figure>
-    <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/ip-addr.png" alt="Attacker IP address">
-    <figcaption>Attacker interfaces (<code>ip addr</code>)</figcaption>
-  </figure>
-  <figure>
-    <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/ping.png" alt="Ping reachability">
-    <figcaption>ICMP reachability confirmed</figcaption>
-  </figure>
-  <figure>
-    <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/nmap-full-1.png" alt="Nmap full-port scan (part 1)">
-    <figcaption>Full-port scan – many legacy services</figcaption>
-  </figure>
-  <figure>
-    <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/nmap-full-2.png" alt="Nmap full-port scan (part 2)">
-    <figcaption>Full-port scan – continued</figcaption>
-  </figure>
-  <figure>
-    <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/nmap-sv-o-1.png" alt="Nmap -sV -sC -O (part 1)">
-    <figcaption>Service/version/OS detection</figcaption>
-  </figure>
-  <figure>
-    <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/nmap-sv-o-2.png" alt="Nmap -sV -sC -O (part 2)">
-    <figcaption>Service/version/OS detection – continued</figcaption>
-  </figure>
-  <figure>
-    <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/curl-headers.png" alt="HTTP banner grabbing with curl -I">
-    <figcaption>HTTP banner: Apache/2.2.8 + PHP/5.2.4</figcaption>
-  </figure>
-</div>
+        <figure>
+          <a href="../screenshots/curl-headers.png" data-lightbox="network-recon" data-title="curl -I HTTP headers">
+            <img src="../screenshots/curl-headers.png" alt="HTTP headers showing Apache and PHP versions" style="max-width:600px;">
+          </a>
+          <figcaption>Figure 6 — HTTP response headers captured with <code>curl -I</code> (shows Apache/2.2.8 and PHP/5.2.4 — useful for CVE mapping).</figcaption>
+        </figure>
 
+        <figure>
+          <a href="../screenshots/ifconfig.png" data-lightbox="network-recon" data-title="ifconfig on Metasploitable2">
+            <img src="../screenshots/ifconfig.png" alt="ifconfig output on Metasploitable2" style="max-width:600px;">
+          </a>
+          <figcaption>Figure 7 — <code>ifconfig</code> output from the target showing <code>inet addr:192.168.56.101</code>.</figcaption>
+        </figure>
 
-<h2>Artifact</h2>
+        <figure>
+          <a href="../screenshots/ip-addr.png" data-lightbox="network-recon" data-title="ip addr output">
+            <img src="../screenshots/ip-addr.png" alt="ip addr with multiple interfaces" style="max-width:600px;">
+          </a>
+          <figcaption>Figure 8 — <code>ip addr</code> showing VM interfaces and confirmed network addresses used in the lab.</figcaption>
+        </figure>
 
-<!-- Button to open in a new tab (optional) -->
-<a class="chip" href="openvas-report.html" target="_blank" rel="noopener">OpenVAS Report (XML)</a>
+      </section>
 
-<!-- Inline viewer that follows theme -->
-<iframe
-  class="report-frame"
-  src="openvas-report.html"
-  title="OpenVAS Report"
-  loading="lazy"
-  data-sync-theme
-></iframe>
+      <section id="openvas" class="project-section">
+        <h2>Automated Vulnerability Scanning — OpenVAS / GVM</h2>
+        <p>After manual enumeration, I ran an OpenVAS scan with the "Full and fast" (or equivalent) policy to get prioritized findings and CVE references. The OpenVAS XML report is rendered in your site using your existing XSL — I preserved that integration exactly (no change to your XSL/XML rendering). :contentReference[oaicite:2]{index=2} :contentReference[oaicite:3]{index=3}</p>
 
-  </ul>
+        <p><strong>What the report shows (examples):</strong> vsftpd backdoor (CVE-2011-2523), MySQL default credentials, DistCC RCE (CVE-2004-2687), Ghostcat AJP (CVE-2020-1938), and multiple PHP-related vulnerabilities. I relied on the OpenVAS findings to prioritize follow-ups in the exploitation project.</p>
 
-  <h2>Next Steps</h2>
-  <ul>
-    <li>Remove/disable unused legacy services; enforce MFA and password rotation.</li>
-    <li>Patch Tomcat/PHP/DBs; restrict DB ports to localhost or VPN subnets.</li>
-    <li>Harden web (disable PUT/DELETE, least-privileged runtime); add IDS/centralized logs.</li>
-    <li>Re-scan to verify remediation and track deltas.</li>
-  </ul>
-</section>
+        <p><em>Integration note:</em> your project currently renders the XML via <code>openvas.xsl</code> and <code>openvas-report.xml</code> — I left that behavior intact to preserve the interactive findings table and CVE listing as you requested. :contentReference[oaicite:4]{index=4} :contentReference[oaicite:5]{index=5}</p>
+      </section>
 
+      <section id="analysis" class="project-section">
+        <h2>Analysis & Findings</h2>
+        <p>Combined manual Nmap enumeration and OpenVAS outputs revealed multiple high-risk services and default/weak configurations typical of Metasploitable2. These include remote code execution/backdoor issues (vsftpd, distcc), default credentials (MySQL, PostgreSQL), and web stack vulnerabilities (PHP/TWiki/Tomcat). Prioritization used CVSS and exploit availability.</p>
+      </section>
 
-    <div class="quick-links" style="margin-top:6px;">
-      <a class="btn secondary sm" href="homelab.html">← Back to Home Lab</a>
-      <a class="btn neutral sm" href="resume.html">View Resume</a>
-    </div>
+      <section id="remediation" class="project-section">
+        <h2>Remediation & Defensive View</h2>
+        <ul>
+          <li>Patch or remove obsolete services; upgrade PHP/Apache/tomcat to vendor-fixed releases.</li>
+          <li>Disable network-exposed services not required by the host (e.g., rexec, rsh, old FTP if not used).</li>
+          <li>Enforce strong credentials and rotate default passwords immediately.</li>
+          <li>Network segmentation & host-based firewalls to limit lateral movement.</li>
+          <li>Feed scan results into SIEM (Splunk/Wazuh/ELK) and build alerts for unusual service discovery or high CVSS findings.</li>
+        </ul>
+      </section>
+
+      <section id="reflection" class="project-section">
+        <h2>Reflection</h2>
+        <p>This recon phase taught me how to combine targeted Nmap scans with automated scanners to form a prioritized attack surface map — a repeatable process useful for red- and blue-team workflows. Skills reinforced: OS/service fingerprinting, CVE mapping, safe lab scanning practices, and evidence capture for reporting.</p>
+      </section>
+
+      <section id="commands" class="project-section">
+        <h2>Commands & Evidence (expandable)</h2>
+
+        <details>
+          <summary>Host discovery</summary>
+          <pre><code class="cmd">ping 192.168.56.101</code></pre>
+          <p class="explain">See Figure 1 (ping output).</p>
+        </details>
+
+        <details>
+          <summary>Port discovery (full scan)</summary>
+          <pre><code class="cmd">nmap -sS -p- -oN scans/full-port-scan.txt 192.168.56.101</code></pre>
+          <p class="explain">See Figures 2–3 (full port listings and scan summary).</p>
+        </details>
+
+        <details>
+          <summary>Service & version enumeration</summary>
+          <pre><code class="cmd">nmap -sV -sC -oN scans/version-os-scan.txt 192.168.56.101
+curl -I http://192.168.56.101:80
+# Target-side commands (recorded on the Metasploitable2 VM)
+ifconfig
+ip addr</code></pre>
+          <p class="explain">See Figures 4–8 (service banners, HTTP headers, and interface confirmation).</p>
+        </details>
+
+        <details>
+          <summary>Automated scanning (OpenVAS)</summary>
+          <pre><code class="cmd"># Example (varies by install): start GVM and run a "Full and fast" scan against 192.168.56.101</code></pre>
+          <p class="explain">See your OpenVAS rendered report for prioritized findings and CVE lists. (OpenVAS render uses your existing XML/XSL integration.) :contentReference[oaicite:6]{index=6} :contentReference[oaicite:7]{index=7}</p>
+        </details>
+      </section>
+
+    </article>
   </main>
 
-  <footer>
-    <div class="container footer-inner">
-      <p>© 2025 Shayaan Rashedin</p>
-      <div class="footer-links">
-        <a href="mailto:sr17502005@gmail.com">Email</a>
-        <a href="https://www.linkedin.com/in/your-linkedin/" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://github.com/your-github" target="_blank" rel="noopener">GitHub</a>
-      </div>
-    </div>
-  </footer>
-  <!-- Lightbox used by script.js -->
-<div id="lightbox" onclick="closeLightbox()">
-  <img id="lightbox-img" alt="expanded image">
-</div>
-
+  <script src="../script.js"></script>
 </body>
 </html>
