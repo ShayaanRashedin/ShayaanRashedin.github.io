@@ -66,12 +66,12 @@
           <p>Verified attacker IP address and confirmed reachability to target via ICMP ping.</p>
           <div class="evidence-grid">
             <figure>
-              <img class="lab-img" src="assets/homelab_projects/network-recon/ifconfig.png" alt="ifconfig on attacker"
+              <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/ifconfig.png" alt="ifconfig on attacker"
                    onclick="openLightbox(this)" />
               <figcaption>Attacker IP via <code>ifconfig</code></figcaption>
             </figure>
             <figure>
-              <img class="lab-img" src="assets/homelab_projects/network-recon/ping.png" alt="ping target"
+              <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/ping.png" alt="ping target"
                    onclick="openLightbox(this)" />
               <figcaption>Reachability confirmed with <code>ping</code></figcaption>
             </figure>
@@ -81,12 +81,12 @@
           <p>Ran an Nmap full TCP port sweep to enumerate listening services.</p>
           <div class="evidence-grid">
             <figure>
-              <img class="lab-img" src="assets/homelab_projects/network-recon/nmap-full-1.png" alt="nmap full scan part 1"
+              <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/nmap-full-1.png" alt="nmap full scan part 1"
                    onclick="openLightbox(this)" />
               <figcaption><code>nmap -p- &lt;target-ip&gt;</code> (first results)</figcaption>
             </figure>
             <figure>
-              <img class="lab-img" src="assets/homelab_projects/network-recon/nmap-full-2.png" alt="nmap full scan part 2"
+              <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/nmap-full-2.png" alt="nmap full scan part 2"
                    onclick="openLightbox(this)" />
               <figcaption><code>nmap -p- &lt;target-ip&gt;</code> (continued)</figcaption>
             </figure>
@@ -96,12 +96,12 @@
           <p>Performed version detection and OS fingerprinting to gather banner information and match to CVEs.</p>
           <div class="evidence-grid">
             <figure>
-              <img class="lab-img" src="assets/homelab_projects/network-recon/nmap-sv-o-1.png" alt="nmap -sV -O part 1"
+              <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/nmap-sv-o-1.png" alt="nmap -sV -O part 1"
                    onclick="openLightbox(this)" />
               <figcaption><code>nmap -sV -O &lt;target-ip&gt;</code> (service detection)</figcaption>
             </figure>
             <figure>
-              <img class="lab-img" src="assets/homelab_projects/network-recon/nmap-sv-o-2.png" alt="nmap -sV -O part 2"
+              <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/nmap-sv-o-2.png" alt="nmap -sV -O part 2"
                    onclick="openLightbox(this)" />
               <figcaption><code>nmap -sV -O &lt;target-ip&gt;</code> (OS fingerprinting)</figcaption>
             </figure>
@@ -111,7 +111,7 @@
           <p>Grabbed headers from web service to validate version and confirm attack surface.</p>
           <div class="evidence-grid">
             <figure>
-              <img class="lab-img" src="assets/homelab_projects/network-recon/curl-headers.png" alt="curl headers"
+              <img class="lab-img" src="assets/homelab_projects/metasploitable2-recon/curl-headers.png" alt="curl headers"
                    onclick="openLightbox(this)" />
               <figcaption><code>curl -I http://&lt;target-ip&gt;</code> — HTTP headers</figcaption>
             </figure>
@@ -157,7 +157,7 @@
           <h3>Artifacts</h3>
           <ul class="chips">
             <li><a class="chip" href="openvas-report.html" target="_blank" rel="noopener">OpenVAS XML</a></li>
-            <li><a class="chip" href="assets/homelab_projects/network-recon/nmap-full-1.png" target="_blank">Nmap scan output</a></li>
+            <li><a class="chip" href="assets/homelab_projects/metasploitable2-recon/nmap-full-1.png" target="_blank">Nmap scan output</a></li>
           </ul>
           <p class="meta-line">All scans performed in a closed lab environment on intentionally vulnerable systems.</p>
         </div>
