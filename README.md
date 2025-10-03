@@ -1,2 +1,2 @@
 # ShayaanRashedin.github.io
-Personal Cybersecurity Portfolio
+Personal Portfolio
