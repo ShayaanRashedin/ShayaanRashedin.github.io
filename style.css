@@ -583,12 +583,13 @@ a.tag:link,  a.tag:visited,  a.tag:hover,  a.tag:active {
 /* If you include tables or wide elements inside dropdowns */
 .accordion-content .table-scroll { overflow-x: auto; }
 
-/* ===== Page layout constraints (projects page, etc.) ===== */
-main {
-  max-width: 900px;
+/* ===== Page layout constraints (only for Projects page) ===== */
+body.projects-page main {
+  max-width: 1040px;       /* wider than before for comfort */
   margin: 2rem auto;
-  padding: 0 1.5rem;
+  padding: 0 1rem;         /* smaller side padding */
 }
+
 
 /* ===== Intro card at top of Projects page ===== */
 .projects-intro {
