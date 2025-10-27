@@ -26,21 +26,136 @@
   </div>
 </header>
 
+<main>
 
+  <!-- 1. Analyzing Network Structure and Security -->
+  <div class="accordion-item">
+    <div class="accordion-header">Analyzing Network Structure and Security</div>
+    <div class="accordion-content">
+      <h3>Project Overview</h3>
+      <p>
+        I acted as a cybersecurity analyst at a multimedia company that offers web, graphic, and social media services. After the company experienced a distributed denial of service attack that sent a large volume of ICMP packets through an unconfigured firewall and brought internal services offline for two hours, I developed a security improvement plan based on the NIST Cybersecurity Framework. I focused on firewall misconfigurations, DDoS response, and long term network hardening to prevent similar attacks in the future.
+      </p>
 
-  <main>
-  <!-- 1. Conducting a Security Audit -->
+      <h3>Implemented Controls</h3>
+      <ul>
+        <li>Added a firewall rule to rate limit incoming ICMP packets.</li>
+        <li>Enabled source IP verification on the firewall to prevent spoofed addresses.</li>
+        <li>Deployed network monitoring software to detect abnormal traffic patterns.</li>
+        <li>Installed and tuned an IDS and IPS to filter suspicious ICMP traffic.</li>
+      </ul>
+
+      <h3>Network Security Improvement Plan Based on the NIST Cybersecurity Framework</h3>
+
+      <h4>Identify</h4>
+      <p>
+        Conduct regular audits of networks, devices, and access privileges to uncover misconfigurations such as unconfigured firewall rules. Perform vulnerability scans on firewalls and network equipment.
+      </p>
+
+      <h4>Protect</h4>
+      <p>
+        Enforce security policies that require proper firewall configuration, protocol rate limiting, source IP validation, and network segmentation. Train staff on incident response and firewall management.
+      </p>
+
+      <h4>Detect</h4>
+      <p>
+        Deploy network monitoring and anomaly detection tools to alert on traffic spikes. Configure IDS and IPS signatures and thresholds to catch DDoS behavior before service disruption.
+      </p>
+
+      <h4>Respond</h4>
+      <p>
+        Develop a DDoS specific incident response playbook that defines roles, communications, and escalation procedures. Conduct tabletop exercises to validate readiness.
+      </p>
+
+      <h4>Recover</h4>
+      <p>
+        Maintain backups of critical network configurations and system states. Establish rapid service restoration procedures and perform post incident reviews to update controls and lessons learned.
+      </p>
+    </div>
+  </div>
+
+  <!-- 2. Identifying Vulnerabilities for a Small Business -->
+  <div class="accordion-item">
+    <div class="accordion-header">Identifying Vulnerabilities for a Small Business</div>
+    <div class="accordion-content">
+      <h3>Project Overview</h3>
+      <p>
+        I conducted a hands on vulnerability assessment of a publicly accessible Linux server that hosts a MySQL database for a fictional ecommerce organization. The database server is critical for the business and has been exposed to the internet for three years with no inbound firewall restrictions. It runs Linux, allows remote employee access worldwide, communicates with internal systems over IPv4, and uses SSL and TLS to protect data in transit. Using the NIST SP 800 30 framework, I analyzed threats, estimated the likelihood and impact of different attack scenarios, and proposed remediation strategies to protect confidentiality, integrity, and availability.
+      </p>
+
+      <h3>System Description</h3>
+      <p>
+        The server uses a high performance CPU, 128 GB RAM, the latest Linux operating system, and MySQL. It supports global remote access with SSL and TLS and it is directly reachable from the internet with no firewall access control lists limiting inbound database traffic.
+      </p>
+
+      <h3>Scope</h3>
+      <p>
+        This assessment focuses on protecting customer data on the exposed database server. It does not cover physical security or other infrastructure. The three month evaluation followed NIST SP 800 30 guidance.
+      </p>
+
+      <h3>Purpose</h3>
+      <p>
+        The database is essential for sales and marketing. A breach could result in data theft, downtime, legal exposure, and reputational damage. My goal was to identify vulnerabilities before they could be exploited and to recommend effective defensive controls.
+      </p>
+
+      <h3>Risk Assessment</h3>
+      <table class="checklist-table">
+        <thead>
+          <tr>
+            <th>Threat Source</th>
+            <th>Threat Event</th>
+            <th>Likelihood</th>
+            <th>Severity</th>
+            <th>Risk (L × S)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cybercriminals</td>
+            <td>Exfiltrate customer data using SQL injection</td>
+            <td>3</td>
+            <td>3</td>
+            <td>9</td>
+          </tr>
+          <tr>
+            <td>Insider employee</td>
+            <td>Misuse credentials to access restricted data</td>
+            <td>2</td>
+            <td>3</td>
+            <td>6</td>
+          </tr>
+          <tr>
+            <td>Competitor</td>
+            <td>Launch a DDoS attack to disrupt operations</td>
+            <td>2</td>
+            <td>2</td>
+            <td>4</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Approach</h3>
+      <p>
+        Following NIST SP 800 30 Revision 1, I scored threats based on attacker capability and system exposure. I estimated likelihood and severity using threat actor profiles and the potential business impact. I focused mainly on cyber based attack vectors because the server is publicly exposed.
+      </p>
+
+      <h3>Remediation Strategy</h3>
+      <ul>
+        <li>Implement the Principle of Least Privilege to restrict data access by role.</li>
+        <li>Enforce Multi Factor Authentication for all database accounts.</li>
+        <li>Restrict server access behind a VPN or strict firewall access control lists.</li>
+        <li>Deploy continuous monitoring and perform regular vulnerability scans.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 3. Conducting a Security Audit -->
   <div class="accordion-item">
     <div class="accordion-header">Conducting a Security Audit</div>
     <div class="accordion-content">
-      <h3>Project Description</h3>
+      <h3>Project Overview</h3>
       <p>
-        This cybersecurity audit simulated a real-world risk and compliance assessment for Botium Toys, a fictional retail company handling storefront sales and e-commerce with sensitive customer data. I evaluated existing controls, identified gaps against PCI DSS, GDPR, and SOC 2, and provided prioritized recommendations to strengthen security posture.
-      </p>
-
-      <h3>Scenario</h3>
-      <p>
-        Botium Toys operates both a physical storefront and an online platform, managing PII and credit card data. Their infrastructure includes on-premises servers, employee workstations, legacy hardware, and third-party software. The audit scope covered technology, processes, and policies related to data protection and regulatory compliance.
+        I performed a cybersecurity audit and compliance assessment for Botium Toys, a fictional retail company that operates both a physical storefront and an online e commerce platform and handles sensitive customer payment card data and personal information. I evaluated their existing security controls across technology, processes, and policy and compared them to PCI DSS, GDPR, and SOC 2 requirements. I then identified high risk gaps and delivered prioritized recommendations to strengthen the security posture and reduce regulatory and business risk.
       </p>
 
       <h3>Controls Assessment Checklist</h3>
@@ -56,72 +171,72 @@
           <tr>
             <td>Least Privilege</td>
             <td>❌</td>
-            <td>All employees have unrestricted access; implement role-based restrictions.</td>
+            <td>All employees have unrestricted access. Role based restrictions are needed.</td>
           </tr>
           <tr>
             <td>Disaster Recovery Plan</td>
             <td>❌</td>
-            <td>No formal DRP; develop and test a comprehensive plan.</td>
+            <td>There is no formal disaster recovery plan. One should be developed and tested.</td>
           </tr>
           <tr>
             <td>Password Policies</td>
             <td>❌</td>
-            <td>Weak standards; enforce complexity, rotation, and lockout.</td>
+            <td>Weak standards are in place. Complexity, rotation, and lockout should be enforced.</td>
           </tr>
           <tr>
             <td>Separation of Duties</td>
             <td>❌</td>
-            <td>Critical functions handled by one person; split responsibilities.</td>
+            <td>Critical functions are handled by one person. Responsibilities should be split.</td>
           </tr>
           <tr>
             <td>Firewall</td>
             <td>✅</td>
-            <td>Properly configured to control inbound/outbound traffic.</td>
+            <td>The firewall is configured to control inbound and outbound traffic.</td>
           </tr>
           <tr>
-            <td>Intrusion Detection System (IDS)</td>
+            <td>Intrusion Detection System</td>
             <td>❌</td>
-            <td>Missing IDS; install and tune alerts for suspicious activity.</td>
+            <td>No intrusion detection system is in place. Alerts for suspicious activity should be added.</td>
           </tr>
           <tr>
             <td>Backups</td>
             <td>❌</td>
-            <td>No regular backups; schedule automated backups.</td>
+            <td>There are no regular backups. Automated backups should be scheduled.</td>
           </tr>
           <tr>
             <td>Antivirus Software</td>
             <td>✅</td>
-            <td>Up-to-date AV deployed and monitored.</td>
+            <td>Up to date antivirus is deployed and monitored.</td>
           </tr>
           <tr>
             <td>Legacy System Monitoring</td>
             <td>❌</td>
-            <td>No structured maintenance; document and review legacy platforms.</td>
+            <td>No structured maintenance exists. Legacy platforms should be documented and reviewed.</td>
           </tr>
           <tr>
             <td>Encryption</td>
             <td>❌</td>
-            <td>Data at rest/in transit is unencrypted; apply full-disk & data-level encryption.</td>
+            <td>Data at rest and data in transit is unencrypted. Full disk and data level encryption is required.</td>
           </tr>
           <tr>
             <td>Password Management System</td>
             <td>❌</td>
-            <td>No centralized vault; adopt a secure password manager.</td>
+            <td>There is no centralized vault. A secure password manager should be adopted.</td>
           </tr>
           <tr>
             <td>Physical Locks</td>
             <td>✅</td>
-            <td>Facility access controlled by locks.</td>
+            <td>Facility access is controlled by locks.</td>
           </tr>
           <tr>
             <td>CCTV Surveillance</td>
             <td>✅</td>
-            <td>Cameras operational for deterrence and forensics.</td>
+            <td>Security cameras are operational for deterrence and forensics.</td>
           </tr>
           <tr>
             <td>Fire Safety Systems</td>
             <td>✅</td>
-            <td>Alarms and suppression systems functional.</td>
+            <td>Alarms and suppression systems are functional.</td>
           </tr>
         </tbody>
       </table>
@@ -139,140 +254,84 @@
           <tr>
             <td>Authorized access to card data</td>
             <td>❌</td>
-            <td>All employees can view cardholder data; restrict by role.</td>
+            <td>All employees can view cardholder data. Access should be restricted by role.</td>
           </tr>
           <tr>
-            <td>Secure storage & transmission</td>
+            <td>Secure storage and transmission</td>
             <td>❌</td>
-            <td>Card data stored without encryption.</td>
+            <td>Card data is stored without encryption.</td>
           </tr>
           <tr>
             <td>Encryption procedures</td>
             <td>✅</td>
-            <td>Recommend implementing encryption company-wide.</td>
+            <td>Company wide encryption was recommended.</td>
           </tr>
           <tr>
             <td>Password management policies</td>
             <td>✅</td>
-            <td>Adopt complexity and renewal policies.</td>
+            <td>Strong password complexity and renewal policies were recommended.</td>
           </tr>
           <tr>
             <td>GDPR data privacy</td>
             <td>❌</td>
-            <td>PII stored unencrypted; enforce strict access controls.</td>
+            <td>Personal information is stored unencrypted. Strict access controls are required.</td>
           </tr>
           <tr>
             <td>GDPR breach notification</td>
             <td>✅</td>
-            <td>Plan exists to notify within 72 hours.</td>
+            <td>A plan exists to notify within 72 hours.</td>
           </tr>
           <tr>
             <td>Data classification</td>
             <td>❌</td>
-            <td>No formal classification; implement asset inventory & class scheme.</td>
+            <td>There is no formal classification. An asset inventory and classification scheme must be implemented.</td>
           </tr>
           <tr>
             <td>Privacy policy enforcement</td>
             <td>✅</td>
-            <td>Policies in place and applied across departments.</td>
+            <td>Policies exist and are applied across departments.</td>
           </tr>
           <tr>
             <td>User access policies</td>
             <td>❌</td>
-            <td>No formal access policy; establish and enforce role-based rules.</td>
+            <td>There is no formal access policy. Role based rules should be enforced.</td>
           </tr>
           <tr>
             <td>Data integrity</td>
             <td>✅</td>
-            <td>Controls ensure data remains accurate and unaltered.</td>
+            <td>Controls are in place to ensure data remains accurate and unaltered.</td>
           </tr>
           <tr>
             <td>Data availability</td>
             <td>❌</td>
-            <td>Universal access currently; limit to authorized roles.</td>
+            <td>Universal access is currently allowed. Only authorized roles should have access.</td>
           </tr>
         </tbody>
       </table>
 
       <h3>Recommendations</h3>
       <ul>
-        <li>Implement role-based access control (RBAC) and enforce least privilege.</li>
+        <li>Implement role based access control and enforce the Principle of Least Privilege.</li>
         <li>Deploy a centralized password management solution.</li>
-        <li>Introduce full-disk and data-level encryption.</li>
-        <li>Develop, test, and regularly review a DRP and backup schedule.</li>
-        <li>Install and configure an IDS with alerting.</li>
-        <li>Maintain legacy systems with formal documentation and review.</li>
+        <li>Introduce full disk and data level encryption.</li>
+        <li>Develop, test, and regularly review a disaster recovery plan and backup schedule.</li>
+        <li>Install and configure an intrusion detection system with alerting.</li>
+        <li>Maintain legacy systems with formal documentation and regular review.</li>
         <li>Enforce separation of duties for critical functions.</li>
-        <li>Create a formal data classification and inventory program.</li>
-        <li>Continue privacy & security training for PCI DSS, GDPR & SOC 2 compliance.</li>
-        <li>Expand security awareness training to mitigate phishing risks.</li>
+        <li>Create a formal data classification and asset inventory program.</li>
+        <li>Continue privacy and security training for PCI DSS, GDPR, and SOC 2 compliance.</li>
+        <li>Expand security awareness training to reduce phishing risk.</li>
       </ul>
     </div>
   </div>
 
-  <!-- 2. Analyzing Network Structure and Security -->
-  <div class="accordion-item">
-    <div class="accordion-header">Analyzing Network Structure and Security</div>
-    <div class="accordion-content">
-      <h3>Project Description</h3>
-      <p>
-        In this project, I developed a network security improvement plan based on the NIST Cybersecurity Framework to harden a fictional multimedia company’s internal network after a DDoS attack compromised services for two hours.
-      </p>
-
-      <h3>Scenario</h3>
-      <p>
-        I acted as a cybersecurity analyst at a multimedia firm offering web, graphic, and social‐media services. The company suffered a DDoS attack via a flood of ICMP packets through an unconfigured firewall, bringing the internal network offline for two hours. The incident response team blocked ICMP traffic, halted non‐critical services, and restored essential functions.
-      </p>
-
-      <h3>Implemented Controls</h3>
-      <ul>
-        <li>Added a firewall rule to rate-limit incoming ICMP packets.</li>
-        <li>Enabled source IP verification on the firewall to prevent spoofed addresses.</li>
-        <li>Deployed network monitoring software to detect abnormal traffic patterns.</li>
-        <li>Installed and tuned an IDS/IPS to filter suspicious ICMP traffic. </li>
-      </ul>
-
-      <h3>Network Security Improvement Plan (NIST CSF)</h3>
-
-      <h4>Identify</h4>
-      <p>
-        Conduct regular audits of networks, devices, and access privileges to uncover misconfigurations (e.g., unconfigured firewall rules). Perform vulnerability scans on firewalls and network equipment.
-      </p>
-
-      <h4>Protect</h4>
-      <p>
-        Enforce security policies ensuring proper firewall configuration, protocol rate limiting, source IP validation, and network segmentation. Train staff on incident response and firewall management. 
-      </p>
-
-      <h4>Detect</h4>
-      <p>
-        Deploy network monitoring and anomaly-detection tools to alert on traffic spikes. Configure IDS/IPS signatures and thresholds to catch DDoS behavior before service disruption.
-      </p>
-
-      <h4>Respond</h4>
-      <p>
-        Develop a DDoS-specific incident response playbook outlining roles, communications, and escalation procedures. Conduct tabletop exercises to validate readiness. 
-      </p>
-
-      <h4>Recover</h4>
-      <p>
-        Maintain backups of critical network configurations and system states. Establish rapid service restoration procedures and perform post-incident reviews to update controls and lessons learned. 
-      </p>
-    </div>
-  </div>
-
-  <!-- 3. Using Linux Commands to Manage File Permissions -->
+  <!-- 4. Using Linux Commands to Manage File Permissions -->
   <div class="accordion-item">
     <div class="accordion-header">Using Linux Commands to Manage File Permissions</div>
     <div class="accordion-content">
-      <h3>Project Description</h3>
+      <h3>Project Overview</h3>
       <p>
-        In this activity, I acted as a security professional managing file and directory permissions for a fictional research team. My main goal was to analyze current permissions, determine if they matched authorization policies, and use Linux commands to correct any discrepancies. This ensured that only the appropriate users could access or modify specific files and directories.
-      </p>
-
-      <h3>Scenario</h3>
-      <p>
-        As a Security Analyst working with a research team in a large organization, I was tasked with auditing and correcting file and directory permissions within a Linux environment. The objective was to ensure users had only the appropriate level of access, in alignment with organizational security policies. This activity involved analyzing permission settings on files and directories within the <code>/home/researcher2/projects</code> directory. Based on the assessment, I used Linux commands to correct any misconfigurations—specifically focusing on removing unnecessary write access, securing hidden files, and ensuring restricted directories were only accessible to authorized users.
+        I acted as a security analyst supporting a research team in a large organization. I audited and corrected file and directory permissions within a Linux environment to make sure that users only had the appropriate level of access that matched organizational security policies. I inspected file permissions in the <code>/home/researcher2/projects</code> directory, identified unnecessary or unsafe permissions such as public write access, and used Linux commands to fix them so that only authorized users retained access.
       </p>
 
       <h3>Check File and Directory Details</h3>
@@ -283,14 +342,14 @@
       <p>Example permissions string:</p>
       <pre><code class="bash">-rw-rw-r-- 1 researcher2 researcher2 1234 project_k.txt</code></pre>
       <ul>
-        <li><code>-</code>: Regular file</li>
-        <li><code>rw-</code>: User has read &amp; write</li>
-        <li><code>rw-</code>: Group has read &amp; write</li>
-        <li><code>r--</code>: Others have read only</li>
+        <li>Regular file</li>
+        <li>User has read and write</li>
+        <li>Group has read and write</li>
+        <li>Others have read only</li>
       </ul>
 
       <h3>Change File Permissions</h3>
-      <p>The organization prohibits write access for “others.” To correct <code>project_k.txt</code>:</p>
+      <p>The organization prohibits write access for others. To correct <code>project_k.txt</code>:</p>
       <pre><code class="bash">chmod o-w /home/researcher2/projects/project_k.txt</code></pre>
       <p><strong>Result:</strong></p>
       <pre><code class="bash">-rw-rw-r-- 1 researcher2 researcher2 1234 project_k.txt</code></pre>
@@ -309,26 +368,96 @@
 
       <h3>Summary</h3>
       <p>
-        In this exercise, I checked file and directory permissions using <code>ls -la</code>, interpreted the permissions string, and modified access controls with <code>chmod</code>. I ensured only authorized users had appropriate rights, revoking unnecessary permissions for others. This aligned the system with secure access policies, supporting organizational data protection efforts.
+        I checked file and directory permissions using <code>ls -la</code>, interpreted the permissions string, and modified access controls using <code>chmod</code>. I ensured that only authorized users had appropriate rights and I removed unnecessary permissions for others. This aligned the system with secure access policies and supported organizational data protection efforts.
       </p>
     </div>
   </div>
 
-  <!-- 4. Applying Filters to SQL Queries -->
+  <!-- 5. Importing and Parsing a Text File in a Security Related Scenario -->
+  <div class="accordion-item">
+    <div class="accordion-header">
+      Importing and Parsing a Text File in a Security Related Scenario
+    </div>
+    <div class="accordion-content">
+      <h3>Project Overview</h3>
+      <p>
+        I acted as a security professional at a fictional healthcare company and was responsible for maintaining a list of employee IP addresses that are allowed to access a restricted subnetwork. The list is stored in a file named <code>allow_list.txt</code> and must be kept up to date by removing any IP addresses that appear in a separate list of revoked addresses. I wrote a Python script that opens and parses the allow list, removes any addresses that appear in the revoke list, and then writes the cleaned list back to the file so that only currently authorized IPs keep access.
+      </p>
+
+      <h3>Open and Read the File</h3>
+      <pre><code class="bash">with open("allow_list.txt", "r") as file:
+    ip_addresses = file.read().split()
+</code></pre>
+
+      <h3>Iterate and Remove</h3>
+      <pre><code class="bash">remove_list = ["192.168.1.1", "10.0.0.5"]
+for ip in remove_list:
+    if ip in ip_addresses:
+        ip_addresses.remove(ip)
+</code></pre>
+
+      <h3>Write the Updated List</h3>
+      <pre><code class="bash">with open("allow_list.txt", "w") as file:
+    file.write("\n".join(ip_addresses))
+</code></pre>
+
+      <h3>Summary</h3>
+      <p>
+        This Python workflow automates access control by reading the existing allow list file, parsing it into a list, removing any revoked IP addresses, and writing the updated list back to disk. The result is a self updating allow list that reflects current authorization policy.
+      </p>
+    </div>
+  </div>
+
+  <!-- 6. Documenting Incidents with an Incident Handler’s Journal -->
+  <div class="accordion-item">
+    <div class="accordion-header">
+      Documenting Incidents with an Incident Handler’s Journal
+    </div>
+    <div class="accordion-content">
+      <h3>Project Overview</h3>
+      <p>
+        I acted as the incident handler for a simulated ransomware attack against a small United States healthcare clinic. The attack began when a staff member opened a phishing email with a malicious attachment that deployed ransomware and encrypted critical medical and administrative files. I documented the event in an incident handler journal using an investigative framework based on the Five Ws Who, What, When, Where, and Why to capture key details, assess impact, and recommend response and recovery actions.
+      </p>
+
+      <h3>Incident Handler Journal Entry</h3>
+      <p><strong>Date:</strong> July 26, 2025</p>
+
+      <h4>Description</h4>
+      <p>
+        A ransomware incident occurred at a small United States healthcare clinic following a phishing email. This entry records the event and its key elements.
+      </p>
+
+      <h4>Tools Used</h4>
+      <p>
+        No specific cybersecurity tools were mentioned in the scenario. Tooling had not yet been deployed.
+      </p>
+
+      <h4>The Five Ws</h4>
+      <ul>
+        <li><strong>Who:</strong> An organized group of unethical hackers targeting healthcare and transportation sectors.</li>
+        <li><strong>What:</strong> Employees received phishing emails with malicious attachments that encrypted critical files and displayed a ransom note.</li>
+        <li><strong>When:</strong> Tuesday morning at approximately 9:00 a.m.</li>
+        <li><strong>Where:</strong> A small healthcare clinic in the United States that provides primary care services.</li>
+        <li><strong>Why:</strong> The attack succeeded because employees opened phishing emails with malicious attachments that installed ransomware.</li>
+      </ul>
+
+      <h4>Additional Notes</h4>
+      <p>
+        Immediate containment and recovery measures are required. The organization should notify authorities, begin forensic investigation, and implement stronger phishing protections. User awareness training and a reliable data backup strategy should also be prioritized.
+      </p>
+    </div>
+  </div>
+
+  <!-- 7. Applying Filters to SQL Queries -->
   <div class="accordion-item">
     <div class="accordion-header">Applying Filters to SQL Queries</div>
     <div class="accordion-content">
-      <h3>Project Description</h3>
+      <h3>Project Overview</h3>
       <p>
-        In this project, I investigated potential security threats within a fictional corporate environment by querying employee and login activity data. Through SQL, I applied logical filters to detect anomalies such as failed login attempts outside business hours, activity from non-domestic locations, and device update needs by department. This exercise emphasized the use of <code>AND</code>, <code>OR</code>, <code>NOT</code>, and <code>LIKE</code> operators for real-world threat detection. 
+        I investigated potential security threats within a fictional corporate environment by querying employee data and login activity data. I used SQL to detect anomalies such as failed login attempts outside of business hours, activity from non domestic locations, and device update needs by department. This work emphasized the use of AND, OR, NOT, and LIKE operators for real world threat detection.
       </p>
 
-      <h3>Scenario</h3>
-      <p>
-        As a security professional at a large organization, I was tasked with analyzing two key datasets—<code>log_in_attempts</code> and <code>employees</code>—to identify suspicious behavior such as failed logins outside business hours, access from unknown locations, and machines needing updates. 
-      </p>
-
-      <h3>Retrieve After-Hours Failed Login Attempts</h3>
+      <h3>Retrieve After Hours Failed Login Attempts</h3>
       <pre><code>SELECT *
 FROM log_in_attempts
 WHERE login_time > '18:00'
@@ -371,188 +500,22 @@ WHERE department != 'Information Technology';
 
       <h3>Summary</h3>
       <p>
-        This activity demonstrated my ability to apply SQL filtering techniques—using logical operators, date/time conditions, and pattern matching—to identify security-relevant anomalies in login and employee data. 
+        This activity demonstrates my ability to apply SQL filtering techniques, including logical operators, date and time conditions, and pattern matching, to identify security relevant anomalies in login and employee data.
       </p>
     </div>
   </div>
 
-  <!-- 5. Identifying Vulnerabilities for a Small Business -->
-  <div class="accordion-item">
-    <div class="accordion-header">Identifying Vulnerabilities for a Small Business</div>
-    <div class="accordion-content">
-      <h3>Project Description</h3>
-      <p>
-        I conducted a hands-on vulnerability assessment of a publicly accessible Linux server hosting a MySQL database for a fictional e-commerce organization. Using the NIST SP 800-30 framework, I analyzed threats, quantified likelihood and impact, and proposed remediation strategies to protect customer data and ensure service availability.
-      </p>
+</main>
 
-      <h3>Scenario</h3>
-      <p>
-        As part of my cybersecurity learning journey, the organization’s database server—critical for business operations and storing customer data—has been online and publicly accessible for three years. It runs Linux, hosts MySQL, supports remote employee access worldwide, and uses SSL/TLS for data transmission. This exercise simulated a real-world assessment following NIST SP 800-30 Rev. 1. 
-      </p>
-
-      <h3>System Description</h3>
-      <p>
-        The server features a high-performance CPU and 128 GB RAM, latest Linux OS, and MySQL. It communicates over IPv4 with internal servers, allows global remote access, and secures connections via SSL/TLS. No firewall restrictions exist for inbound database traffic.
-      </p>
-
-      <h3>Scope</h3>
-      <p>
-        This assessment focuses on the confidentiality, integrity, and availability of data on the publicly accessible database server. It excludes physical security and other IT infrastructure. The three-month evaluation followed NIST SP 800-30 guidelines.
-      </p>
-
-      <h3>Purpose</h3>
-      <p>
-        The database is essential for sales and marketing. A breach could lead to data theft, legal issues, reputational harm, and operational downtime. This report aims to identify vulnerabilities before exploitation and recommend controls to mitigate risk.
-      </p>
-
-      <h3>Risk Assessment</h3>
-      <table class="checklist-table">
-        <thead>
-          <tr>
-            <th>Threat Source</th>
-            <th>Threat Event</th>
-            <th>Likelihood</th>
-            <th>Severity</th>
-            <th>Risk (L × S)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Cybercriminals</td>
-            <td>Exfiltrate customer data via SQL injection</td>
-            <td>3</td>
-            <td>3</td>
-            <td>9</td>
-          </tr>
-          <tr>
-            <td>Insider (employee)</td>
-            <td>Misuse credentials to access restricted data</td>
-            <td>2</td>
-            <td>3</td>
-            <td>6</td>
-          </tr>
-          <tr>
-            <td>Competitor</td>
-            <td>Launch DDoS attack to disrupt operations</td>
-            <td>2</td>
-            <td>2</td>
-            <td>4</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3>Approach</h3>
-      <p>
-        Using NIST SP 800-30 Rev. 1, I scored threats based on actor capability and system exposure. Likelihood and severity ratings were estimated from threat actor profiles and potential business impact. Focus was on cyber-based vectors due to public accessibility. 
-      </p>
-
-      <h3>Remediation Strategy</h3>
-      <ul>
-        <li>Implement Principle of Least Privilege to restrict data access by role.</li>
-        <li>Enforce Multi-Factor Authentication (MFA) for all database accounts.</li>
-        <li>Restrict server access behind a VPN or firewall ACLs.</li>
-        <li>Deploy continuous monitoring and regular vulnerability scans.</li>
-      </ul>
+<footer>
+  <div class="container footer-inner">
+    <p>© 2025 Shayaan Rashedin</p>
+    <div class="footer-links">
+      <a href="mailto:shayaan.rashedin@torontomu.ca">Email</a>
+      <a href="https://www.linkedin.com/in/shayaanrashedin" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/ShayaanRashedin" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
-
-  <!-- 6. Documenting Incidents with an Incident Handler’s Journal -->
-  <div class="accordion-item">
-    <div class="accordion-header">
-      Documenting Incidents with an Incident Handler’s Journal
-    </div>
-    <div class="accordion-content">
-      <h3>Scenario</h3>
-      <p>
-        In this simulated cybersecurity incident response exercise, I acted as the incident handler for a ransomware attack on a small U.S. healthcare clinic. The scenario was designed to assess my ability to document and analyze an incident using industry-recognized frameworks like the 5 W’s (Who, What, When, Where, Why). The attack stemmed from a phishing email opened by clinic staff, which deployed ransomware to encrypt critical medical and administrative files. My role was to capture the incident details in a structured journal format, emphasizing investigative clarity and practical response measures. This activity demonstrates my competency in analyzing attack vectors, identifying vulnerabilities, and recommending mitigation strategies—key skills for any entry-level cybersecurity role. The incident journal entry below reflects my structured response and documentation skills. :contentReference[oaicite:1]{index=1}
-      </p>
-
-      <h3>Incident Handler Journal Entry</h3>
-      <p><strong>Date:</strong> July 26, 2025</p>
-
-      <h4>Description</h4>
-      <p>
-        A ransomware incident occurred at a small U.S. healthcare clinic due to a phishing attack. This entry details the event and its key elements.
-      </p>
-
-      <h4>Tool(s) Used</h4>
-      <p>
-        No specific cybersecurity tools were mentioned in the scenario. It appears tools are yet to be deployed.
-      </p>
-
-      <h4>The 5 W’s</h4>
-      <ul>
-        <li><strong>Who:</strong> An organized group of unethical hackers targeting healthcare and transportation sectors.</li>
-        <li><strong>What:</strong> Employees received phishing emails containing malicious attachments. When opened, the malware encrypted the clinic’s critical files and a ransom note was displayed.</li>
-        <li><strong>When:</strong> Tuesday morning at approximately 9:00 a.m.</li>
-        <li><strong>Where:</strong> At a small U.S. healthcare clinic specializing in primary-care services.</li>
-        <li><strong>Why:</strong> The attack occurred because employees opened phishing emails with malicious attachments that installed ransomware.</li>
-      </ul>
-
-      <h4>Additional Notes</h4>
-      <p>
-        Immediate containment and recovery measures are required. The organization should notify authorities, begin forensic investigation, and implement stronger phishing protections. User awareness training and a reliable data backup strategy should also be prioritized.
-      </p>
-    </div>
-  </div>
-
-  <!-- 7. Importing and Parsing a Text File in a Security-Related Scenario -->
-  <div class="accordion-item">
-    <div class="accordion-header">
-      Importing and Parsing a Text File in a Security-Related Scenario
-    </div>
-    <div class="accordion-content">
-      <h3>Project Description</h3>
-      <p>
-        I acted as a security professional at a fictional healthcare company, tasked with maintaining a list of employee IP addresses that are permitted to access a restricted subnetwork. This list, stored in <code>allow_list.txt</code>, must be regularly updated to remove any IPs identified in a separate <code>remove_list</code> of revoked addresses. The goal is to automate the removal of any IPs in the remove list from the allow list using Python. 
-      </p>
-
-      <h3>Scenario</h3>
-      <p>
-        I simulate a real-world network admin task: given <code>allow_list.txt</code> containing authorized IPs and a predefined <code>remove_list</code>, write a Python script to filter out revoked addresses and update the file. This ensures only currently authorized IPs retain access.
-      </p>
-
-      <h3>Open & Read the File</h3>
-      <pre><code class="bash">with open("allow_list.txt", "r") as file:
-    ip_addresses = file.read().split()
-</code></pre>
-
-      <h3>Iterate & Remove</h3>
-      <pre><code class="bash">remove_list = ["192.168.1.1", "10.0.0.5"]
-for ip in remove_list:
-    if ip in ip_addresses:
-        ip_addresses.remove(ip)
-</code></pre>
-
-      <h3>Write the Updated List</h3>
-      <pre><code class="bash">with open("allow_list.txt", "w") as file:
-    file.write("\n".join(ip_addresses))
-</code></pre>
-
-      <h3>Summary</h3>
-      <p>
-        This Python algorithm automates access control by:  
-        1. Reading the existing allow-list file.<br>
-        2. Parsing its contents into a list.<br>
-        3. Removing any IPs found in a predefined revoke list.<br>
-        4. Writing the cleaned list back to the file.  
-        The result is a self-updating allow-list that reflects current authorization policies.
-      </p>
-    </div>
-  </div>
-
-
-  </main>
-
-  <footer>
-    <div class="container footer-inner">
-      <p>© 2025 Shayaan Rashedin</p>
-      <div class="footer-links">
-        <a href="mailto:shayaan.rashedin@torontomu.ca">Email</a>
-        <a href="https://www.linkedin.com/in/shayaanrashedin" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://github.com/ShayaanRashedin" target="_blank" rel="noopener">GitHub</a>
-      </div>
-    </div>
-  </footer>
+</footer>
 </body>
 </html>
