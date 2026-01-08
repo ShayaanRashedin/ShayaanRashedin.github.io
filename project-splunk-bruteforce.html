@@ -46,30 +46,30 @@
       <h2>Setup &amp; Environment</h2>
       <p>Environment used for this exercise (all VMs on an isolated host-only VirtualBox network):</p>
       <ul>
-        <li>Kali (attacker) — 192.168.56.102 — Hydra/forwarder check.</li>
-        <li>Metasploitable2 (target) — 192.168.56.101 — FTP service + syslog forwarded.</li>
-        <li>Splunk Enterprise (SIEM) — 192.168.56.107 — receiving forwarder traffic on TCP 9997 and syslog on UDP 514.</li>
+        <li>Kali (attacker) - 192.168.56.102 - Hydra/forwarder check.</li>
+        <li>Metasploitable2 (target) - 192.168.56.101 - FTP service + syslog forwarded.</li>
+        <li>Splunk Enterprise (SIEM) - 192.168.56.107 - receiving forwarder traffic on TCP 9997 and syslog on UDP 514.</li>
       </ul>
 
       <div class="evidence-grid">
         <figure>
           <img class="lab-img" src="images/siem/forwarder-monitors.png" alt="Splunk forwarder monitored logs" />
-          <figcaption>Figure 01 — Splunk Universal Forwarder monitored directories &amp; monitored files (example).</figcaption>
+          <figcaption>Figure 01 - Splunk Universal Forwarder monitored directories &amp; monitored files (example).</figcaption>
         </figure>
 
         <figure>
           <img class="lab-img" src="images/siem/forward-server.png" alt="Splunk forward server configuration" />
-          <figcaption>Figure 02 — Forward-server configured (example): forward to <code>192.168.56.107:9997</code>.</figcaption>
+          <figcaption>Figure 02 - Forward-server configured (example): forward to <code>192.168.56.107:9997</code>.</figcaption>
         </figure>
 
         <figure>
           <img class="lab-img" src="images/siem/metasploitable-syslogconf.png" alt="Metasploitable syslog configuration" />
-          <figcaption>Figure 03 — Metasploitable2 <code>/etc/syslog.conf</code> excerpt showing forwarding to Splunk syslog receiver.</figcaption>
+          <figcaption>Figure 03 - Metasploitable2 <code>/etc/syslog.conf</code> excerpt showing forwarding to Splunk syslog receiver.</figcaption>
         </figure>
 
         <figure>
           <img class="lab-img" src="images/siem/ports-listening.png" alt="Splunk listening ports" />
-          <figcaption>Figure 04 — Splunk server listening: UDP <code>514</code> (syslog) and TCP <code>9997</code> (forwarder ingestion).</figcaption>
+          <figcaption>Figure 04 - Splunk server listening: UDP <code>514</code> (syslog) and TCP <code>9997</code> (forwarder ingestion).</figcaption>
         </figure>
       </div>
     </section>
@@ -81,13 +81,13 @@
       <div class="evidence-grid">
         <figure>
           <img class="lab-img" src="images/siem/hydra-ftp-bruteforce.png" alt="Hydra brute force against FTP" />
-          <figcaption>Figure 05 — Hydra performing a multi-threaded brute-force against <code>msfadmin@192.168.56.101</code>.</figcaption>
+          <figcaption>Figure 05 - Hydra performing a multi-threaded brute-force against <code>msfadmin@192.168.56.101</code>.</figcaption>
         </figure>
       </div>
 
       <div class="accordion">
         <div class="accordion-item">
-          <div class="accordion-header" aria-controls="hydra-cmd" aria-expanded="false">Commands — Attack invocation</div>
+          <div class="accordion-header" aria-controls="hydra-cmd" aria-expanded="false">Commands - Attack invocation</div>
           <div id="hydra-cmd" class="accordion-content">
 <pre><code># Hydra brute force (attacker VM)
 hydra -l msfadmin -P /usr/share/wordlists/rockyou.txt ftp://192.168.56.101 -t 4 -V
@@ -104,28 +104,28 @@ hydra -l msfadmin -P /usr/share/wordlists/rockyou.txt ftp://192.168.56.101 -t 4 
       <div class="evidence-grid">
         <figure>
           <img class="lab-img" src="images/siem/splunk-ftp-authfail-events.png" alt="FTP auth failure events in Splunk" />
-          <figcaption>Figure 06 — Raw authentication failure events in Splunk for host <code>192.168.56.101</code>.</figcaption>
+          <figcaption>Figure 06 - Raw authentication failure events in Splunk for host <code>192.168.56.101</code>.</figcaption>
         </figure>
 
         <figure>
           <img class="lab-img" src="images/siem/splunk-detection-stats.png" alt="Splunk detection statistics" />
-          <figcaption>Figure 07 — SPL aggregation showing failures in time buckets (used to trigger alert).</figcaption>
+          <figcaption>Figure 07 - SPL aggregation showing failures in time buckets (used to trigger alert).</figcaption>
         </figure>
 
         <figure>
           <img class="lab-img" src="images/siem/splunk-host-cyberlab-events.png" alt="Events from cyberlab host" />
-          <figcaption>Figure 08 — Example of events from the attacker host (cyberlab) and target host.</figcaption>
+          <figcaption>Figure 08 - Example of events from the attacker host (cyberlab) and target host.</figcaption>
         </figure>
 
         <figure>
           <img class="lab-img" src="images/siem/splunk-stats-host-source.png" alt="Splunk stats grouped by host and source" />
-          <figcaption>Figure 09 — Event counts by host &amp; source confirm forwarding coverage and visibility.</figcaption>
+          <figcaption>Figure 09 - Event counts by host &amp; source confirm forwarding coverage and visibility.</figcaption>
         </figure>
       </div>
 
       <div class="accordion">
         <div class="accordion-item">
-          <div class="accordion-header" aria-controls="spl-query" aria-expanded="false">Commands — SPL correlation query</div>
+          <div class="accordion-header" aria-controls="spl-query" aria-expanded="false">Commands - SPL correlation query</div>
           <div id="spl-query" class="accordion-content">
 <pre><code>index=main sourcetype=syslog host=192.168.56.101
 ("pam_unix(ftp:auth): authentication failure" OR "last message repeated")
@@ -148,7 +148,7 @@ hydra -l msfadmin -P /usr/share/wordlists/rockyou.txt ftp://192.168.56.101 -t 4 
       <div class="evidence-grid">
         <figure>
           <img class="lab-img" src="images/siem/splunk-alert-config.png" alt="Splunk alert configuration" />
-          <figcaption>Figure 10 — Splunk alert configuration UI (thresholds, schedule, actions).</figcaption>
+          <figcaption>Figure 10 - Splunk alert configuration UI (thresholds, schedule, actions).</figcaption>
         </figure>
       </div>
     </section>
@@ -200,9 +200,9 @@ hydra -l msfadmin -P /usr/share/wordlists/rockyou.txt ftp://192.168.56.101 -t 4 
       <table class="checklist-table">
         <thead><tr><th>Technique</th><th>Example mapping</th></tr></thead>
         <tbody>
-          <tr><td>T1110 — Brute Force</td><td>Hydra attempts on FTP (msfadmin)</td></tr>
-          <tr><td>T1078 — Valid Accounts</td><td>Attempts to authenticate as known user</td></tr>
-          <tr><td>T1040 — Network Sniffing</td><td>Visibility provided by forwarded syslog to SIEM</td></tr>
+          <tr><td>T1110 - Brute Force</td><td>Hydra attempts on FTP (msfadmin)</td></tr>
+          <tr><td>T1078 - Valid Accounts</td><td>Attempts to authenticate as known user</td></tr>
+          <tr><td>T1040 - Network Sniffing</td><td>Visibility provided by forwarded syslog to SIEM</td></tr>
         </tbody>
       </table>
     </section>
@@ -211,7 +211,7 @@ hydra -l msfadmin -P /usr/share/wordlists/rockyou.txt ftp://192.168.56.101 -t 4 
       <h2>Reflection</h2>
       <ul>
         <li><strong>Skills demonstrated:</strong> Splunk forwarder ops, syslog configuration, SPL authoring, and alert design for operational detection.</li>
-        <li><strong>Outcome:</strong> Real-time detection of brute-force activity with evidence & remediation steps — demonstrates blue-team readiness.</li>
+        <li><strong>Outcome:</strong> Real-time detection of brute-force activity with evidence & remediation steps - demonstrates blue-team readiness.</li>
       </ul>
     </section>
 
