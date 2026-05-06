@@ -52,7 +52,7 @@
             A controlled home lab used to practice cybersecurity operations from both offensive and defensive perspectives. The lab includes a Kali attacker VM, a Metasploitable2 target VM, and an Ubuntu/Splunk SIEM VM where applicable.
           </p>
           <div class="detail-grid">
-            <section>
+            <a class="project-card evidence-link-card" href="project-network-scanning.html">
               <h3>What I Practiced</h3>
               <ul class="check-list">
                 <li>Network reconnaissance with Nmap, service enumeration, and banner review.</li>
@@ -61,8 +61,8 @@
                 <li>CVE documentation, risk notes, and remediation recommendations.</li>
                 <li>Splunk brute-force detection, alert logic, and log analysis as the blue-team extension of the lab.</li>
               </ul>
-            </section>
-            <section>
+            </a>
+            <a class="project-card evidence-link-card" href="homelab.html">
               <h3>Evidence Preserved</h3>
               <ul class="check-list">
                 <li>VM screenshots for Kali, Metasploitable2, and Splunk/Ubuntu.</li>
@@ -70,27 +70,24 @@
                 <li>Metasploitable2 exploit validation screenshots.</li>
                 <li>Splunk detection screenshots and FTP brute-force incident report PDF.</li>
               </ul>
-            </section>
+            </a>
           </div>
-          <div class="evidence-strip" aria-label="Homelab screenshots">
-            <figure>
-              <img src="images/Kali_Linux_Image.png" alt="Kali Linux VM configuration screenshot" />
-              <figcaption>Kali attacker VM</figcaption>
-            </figure>
-            <figure>
-              <img src="images/Metasploitable_Image.png" alt="Metasploitable2 VM configuration screenshot" />
-              <figcaption>Metasploitable2 target VM</figcaption>
-            </figure>
-            <figure>
-              <img src="images/Splunk_VM.png" alt="Ubuntu Splunk VM configuration screenshot" />
-              <figcaption>Splunk SIEM VM</figcaption>
-            </figure>
-          </div>
-          <div class="card-actions">
-            <a class="btn primary" href="homelab.html">Open homelab overview</a>
-            <a class="btn ghost" href="project-network-scanning.html">Recon evidence</a>
-            <a class="btn ghost" href="project-metasploitable2-exploit.html">Exploit evidence</a>
-            <a class="btn ghost" href="project-splunk-bruteforce.html">Splunk evidence</a>
+          <div class="lab-grid evidence-card-grid">
+            <a class="project-card evidence-link-card" href="project-network-scanning.html">
+              <h3>Recon &amp; Vulnerability Scanning</h3>
+              <p>Nmap service discovery, OpenVAS/GVM scanning, CVE review, and remediation notes.</p>
+              <div class="tags"><span>Nmap</span><span>OpenVAS/GVM</span><span>Recon</span></div>
+            </a>
+            <a class="project-card evidence-link-card" href="project-metasploitable2-exploit.html">
+              <h3>Exploit Validation</h3>
+              <p>Controlled Metasploitable2 exploitation evidence, impact validation, and remediation thinking.</p>
+              <div class="tags"><span>Metasploit</span><span>CVE validation</span><span>Ethical lab</span></div>
+            </a>
+            <a class="project-card evidence-link-card" href="project-splunk-bruteforce.html">
+              <h3>Splunk Detection</h3>
+              <p>FTP brute-force simulation, Splunk log analysis, alert configuration, and incident report evidence.</p>
+              <div class="tags"><span>Splunk</span><span>SPL</span><span>Detection</span></div>
+            </a>
           </div>
         </article>
       </div>
@@ -149,41 +146,41 @@
           <h2 class="section-title">Certification Projects</h2>
         </div>
         <div class="lab-grid">
-          <article class="project-card">
+          <a class="project-card" href="cert-security-audit.html">
             <h3>Security Audit</h3>
-            <p>Compliance and control review for a fictional organization, including gaps related to PCI DSS, GDPR, SOC 2, least privilege, encryption, backups, and incident detection.</p>
+            <p>Internal audit for Botium Toys assessing assets, control gaps, compliance needs, and prioritized security recommendations.</p>
             <div class="tags"><span>Audit</span><span>Controls</span><span>Compliance</span></div>
-          </article>
-          <article class="project-card">
+          </a>
+          <a class="project-card" href="cert-network-security.html">
             <h3>Network Structure &amp; Security</h3>
-            <p>DDoS response and network hardening exercise using the NIST Cybersecurity Framework to organize identify, protect, detect, respond, and recover recommendations.</p>
+            <p>Incident report analysis focused on network availability, traffic behavior, security weaknesses, and response improvements.</p>
             <div class="tags"><span>NIST CSF</span><span>Network Defense</span><span>DDoS</span></div>
-          </article>
-          <article class="project-card">
+          </a>
+          <a class="project-card" href="cert-linux-permissions.html">
             <h3>Linux Permissions</h3>
-            <p>Linux access-control exercise using command-line permission review and chmod changes to align files and directories with least privilege.</p>
+            <p>File and directory permission review using Linux commands to identify and correct access-control issues.</p>
             <div class="tags"><span>Linux</span><span>chmod</span><span>Access Control</span></div>
-          </article>
-          <article class="project-card">
+          </a>
+          <a class="project-card" href="cert-sql-filtering.html">
             <h3>SQL Filtering</h3>
-            <p>Security-relevant SQL filtering of login and employee data to identify failed logins, after-hours activity, country filters, and department-specific records.</p>
+            <p>SQL query filtering for login investigation, after-hours activity review, location filtering, and employee record analysis.</p>
             <div class="tags"><span>SQL</span><span>Log Review</span><span>Detection</span></div>
-          </article>
-          <article class="project-card">
+          </a>
+          <a class="project-card" href="cert-vulnerability-assessment.html">
             <h3>Small Business Vulnerability Assessment</h3>
-            <p>NIST SP 800-30-style assessment of a publicly exposed database server, including threat scenarios, likelihood/severity scoring, and remediation strategy.</p>
+            <p>Vulnerability assessment report defining scope, system description, risk scoring, threat scenarios, and mitigation recommendations.</p>
             <div class="tags"><span>NIST 800-30</span><span>Risk</span><span>Remediation</span></div>
-          </article>
-          <article class="project-card">
+          </a>
+          <a class="project-card" href="cert-incident-journal.html">
             <h3>Incident Handler Journal</h3>
-            <p>Structured incident response documentation for a simulated phishing-led ransomware event using the Five Ws and recovery-oriented recommendations.</p>
+            <p>Incident handler journal documenting a simulated incident with structured notes, analysis, and response observations.</p>
             <div class="tags"><span>Incident Response</span><span>Ransomware</span><span>Documentation</span></div>
-          </article>
-          <article class="project-card">
+          </a>
+          <a class="project-card" href="cert-python-allow-list.html">
             <h3>Python Allow List Parsing</h3>
-            <p>Python file parsing exercise that removes revoked IP addresses from an allow list and writes updated access-control data back to a text file.</p>
+            <p>Python algorithm that reads an allow list, removes revoked IP addresses, and writes updated access-control data.</p>
             <div class="tags"><span>Python</span><span>Automation</span><span>Access Control</span></div>
-          </article>
+          </a>
         </div>
       </div>
     </section>

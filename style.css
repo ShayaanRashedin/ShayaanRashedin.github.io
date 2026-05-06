@@ -313,6 +313,16 @@ h3 {
   border: 1px solid var(--border-color);
   border-radius: 8px;
   box-shadow: var(--shadow-soft);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+}
+
+.mini-project-card:hover {
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  transform: translateY(-2px);
 }
 
 .mini-project-card h3 {
@@ -363,6 +373,22 @@ h3 {
 .project-detail p,
 .contact-card p {
   color: var(--muted-text);
+}
+
+a.project-card {
+  color: inherit;
+}
+
+a.project-card:hover {
+  border-color: var(--primary-color);
+}
+
+.evidence-card-grid {
+  margin-top: 18px;
+}
+
+.evidence-link-card .check-list {
+  color: var(--text-color);
 }
 
 .tags,
@@ -467,6 +493,11 @@ h3 {
 .page-title {
   margin: 0 0 10px;
   font-size: clamp(2rem, 5vw, 3.7rem);
+}
+
+.resume-title {
+  margin: 0;
+  font-size: clamp(3rem, 8vw, 5.8rem);
 }
 
 .meta-line {
