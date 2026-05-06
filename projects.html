@@ -94,21 +94,21 @@
               <h2>Network Threat Detector</h2>
             </div>
             <div class="tags">
-              <span>Python</span><span>Networking</span><span>Traffic Analysis</span><span>Wireshark CSV</span><span>Detection Logic</span><span>Reports</span>
+              <span>Python</span><span>Traffic Analysis</span><span>Wireshark CSV</span><span>SQLite</span><span>Airflow</span><span>Bash</span>
             </div>
           </div>
           <p class="lead">
-            A practical security tool that analyzes network-related data and detects suspicious activity using Python, rule-based logic, and alert/report generation. This project connects cybersecurity, programming, networking, and data workflow concepts.
+            A Python IDS-style detection prototype that analyzes traffic logs, supports custom and Wireshark CSV formats, applies rule-based detection logic, prints readable alerts, saves findings to SQLite, and includes Apache Airflow orchestration.
           </p>
           <div class="detail-grid">
             <section>
               <h3>Technical Focus</h3>
               <ul class="check-list">
-                <li>Python development for parsing and analyzing network/log-style data.</li>
-                <li>Wireshark CSV support for traffic-analysis workflows.</li>
-                <li>Rule-based detection logic for suspicious patterns and security-relevant events.</li>
-                <li>Alert and report generation to turn raw network data into reviewable findings.</li>
-                <li>Basic data engineering concepts through structured inputs, processing, and output artifacts.</li>
+                <li>Python modules for log parsing, detection rules, alert printing, and SQLite storage.</li>
+                <li>Detection coverage for possible port scans, suspicious outbound connections, data exfiltration, and beaconing.</li>
+                <li>Support for custom CSV logs and Wireshark exported traffic logs.</li>
+                <li>Command-line arguments for file path and log format selection.</li>
+                <li>Data workflow concepts through Bash automation, SQLite persistence, Docker Compose, and an Airflow DAG.</li>
               </ul>
             </section>
             <section>
@@ -117,16 +117,13 @@
                 <li>Shows ability to build a security-focused tool rather than only use existing tools.</li>
                 <li>Demonstrates networking knowledge, traffic/log analysis, and practical detection thinking.</li>
                 <li>Supports SOC/security analyst learning through repeatable detection and reporting workflows.</li>
-                <li>Can be extended with workflow orchestration if implementation evidence is added later.</li>
+                <li>Connects cybersecurity, software development, and data pipeline concepts in one project.</li>
               </ul>
             </section>
           </div>
-          <p class="note">
-            Project source files or screenshots were not present in this portfolio repo during the revamp, so this section avoids claiming specific deployment outcomes. Add a direct repository link when available.
-          </p>
           <div class="card-actions">
-            <a class="btn primary" href="https://github.com/ShayaanRashedin" target="_blank" rel="noopener">View GitHub</a>
-            <a class="btn ghost" href="contact.html">Discuss project</a>
+            <a class="btn primary" href="network-threat-detector.html">Network Detector Overview</a>
+            <a class="btn ghost" href="https://github.com/ShayaanRashedin/network-threat-detector" target="_blank" rel="noopener">GitHub Repo</a>
           </div>
         </article>
       </div>

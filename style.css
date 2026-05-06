@@ -404,6 +404,15 @@ a.project-card:hover div {
   color: var(--text-color);
 }
 
+.code-evidence-card {
+  margin: 22px 0;
+}
+
+.code-evidence-card pre {
+  margin-bottom: 0;
+  white-space: pre-wrap;
+}
+
 .tags,
 .chips {
   display: flex;
@@ -511,6 +520,12 @@ a.project-card:hover div {
 .resume-title {
   margin: 0;
   font-size: clamp(3rem, 8vw, 5.8rem);
+}
+
+.resume-title-accent {
+  margin: 0;
+  font-size: clamp(3rem, 8vw, 5.8rem);
+  line-height: 1;
 }
 
 .meta-line {
@@ -623,39 +638,40 @@ figcaption {
 }
 
 .final-cta {
-  background: #0f172a;
-  color: #e5e7eb;
+  background: var(--surface-soft);
+  color: var(--text-color);
+  border-block: 1px solid var(--border-color);
 }
 
 .final-cta h2,
 .final-cta .eyebrow {
-  color: #ffffff;
+  color: var(--heading-color);
 }
 
 .final-cta p {
-  color: #cbd5e1;
+  color: var(--muted-text);
 }
 
 .final-cta .btn.primary {
-  background: #14b8a6;
-  border-color: #14b8a6;
-  color: #06141f;
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  color: #ffffff;
 }
 
 .final-cta .btn.secondary {
-  background: #60a5fa;
-  border-color: #60a5fa;
-  color: #06141f;
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  color: #ffffff;
 }
 
 .final-cta .btn.ghost {
-  background: transparent;
-  border-color: #64748b;
-  color: #f8fafc;
+  background: var(--surface);
+  border-color: var(--border-color);
+  color: var(--heading-color);
 }
 
 .final-cta .btn:hover {
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+  box-shadow: var(--shadow-soft);
 }
 
 .final-cta-grid {
