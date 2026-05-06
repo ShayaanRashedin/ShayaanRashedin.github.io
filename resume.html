@@ -2,50 +2,52 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Resume | Shayaan Rashedin</title>
+  <meta name="description" content="Resume for Shayaan Rashedin, Computer Engineering student seeking cybersecurity and IT internships/co-ops starting Fall 2026." />
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="index.html" aria-label="Homepage">
+      <a class="brand" href="index.html" aria-label="Shayaan Rashedin homepage">
         <span class="brand-mark">SR</span>
         <span class="brand-text">Shayaan Rashedin</span>
       </a>
-
-      <nav aria-label="Primary">
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
         <a href="projects.html">Projects</a>
-        <a href="homelab.html">Home Lab</a>
-        <a href="resume.html" class="active" aria-current="page">Resume</a>
+        <a href="index.html#skills">Skills</a>
+        <a href="index.html#certifications">Certifications</a>
+        <a href="index.html#education-leadership">Education &amp; Leadership</a>
+        <a href="resume.html">Resume</a>
         <a href="contact.html">Contact</a>
       </nav>
-
-      <button id="theme-toggle" class="btn secondary">Toggle Theme</button>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">Theme</button>
     </div>
   </header>
 
-  <main class="container">
-    <section>
-       <h1 class="page-title">Resume</h1>
-      <p class="muted">PDF preview below. Use the button to download.</p>
+  <main>
+    <section class="page-hero section">
+      <div class="container narrow">
+        <p class="eyebrow">Resume</p>
+        <h1>Cybersecurity &amp; IT co-op resume.</h1>
+        <p>PDF preview and download link for recruiters reviewing Fall/September 2026 internship and co-op candidates.</p>
+      </div>
+    </section>
 
-      <div class="resume-card">
-        <div class="resume-frame">
-          <!-- Show the PDF as an inline preview -->
-          <iframe
-            src="Shayaan_Rashedin_Resume.pdf#view=FitH&toolbar=0&navpanes=0"
-            title="Shayaan Rashedin Resume preview"
-            loading="lazy">
-          </iframe>
-        </div>
-
-        <div class="resume-actions">
-          <a class="btn primary" href="Shayaan_Rashedin_Resume.pdf" download>
-            Download PDF
-          </a>
-          <a class="btn ghost" href="mailto:shayaan.rashedin@torontomu.ca">Email Me</a>
+    <section class="section">
+      <div class="container narrow">
+        <div class="resume-card">
+          <div class="resume-frame">
+            <iframe src="Shayaan_Rashedin_Resume.pdf#view=FitH&toolbar=0&navpanes=0" title="Shayaan Rashedin resume PDF preview" loading="lazy"></iframe>
+          </div>
+          <div class="resume-actions">
+            <a class="btn primary" href="Shayaan_Rashedin_Resume.pdf" target="_blank" rel="noopener">Open PDF</a>
+            <a class="btn secondary" href="Shayaan_Rashedin_Resume.pdf" download>Download PDF</a>
+            <a class="btn ghost" href="mailto:shayaan.rashedin@torontomu.ca">Email Me</a>
+          </div>
         </div>
       </div>
     </section>
@@ -53,7 +55,7 @@
 
   <footer>
     <div class="container footer-inner">
-      <p>© 2025 Shayaan Rashedin</p>
+      <p>&copy; 2026 Shayaan Rashedin</p>
       <div class="footer-links">
         <a href="mailto:shayaan.rashedin@torontomu.ca">Email</a>
         <a href="https://www.linkedin.com/in/shayaanrashedin" target="_blank" rel="noopener">LinkedIn</a>

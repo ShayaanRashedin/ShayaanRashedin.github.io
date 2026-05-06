@@ -2,109 +2,112 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Home Lab | Shayaan Rashedin</title>
-  <meta name="description" content="Two‑VM cybersecurity home lab using Kali Linux and Metasploitable 2 with projects spanning scanning, exploitation, and detection." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cybersecurity Homelab | Shayaan Rashedin</title>
+  <meta name="description" content="Cybersecurity homelab evidence for Shayaan Rashedin, including Kali, Metasploitable2, Ubuntu/Splunk, Nmap, OpenVAS, Metasploit, and SIEM detection." />
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="index.html" aria-label="Homepage">
+      <a class="brand" href="index.html" aria-label="Shayaan Rashedin homepage">
         <span class="brand-mark">SR</span>
         <span class="brand-text">Shayaan Rashedin</span>
       </a>
-      <nav aria-label="Primary">
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
         <a href="projects.html">Projects</a>
-        <a class="active" href="homelab.html">Home Lab</a>
+        <a href="index.html#skills">Skills</a>
+        <a href="index.html#certifications">Certifications</a>
+        <a href="index.html#education-leadership">Education &amp; Leadership</a>
         <a href="resume.html">Resume</a>
         <a href="contact.html">Contact</a>
       </nav>
-      <button id="theme-toggle" aria-label="Toggle dark mode">Toggle Theme</button>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">Theme</button>
     </div>
   </header>
 
-  <main class="container">
-<section id="lab-intro">
-  <h1>Cybersecurity Home Lab</h1>
-  <p>
-    I built a home lab to practice both offensive and defensive skills using
-    <strong>Kali Linux</strong> (attacker), <strong>Metasploitable&nbsp;2</strong> (intentionally vulnerable target),
-    and an <strong>Ubuntu</strong> VM running <strong>Splunk</strong> as the SIEM, all within isolated
-    <strong>VirtualBox</strong> networks. The lab supports vulnerability scanning (<strong>OpenVAS/GVM</strong>,
-    <strong>Nmap</strong>), exploitation and post-exploitation (<strong>Metasploit</strong>), packet capture/analysis,
-    and blue-team detection/response workflows with <strong>Splunk</strong> dashboards and alerts.
-  </p>
-</section>
-
-
-    <section id="lab-diagram">
-      <h2>Topology / Setup</h2>
-      <p class="muted">Click any image to enlarge.</p>
-      <div class="lab-images">
-        <figure>
-          <img src="./images/Kali_Linux_Image.png" alt="Kali Linux VM configuration" class="lab-img" />
-          <figcaption>Kali VM configuration</figcaption>
-        </figure>
-        <figure>
-          <img src="./images/Metasploitable_Image.png" alt="Metasploitable 2 VM configuration" class="lab-img" />
-          <figcaption>Metasploitable 2 VM configuration</figcaption>
-        </figure>
-        <figure>
-          <img src="./images/Splunk_VM.png" alt="Splunk (Ubuntu) VM configuration" class="lab-img" />
-         <figcaption>Splunk (Ubuntu) VM configuration</figcaption>
-        </figure>
-      </div>
-      <div id="lightbox" role="dialog" aria-modal="true" aria-label="Expanded image" onclick="closeLightbox()">
-        <img id="lightbox-img" src="" alt="Expanded screenshot" />
+  <main>
+    <section class="page-hero section">
+      <div class="container narrow">
+        <p class="eyebrow">Project Evidence</p>
+        <h1>Cybersecurity Homelab</h1>
+        <p>
+          A controlled lab environment for ethical testing, vulnerability assessment, exploit validation, remediation thinking, and defensive detection through Splunk/log analysis.
+        </p>
       </div>
     </section>
 
-<section id="lab-projects">
-  <h2>Key Projects from the Lab</h2>
-  <div class="project-grid">
-
-
-    <!-- Single project -->
-    <a class="project-card" href="project-network-scanning.html" title="Open project">
-      <h3>Network Scanning & Reconnaissance</h3>
-      <p>Mapped target services with Nmap; identified versions, grabbed banners, and triaged known CVEs with OpenVAS.</p>
-      <div class="tags"><span>Nmap</span><span>OpenVAS/GVM</span><span>Recon</span></div>
-      <div class="cta-row" style="margin-top:12px;">
-        <span class="btn primary sm">View Project</span>
+    <section class="section">
+      <div class="container">
+        <article class="project-detail">
+          <h2>Lab Topology</h2>
+          <p class="lead">
+            The lab uses Kali Linux as the attacker VM, Metasploitable2 as the intentionally vulnerable target, and Ubuntu/Splunk as the SIEM VM where applicable. The environment is isolated in VirtualBox and used only for controlled learning and documentation.
+          </p>
+          <div class="lab-images">
+            <figure>
+              <img src="images/Kali_Linux_Image.png" alt="Kali Linux VM configuration" class="lab-img" />
+              <figcaption>Kali Linux attacker VM</figcaption>
+            </figure>
+            <figure>
+              <img src="images/Metasploitable_Image.png" alt="Metasploitable2 VM configuration" class="lab-img" />
+              <figcaption>Metasploitable2 vulnerable target VM</figcaption>
+            </figure>
+            <figure>
+              <img src="images/Splunk_VM.png" alt="Ubuntu Splunk VM configuration" class="lab-img" />
+              <figcaption>Ubuntu/Splunk SIEM VM</figcaption>
+            </figure>
+          </div>
+          <div id="lightbox" role="dialog" aria-modal="true" aria-label="Expanded image" onclick="closeLightbox()">
+            <img id="lightbox-img" src="" alt="Expanded screenshot" />
+          </div>
+        </article>
       </div>
-    </a>
-   <!-- Metasploitable2 Exploitation card (matches Recon styling) -->
-<a class="project-card" href="project-metasploitable2-exploit.html" title="Open project">
-  <h3>Metasploitable2 Exploitation</h3>
-  <p>Targeted “easy wins” (vsftpd, UnrealIRCd, distcc) to demonstrate recon → root shell.</p>
-  <div class="tags">
-    <span>Metasploit</span>
-    <span>Nmap</span>
-    <span>Exploitation</span>
-  </div>
-  <div class="cta-row" style="margin-top:12px;">
-    <span class="btn primary sm">View Project</span>
-  </div>
-</a>
+    </section>
 
-<a class="project-card" href="project-splunk-bruteforce.html" title="Open project">
-  <h3>SIEM: Brute-Force Detection (Splunk)</h3>
-  <p>Detected and alerted on SSH/Telnet brute-force using SPL; mapped to MITRE T1110 and implemented hardening.</p>
-  <div class="tags"><span>Splunk</span><span>Hydra</span><span>MITRE ATT&CK</span></div>
-  <div class="cta-row" style="margin-top:12px;">
-    <span class="btn primary sm">View Project</span>
-  </div>
-</a>
-
-</section>
-
+    <section class="section subtle-section">
+      <div class="container">
+        <div class="section-heading compact">
+          <p class="eyebrow">Integrated Workflows</p>
+          <h2>Reconnaissance, exploit validation, reporting, and detection in one lab.</h2>
+        </div>
+        <div class="lab-grid">
+          <article class="project-card">
+            <h3>Nmap Reconnaissance &amp; OpenVAS/GVM Scanning</h3>
+            <p>Mapped services, reviewed versions, captured evidence, and used OpenVAS/GVM output to triage vulnerabilities and document remediation paths.</p>
+            <div class="tags"><span>Nmap</span><span>OpenVAS/GVM</span><span>CVE review</span></div>
+            <div class="card-actions">
+              <a class="text-link" href="project-network-scanning.html">View recon evidence</a>
+              <a class="text-link" href="openvas-report.pdf" target="_blank" rel="noopener">Open report PDF</a>
+            </div>
+          </article>
+          <article class="project-card">
+            <h3>Metasploitable2 Exploit Validation</h3>
+            <p>Validated known vulnerable services in a controlled environment using Metasploit and documented proof, impact, and remediation recommendations.</p>
+            <div class="tags"><span>Metasploit</span><span>Metasploitable2</span><span>Ethical lab</span></div>
+            <div class="card-actions">
+              <a class="text-link" href="project-metasploitable2-exploit.html">View exploit evidence</a>
+            </div>
+          </article>
+          <article class="project-card">
+            <h3>Splunk Brute-Force Detection</h3>
+            <p>Extended the homelab into blue-team work by forwarding logs, detecting brute-force behavior in Splunk, reviewing events, and documenting response-oriented findings.</p>
+            <div class="tags"><span>Splunk</span><span>SPL</span><span>Log analysis</span><span>MITRE T1110</span></div>
+            <div class="card-actions">
+              <a class="text-link" href="project-splunk-bruteforce.html">View detection evidence</a>
+              <a class="text-link" href="FTP_Brute_Force_Incident_Report.pdf" target="_blank" rel="noopener">Open incident report</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
     <div class="container footer-inner">
-      <p>© 2025 Shayaan Rashedin</p>
+      <p>&copy; 2026 Shayaan Rashedin</p>
       <div class="footer-links">
         <a href="mailto:shayaan.rashedin@torontomu.ca">Email</a>
         <a href="https://www.linkedin.com/in/shayaanrashedin" target="_blank" rel="noopener">LinkedIn</a>
