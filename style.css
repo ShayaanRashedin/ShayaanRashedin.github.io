@@ -652,6 +652,15 @@ figcaption {
   color: var(--muted-text);
 }
 
+.final-cta-title {
+  font-size: clamp(2.35rem, 5.5vw, 4.1rem);
+}
+
+.final-cta-copy {
+  max-width: 820px;
+  font-size: clamp(1.08rem, 2vw, 1.28rem);
+}
+
 .final-cta .btn.primary {
   background: var(--primary-dark);
   border-color: var(--primary-dark);
