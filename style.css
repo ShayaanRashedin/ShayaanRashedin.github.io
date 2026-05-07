@@ -661,6 +661,73 @@ figcaption {
   font-size: clamp(1.08rem, 2vw, 1.28rem);
 }
 
+.network-diagram {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) minmax(160px, 0.7fr) minmax(180px, 1fr) minmax(130px, 0.55fr) minmax(180px, 1fr);
+  gap: 12px;
+  align-items: stretch;
+  margin: 26px 0;
+}
+
+.diagram-node,
+.diagram-link {
+  display: grid;
+  align-content: center;
+  gap: 6px;
+  min-height: 150px;
+  padding: 18px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+}
+
+.diagram-node strong {
+  color: var(--heading-color);
+  font-size: 1.08rem;
+}
+
+.diagram-node span,
+.diagram-node small,
+.diagram-link span {
+  color: var(--muted-text);
+}
+
+.diagram-node .node-role {
+  color: var(--primary-dark);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.diagram-link {
+  position: relative;
+  background: color-mix(in srgb, var(--primary-color) 9%, var(--surface));
+}
+
+.diagram-link::before,
+.diagram-link::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 12px;
+  height: 2px;
+  background: var(--primary-color);
+}
+
+.diagram-link::before { left: -13px; }
+.diagram-link::after { right: -13px; }
+
+.diagram-link strong {
+  color: var(--heading-color);
+}
+
+.diagram-link-secondary {
+  min-height: 120px;
+}
+
 .final-cta .btn.primary {
   background: var(--primary-dark);
   border-color: var(--primary-dark);
@@ -740,6 +807,11 @@ figcaption {
 .accordion {
   display: grid;
   gap: 12px;
+  margin-bottom: 24px;
+}
+
+.project-section {
+  margin-bottom: 38px;
 }
 
 .accordion-item {
@@ -892,8 +964,14 @@ footer {
 
   .lab-grid,
   .mini-project-grid,
-  .contact-grid {
+  .contact-grid,
+  .network-diagram {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .diagram-link::before,
+  .diagram-link::after {
+    display: none;
   }
 
   .detail-header {
@@ -943,7 +1021,8 @@ footer {
   .skill-groups,
   .evidence-strip,
   .lab-images,
-  .evidence-grid {
+  .evidence-grid,
+  .network-diagram {
     grid-template-columns: 1fr;
   }
 

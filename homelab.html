@@ -46,6 +46,33 @@
           <p class="lead">
             The lab uses Kali Linux as the attacker VM, Metasploitable2 as the intentionally vulnerable target, and Ubuntu/Splunk as the SIEM VM where applicable. The environment is isolated in VirtualBox and used only for controlled learning and documentation.
           </p>
+          <div class="network-diagram" aria-label="Homelab network diagram">
+            <div class="diagram-node">
+              <span class="node-role">Attacker VM</span>
+              <strong>Kali Linux</strong>
+              <span>192.168.56.102</span>
+              <small>Nmap, Metasploit, Hydra, Wireshark</small>
+            </div>
+            <div class="diagram-link">
+              <span>VirtualBox host-only lab network</span>
+              <strong>192.168.56.0/24</strong>
+            </div>
+            <div class="diagram-node">
+              <span class="node-role">Target VM</span>
+              <strong>Metasploitable2</strong>
+              <span>192.168.56.101</span>
+              <small>Vulnerable services and system logs</small>
+            </div>
+            <div class="diagram-link diagram-link-secondary">
+              <span>Log forwarding / detection path</span>
+            </div>
+            <div class="diagram-node">
+              <span class="node-role">SIEM VM</span>
+              <strong>Ubuntu / Splunk</strong>
+              <span>192.168.56.107</span>
+              <small>Forwarder input, SPL searches, alerts</small>
+            </div>
+          </div>
           <div class="lab-images">
             <figure>
               <img src="images/Kali_Linux_Image.png" alt="Kali Linux VM configuration" class="lab-img" />
