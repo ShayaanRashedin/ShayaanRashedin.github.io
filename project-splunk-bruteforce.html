@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SIEM: Brute-Force Detection (Splunk) | Shayaan Rashedin</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script defer src="assets/js/script.js"></script>
 </head>
 <body>
   <header class="site-header">
@@ -53,22 +53,22 @@
 
       <div class="evidence-grid">
         <figure>
-          <img class="lab-img" src="images/siem/forwarder-monitors.png" alt="Splunk forwarder monitored logs" />
+          <img class="lab-img" src="assets/images/homelab/splunk-bruteforce/forwarder-monitors.png" alt="Splunk forwarder monitored logs" />
           <figcaption>Figure 01 - Splunk Universal Forwarder monitored directories &amp; monitored files (example).</figcaption>
         </figure>
 
         <figure>
-          <img class="lab-img" src="images/siem/forward-server.png" alt="Splunk forward server configuration" />
+          <img class="lab-img" src="assets/images/homelab/splunk-bruteforce/forward-server.png" alt="Splunk forward server configuration" />
           <figcaption>Figure 02 - Forward-server configured (example): forward to <code>192.168.56.107:9997</code>.</figcaption>
         </figure>
 
         <figure>
-          <img class="lab-img" src="images/siem/metasploitable-syslogconf.png" alt="Metasploitable syslog configuration" />
+          <img class="lab-img" src="assets/images/homelab/splunk-bruteforce/metasploitable-syslogconf.png" alt="Metasploitable syslog configuration" />
           <figcaption>Figure 03 - Metasploitable2 <code>/etc/syslog.conf</code> excerpt showing forwarding to Splunk syslog receiver.</figcaption>
         </figure>
 
         <figure>
-          <img class="lab-img" src="images/siem/ports-listening.png" alt="Splunk listening ports" />
+          <img class="lab-img" src="assets/images/homelab/splunk-bruteforce/ports-listening.png" alt="Splunk listening ports" />
           <figcaption>Figure 04 - Splunk server listening: UDP <code>514</code> (syslog) and TCP <code>9997</code> (forwarder ingestion).</figcaption>
         </figure>
       </div>
@@ -80,7 +80,7 @@
 
       <div class="evidence-grid">
         <figure>
-          <img class="lab-img" src="images/siem/hydra-ftp-bruteforce.png" alt="Hydra brute force against FTP" />
+          <img class="lab-img" src="assets/images/homelab/splunk-bruteforce/hydra-ftp-bruteforce.png" alt="Hydra brute force against FTP" />
           <figcaption>Figure 05 - Hydra performing a multi-threaded brute-force against <code>msfadmin@192.168.56.101</code>.</figcaption>
         </figure>
       </div>
@@ -103,22 +103,22 @@ hydra -l msfadmin -P /usr/share/wordlists/rockyou.txt ftp://192.168.56.101 -t 4 
 
       <div class="evidence-grid">
         <figure>
-          <img class="lab-img" src="images/siem/splunk-ftp-authfail-events.png" alt="FTP auth failure events in Splunk" />
+          <img class="lab-img" src="assets/images/homelab/splunk-bruteforce/splunk-ftp-authfail-events.png" alt="FTP auth failure events in Splunk" />
           <figcaption>Figure 06 - Raw authentication failure events in Splunk for host <code>192.168.56.101</code>.</figcaption>
         </figure>
 
         <figure>
-          <img class="lab-img" src="images/siem/splunk-detection-stats.png" alt="Splunk detection statistics" />
+          <img class="lab-img" src="assets/images/homelab/splunk-bruteforce/splunk-detection-stats.png" alt="Splunk detection statistics" />
           <figcaption>Figure 07 - SPL aggregation showing failures in time buckets (used to trigger alert).</figcaption>
         </figure>
 
         <figure>
-          <img class="lab-img" src="images/siem/splunk-host-cyberlab-events.png" alt="Events from cyberlab host" />
+          <img class="lab-img" src="assets/images/homelab/splunk-bruteforce/splunk-host-cyberlab-events.png" alt="Events from cyberlab host" />
           <figcaption>Figure 08 - Example of events from the attacker host (cyberlab) and target host.</figcaption>
         </figure>
 
         <figure>
-          <img class="lab-img" src="images/siem/splunk-stats-host-source.png" alt="Splunk stats grouped by host and source" />
+          <img class="lab-img" src="assets/images/homelab/splunk-bruteforce/splunk-stats-host-source.png" alt="Splunk stats grouped by host and source" />
           <figcaption>Figure 09 - Event counts by host &amp; source confirm forwarding coverage and visibility.</figcaption>
         </figure>
       </div>
@@ -147,7 +147,7 @@ hydra -l msfadmin -P /usr/share/wordlists/rockyou.txt ftp://192.168.56.101 -t 4 
 
       <div class="evidence-grid">
         <figure>
-          <img class="lab-img" src="images/siem/splunk-alert-config.png" alt="Splunk alert configuration" />
+          <img class="lab-img" src="assets/images/homelab/splunk-bruteforce/splunk-alert-config.png" alt="Splunk alert configuration" />
           <figcaption>Figure 10 - Splunk alert configuration UI (thresholds, schedule, actions).</figcaption>
         </figure>
       </div>

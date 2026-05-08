@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>OpenVAS Report</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
   <style>
     :root{
       --bg:#f8fafc; --text:#0b1220; --muted:#475569;
@@ -97,8 +97,8 @@
 
     async function loadReport(){
       // Adjust these if your files live elsewhere
-      const xmlPath = 'assets/homelab_projects/metasploitable2-recon/openvas-report.xml';
-      const xslPath = 'assets/homelab_projects/metasploitable2-recon/openvas-report.xsl';
+      const xmlPath = 'assets/data/openvas/openvas-report.xml';
+      const xslPath = 'assets/data/openvas/openvas.xsl';
 
       try{
         const [xmlTxt, xslResp] = await Promise.all([
