@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shayaan Rashedin | Cybersecurity & IT Portfolio</title>
-  <meta name="description" content="Recruiter-focused cybersecurity and IT portfolio for Shayaan Rashedin, a Computer Engineering student building hands-on security, IT, networking, and programming projects." />
-  <meta property="og:title" content="Shayaan Rashedin | Cybersecurity & IT Portfolio" />
-  <meta property="og:description" content="Hands-on cybersecurity homelab, Python network threat detector, applied certification labs, skills, certifications, leadership, and resume." />
+  <title>Shayaan Rashedin | Software Engineering Portfolio</title>
+  <meta name="description" content="Software engineering portfolio for Shayaan Rashedin, a Computer Engineering student building Python tools, data workflows, systems projects, and security-aware applications." />
+  <meta property="og:title" content="Shayaan Rashedin | Software Engineering Portfolio" />
+  <meta property="og:description" content="Python, systems, data workflow, and cybersecurity-aware software projects by Shayaan Rashedin." />
   <meta name="theme-color" content="#0f172a" />
   <link rel="stylesheet" href="assets/css/style.css" />
   <script defer src="assets/js/script.js"></script>
@@ -46,12 +46,17 @@
     <section class="hero section">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">Cybersecurity | IT Systems | Python &amp; Network Security Projects</p>
+          <p class="eyebrow">Software Engineering | Python | Systems | Security-Aware Development</p>
           <h1>Shayaan Rashedin</h1>
-          <p class="hero-headline">Computer Engineering Student</p>
+          <p class="hero-headline">Computer Engineering student building practical software with cybersecurity judgment.</p>
           <p class="hero-intro">
-            I am a third-year Computer Engineering student at Toronto Metropolitan University building security-focused projects that combine Python programming, networking, IT systems, threat detection, technical documentation, and hands-on cybersecurity practice.
+            I build tools that parse data, automate workflows, reason about networks, and turn messy technical signals into useful outputs. My cybersecurity background gives me a security-minded approach to software design, debugging, logging, and systems thinking.
           </p>
+          <div class="cta-row">
+            <a class="btn primary" href="projects.html">View Projects</a>
+            <a class="btn secondary" href="resume.html">Resume</a>
+            <a class="btn ghost" href="contact.html">Contact</a>
+          </div>
         </div>
         <div class="hero-panel" aria-label="Profile photo">
           <img src="assets/images/profile/Portfolio_Pic.jpg" alt="Portrait of Shayaan Rashedin" class="profile-photo" />
@@ -59,190 +64,173 @@
       </div>
     </section>
 
+    <section id="software-focus" class="section subtle-section">
+      <div class="container">
+        <div class="section-heading compact">
+          <p class="eyebrow">Positioning</p>
+          <h2 class="section-title">Software first, with security depth.</h2>
+          <p>
+            My portfolio is organized around projects that show implementation ability: modular Python, command-line tooling, data persistence, workflow orchestration, technical documentation, and system-level problem solving.
+          </p>
+        </div>
+        <div class="info-grid three-up">
+          <article class="info-card">
+            <h3>Build</h3>
+            <p>Write small, testable tools with clear inputs, readable outputs, and maintainable project structure.</p>
+          </article>
+          <article class="info-card">
+            <h3>Automate</h3>
+            <p>Use scripts, command-line interfaces, data stores, and workflow tools to make repeated technical work reliable.</p>
+          </article>
+          <article class="info-card">
+            <h3>Secure</h3>
+            <p>Apply network, logging, vulnerability, and threat-detection knowledge while designing and evaluating software.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section id="featured-projects" class="section">
       <div class="container">
         <div class="section-heading">
-          <h2 class="section-title">Featured Technical Projects</h2>
+          <p class="eyebrow">Selected Work</p>
+          <h2 class="section-title">Projects that show engineering range.</h2>
         </div>
         <div class="feature-grid two-up">
-          <a class="project-card featured" href="homelab.html">
-            <div class="card-kicker">Flagship Project</div>
-            <h3>Cybersecurity Homelab</h3>
-            <p>
-              Controlled VirtualBox lab using Kali Linux, Metasploitable2, and Ubuntu/Splunk to practice reconnaissance, vulnerability assessment, exploit validation, remediation documentation, and defensive detection.
-            </p>
-            <ul class="check-list">
-              <li>Nmap service discovery and OpenVAS/GVM scanning</li>
-              <li>Metasploit validation against documented CVEs</li>
-              <li>Remediation recommendations and report-style documentation</li>
-              <li>Splunk brute-force detection and log analysis as the blue-team extension</li>
-            </ul>
-            <div class="tags">
-              <span>Kali Linux</span><span>Metasploitable2</span><span>Nmap</span><span>OpenVAS/GVM</span><span>Metasploit</span><span>Splunk</span>
-            </div>
-          </a>
-
-          <a class="project-card featured" href="network-threat-detector.html">
-            <div class="card-kicker">Flagship Project</div>
+          <a class="project-card featured" href="https://github.com/ShayaanRashedin/network-threat-detector" target="_blank" rel="noopener">
+            <div class="card-kicker">Software Project</div>
             <h3>Network Threat Detector</h3>
             <p>
               Python IDS-style prototype that parses custom or Wireshark CSV traffic logs, applies detection rules, prints alerts, stores findings in SQLite, and includes Airflow workflow orchestration.
             </p>
             <ul class="check-list">
-              <li>Detects possible port scans, suspicious outbound connections, data exfiltration, and beaconing</li>
-              <li>Supports custom logs and Wireshark CSV exports</li>
-              <li>Saves alerts to SQLite and prints readable analyst-style output</li>
-              <li>Includes Bash automation and an Apache Airflow DAG for scheduled runs</li>
+              <li>Modular Python code for parsing, detection, alert formatting, and persistence</li>
+              <li>CLI inputs for file path and log format selection</li>
+              <li>SQLite alert storage for later review</li>
+              <li>Bash automation and Apache Airflow DAG for scheduled runs</li>
             </ul>
             <div class="tags">
-              <span>Python</span><span>Wireshark CSV</span><span>SQLite</span><span>Detection Rules</span><span>Airflow</span><span>Bash</span>
+              <span>Python</span><span>CLI</span><span>CSV Parsing</span><span>SQLite</span><span>Airflow</span><span>Security Logic</span>
+            </div>
+          </a>
+
+          <a class="project-card featured" href="homelab.html">
+            <div class="card-kicker">Systems Project</div>
+            <h3>Cybersecurity Homelab</h3>
+            <p>
+              Isolated VirtualBox environment used to understand networks, vulnerable services, system behavior, exploit impact, remediation, and log-based detection.
+            </p>
+            <ul class="check-list">
+              <li>Multi-VM lab with Kali Linux, Metasploitable2, and Ubuntu/Splunk</li>
+              <li>Nmap service discovery and OpenVAS/GVM vulnerability scanning</li>
+              <li>Controlled exploit validation with remediation documentation</li>
+              <li>Splunk brute-force detection and log analysis workflow</li>
+            </ul>
+            <div class="tags">
+              <span>Linux</span><span>Networking</span><span>Nmap</span><span>OpenVAS/GVM</span><span>Splunk</span><span>Systems</span>
             </div>
           </a>
         </div>
       </div>
     </section>
 
-    <section id="applied-labs" class="section subtle-section">
+    <section id="skills" class="section subtle-section">
       <div class="container">
         <div class="section-heading compact">
-          <h2 class="section-title">Certification Projects</h2>
-        </div>
-        <div class="mini-project-grid">
-          <a class="mini-project-card" href="cert-security-audit.html">
-            <h3>Security Audit</h3>
-            <p>Internal audit for Botium Toys covering assets, controls, compliance gaps, and security recommendations.</p>
-          </a>
-          <a class="mini-project-card" href="cert-network-security.html">
-            <h3>Network Security</h3>
-            <p>Incident report analysis focused on network structure, security weaknesses, and response improvements.</p>
-          </a>
-          <a class="mini-project-card" href="cert-linux-permissions.html">
-            <h3>Linux Permissions</h3>
-            <p>Linux permissions review using command-line access checks and least-privilege corrections.</p>
-          </a>
-          <a class="mini-project-card" href="cert-sql-filtering.html">
-            <h3>SQL Filtering</h3>
-            <p>SQL filtering practice for login investigation, employee data review, and security-relevant patterns.</p>
-          </a>
-          <a class="mini-project-card" href="cert-vulnerability-assessment.html">
-            <h3>Risk Assessment</h3>
-            <p>Vulnerability assessment report with scope, risk scoring, threat scenarios, and remediation strategy.</p>
-          </a>
-          <a class="mini-project-card" href="cert-incident-journal.html">
-            <h3>Incident Journal</h3>
-            <p>Incident handler journal documenting a simulated security event with structured analysis notes.</p>
-          </a>
-          <a class="mini-project-card" href="cert-python-allow-list.html">
-            <h3>Python Parsing</h3>
-            <p>Python algorithm for updating an allow list by removing IP addresses that should no longer have access.</p>
-          </a>
-        </div>
-        <div class="section-action">
-          <a class="btn primary" href="projects.html#certification-projects">View Projects</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="skills" class="section">
-      <div class="container">
-        <div class="section-heading compact">
-          <h2 class="section-title">Skills</h2>
+          <p class="eyebrow">Capabilities</p>
+          <h2 class="section-title">Technical toolkit.</h2>
         </div>
         <div class="skill-groups">
           <section class="skill-group">
-            <h3>Technical Skills</h3>
-            <ul class="chips">
-              <li>Security operations</li>
-              <li>SIEM monitoring</li>
-              <li>Log analysis</li>
-              <li>Alert triage</li>
-              <li>Vulnerability assessment</li>
-              <li>Remediation reporting</li>
-              <li>Incident response fundamentals</li>
-              <li>Threat detection</li>
-              <li>MITRE ATT&amp;CK mapping</li>
-              <li>Networking fundamentals</li>
-              <li>Linux and Windows systems</li>
-              <li>Security tooling</li>
-              <li>Git/GitHub</li>
-              <li>Technical documentation</li>
-            </ul>
-          </section>
-          <section class="skill-group">
-            <h3>Programming &amp; Scripting</h3>
+            <h3>Software Development</h3>
             <ul class="chips">
               <li>Python</li>
               <li>C/C++</li>
               <li>Bash</li>
               <li>PowerShell</li>
               <li>SQL</li>
+              <li>Git/GitHub</li>
+              <li>CLI tooling</li>
+              <li>Modular project structure</li>
             </ul>
           </section>
           <section class="skill-group">
-            <h3>Security Tools &amp; Platforms</h3>
+            <h3>Data &amp; Automation</h3>
             <ul class="chips">
-              <li>Splunk</li>
-              <li>Nmap</li>
-              <li>OpenVAS/GVM</li>
-              <li>Metasploit</li>
-              <li>Wireshark</li>
-              <li>Kali Linux</li>
-              <li>Ubuntu</li>
+              <li>CSV parsing</li>
+              <li>SQLite</li>
+              <li>Apache Airflow</li>
+              <li>Docker Compose</li>
+              <li>Log processing</li>
+              <li>Workflow automation</li>
+              <li>Technical documentation</li>
+            </ul>
+          </section>
+          <section class="skill-group">
+            <h3>Systems &amp; Networking</h3>
+            <ul class="chips">
+              <li>Linux</li>
+              <li>Windows systems</li>
               <li>VirtualBox</li>
+              <li>Networking fundamentals</li>
+              <li>Wireshark</li>
+              <li>Nmap</li>
+              <li>Troubleshooting</li>
             </ul>
           </section>
           <section class="skill-group">
-            <h3>Soft Skills</h3>
+            <h3>Cybersecurity Knowledge</h3>
             <ul class="chips">
-              <li>Technical communication</li>
-              <li>Analytical problem solving</li>
-              <li>Troubleshooting</li>
-              <li>Leadership</li>
-              <li>Workshop facilitation</li>
-              <li>Teamwork</li>
-              <li>Adaptability</li>
-              <li>Attention to detail</li>
+              <li>Threat detection</li>
+              <li>SIEM monitoring</li>
+              <li>Splunk</li>
+              <li>Vulnerability assessment</li>
+              <li>Remediation reporting</li>
+              <li>Incident response basics</li>
+              <li>MITRE ATT&amp;CK mapping</li>
             </ul>
           </section>
         </div>
       </div>
     </section>
 
-    <section id="education-leadership" class="section subtle-section">
+    <section id="education-leadership" class="section">
       <div class="container">
         <div class="section-heading compact">
-          <h2 class="section-title">Education &amp; Leadership</h2>
+          <p class="eyebrow">Background</p>
+          <h2 class="section-title">Engineering foundation and leadership.</h2>
         </div>
         <div class="info-grid two-up">
           <article class="info-card">
             <h3>Toronto Metropolitan University</h3>
-            <p>I am a third-year Computer Engineering student with relevant coursework in programming, software systems, digital systems, algorithms and data structures, object-oriented design, microprocessor systems, computer organization and architecture, operating systems, probability, communication systems, and advanced algorithms. This foundation supports my work in cybersecurity, networking, detection logic, systems troubleshooting, and technical analysis.</p>
+            <p>I am a third-year Computer Engineering student with coursework across programming, software systems, algorithms and data structures, object-oriented design, microprocessor systems, computer organization and architecture, operating systems, probability, communication systems, and advanced algorithms.</p>
           </article>
           <article class="info-card">
             <h3>VP of Education, TorontoMet CyberSecurity Association</h3>
-            <p>Lead cybersecurity education initiatives by planning workshops, creating learning materials, facilitating technical sessions, and supporting students as they build confidence with security fundamentals, hands-on labs, and career exploration.</p>
+            <p>I plan workshops, create learning materials, facilitate technical sessions, and help students build confidence with security fundamentals, hands-on labs, and technical career exploration.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="certifications" class="section">
+    <section id="training" class="section subtle-section">
       <div class="container">
         <div class="section-heading compact">
-          <h2 class="section-title">Certifications &amp; Training</h2>
+          <p class="eyebrow">Training</p>
+          <h2 class="section-title">Security and IT fundamentals supporting the software work.</h2>
         </div>
         <div class="info-grid">
           <article class="info-card">
             <h3>Google Cybersecurity Professional Certificate</h3>
-            <p>Completed June 26, 2025. Eight-course program covering cybersecurity foundations, risk management, network security, Linux, SQL, assets/threats/vulnerabilities, detection and response, and Python automation. The training supports my hands-on work with SIEM tools, incident response, hardening, intrusion detection concepts, and security documentation.</p>
+            <p>Completed June 26, 2025. Built foundations in risk, networks, Linux, SQL, assets/threats/vulnerabilities, detection and response, and Python automation.</p>
           </article>
           <article class="info-card">
             <h3>Google IT Support Professional Certificate</h3>
-            <p>Completed February 8, 2025. Five-course program covering technical support fundamentals, computer networking, operating systems, system administration, IT infrastructure services, and IT security. The training strengthened my foundation in troubleshooting, customer support, Linux/CLI, DNS, networking, system administration, and IT support workflows.</p>
+            <p>Completed February 8, 2025. Strengthened troubleshooting, networking, operating systems, system administration, IT infrastructure, and technical support workflows.</p>
           </article>
           <article class="info-card">
             <h3>CyberStart Canada</h3>
-            <p>Canadian cybersecurity training program focused on beginner-friendly, hands-on learning through guided pathways, TryHackMe-powered labs, challenges, and puzzles. The program helped me build confidence with practical cybersecurity problem solving while exploring security fundamentals and career pathways.</p>
+            <p>Hands-on cybersecurity learning program using guided pathways, practical labs, challenges, and puzzles to build technical problem-solving confidence.</p>
           </article>
         </div>
       </div>
@@ -251,12 +239,12 @@
     <section id="resume-contact" class="section final-cta">
       <div class="container final-cta-grid">
         <div>
-          <h2 class="final-cta-title">Resume &amp; Contact</h2>
-          <p class="final-cta-copy">Interested in opportunities where I can apply cybersecurity, IT systems, networking, programming, documentation, and hands-on troubleshooting skills in a technical team environment.</p>
+          <h2 class="final-cta-title">Looking for software roles where security thinking is a strength.</h2>
+          <p class="final-cta-copy">I am interested in internships and technical roles involving software development, automation, systems, data workflows, networked tools, or security-aware engineering.</p>
         </div>
         <div class="cta-row">
           <a class="btn primary" href="resume.html">View Resume</a>
-          <a class="btn secondary" href="contact.html">Contact</a>
+          <a class="btn secondary" href="projects.html">Projects</a>
           <a class="btn ghost" href="mailto:shayaan.rashedin@torontomu.ca">Email</a>
         </div>
       </div>
