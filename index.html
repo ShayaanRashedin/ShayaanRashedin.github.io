@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shayaan Rashedin | Cybersecurity Portfolio</title>
-  <meta name="description" content="Software engineering portfolio for Shayaan Rashedin, a Computer Engineering student building Python tools, data workflows, systems projects, and security-aware applications." />
-  <meta property="og:title" content="Shayaan Rashedin | Cybersecurity Portfolio" />
-  <meta property="og:description" content="Python, systems, data workflow, and cybersecurity-aware software projects by Shayaan Rashedin." />
+  <title>Shayaan Rashedin | Systems &amp; Networking</title>
+  <meta name="description" content="Shayaan Rashedin, Computer Engineering student building C++ and Linux networking projects and seeking entry-level systems, network support, and infrastructure opportunities." />
+  <meta property="og:title" content="Shayaan Rashedin | Systems &amp; Networking" />
+  <meta property="og:description" content="C++ systems programming, Linux network observability, and TCP file transfer projects by Shayaan Rashedin." />
   <meta name="theme-color" content="#0f172a" />
   <link rel="stylesheet" href="assets/css/style.css" />
   <script defer src="assets/js/script.js"></script>
@@ -46,11 +46,12 @@
     <section class="hero section">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">Cybersecurity | Security Operations | Python | Java | Systems</p>
+          <p class="eyebrow">Computer Engineering &middot; Linux &middot; Systems &amp; Networking</p>
           <h1>Shayaan Rashedin</h1>
           <p class="hero-intro">
-            I build tools that parse data, automate workflows, reason about networks, and turn messy technical signals into useful outputs. My cybersecurity background gives me a security-minded approach to software design, debugging, logging, and systems thinking.
+            I build software that works close to the operating system: TCP file transfer, Linux process monitoring, and network observability. I am a Computer Engineering student working toward a career in operating systems or network engineering.
           </p>
+          <p class="career-note">Seeking entry-level and new graduate roles in systems software, Linux/IT support, and network operations. Available May 2027.</p>
           <div class="cta-row">
             <a class="btn primary" href="projects.html">View Projects</a>
             <a class="btn secondary" href="resume.html">Resume</a>
@@ -66,41 +67,40 @@
     <section id="featured-projects" class="section">
       <div class="container">
         <div class="section-heading">
-          <h2 class="section-title">Personal Projects</h2>
+          <h2 class="section-title">Systems &amp; Networking Projects</h2>
         </div>
         <div class="feature-grid two-up">
-          <a class="project-card featured" href="https://github.com/ShayaanRashedin/network-threat-detector" target="_blank" rel="noopener">
-            <div class="card-kicker">Software Project</div>
-            <h3>Network Threat Detector</h3>
-            <p>
-              Python IDS-style prototype that parses custom or Wireshark CSV traffic logs, applies detection rules, prints alerts, stores findings in SQLite, and includes Airflow workflow orchestration.
-            </p>
-            <ul class="check-list">
-              <li>Modular Python code for parsing, detection, alert formatting, and persistence</li>
-              <li>CLI inputs for file path and log format selection</li>
-              <li>SQLite alert storage for later review</li>
-              <li>Bash automation and Apache Airflow DAG for scheduled runs</li>
-            </ul>
-            <div class="tags">
-              <span>Python</span><span>CLI</span><span>CSV Parsing</span><span>SQLite</span><span>Airflow</span><span>Security Logic</span>
-            </div>
+          <a class="project-card featured uniform-project" href="projects.html#syncwire">
+            <div class="card-kicker">Linux Systems Programming</div>
+            <h3>SyncWire</h3>
+            <p>A Linux client-server application for resumable file uploads and incremental directory synchronization over TCP.</p>
+            <ul class="check-list"><li>Designed binary message framing and handled partial socket reads and writes.</li><li>Combined an epoll accept loop with a bounded worker pool and coordinated shutdown.</li><li>Recovered interrupted uploads with CRC-32 checks, fsync, and atomic file replacement.</li></ul>
+            <div class="tags"><span>C++20</span><span>Linux / POSIX</span><span>TCP Sockets</span><span>Concurrency</span></div>
+            <p class="project-readmore">Explore project &rarr;</p>
           </a>
-
-          <a class="project-card featured" href="homelab.html">
-            <div class="card-kicker">Systems Project</div>
+          <a class="project-card featured uniform-project" href="projects.html#netwatch">
+            <div class="card-kicker">Linux Network Observability</div>
+            <h3>NetWatch</h3>
+            <p>A Linux agent that connects TCP/UDP socket activity to processes and exposes event history through a live dashboard.</p>
+            <ul class="check-list"><li>Mapped IPv4/IPv6 sockets to owning processes using Linux procfs.</li><li>Tracked connection changes and stored events through a bounded queue and background writer.</li><li>Delivered a read-only REST API, dashboard, tests, and systemd/container configuration.</li></ul>
+            <div class="tags"><span>C++20</span><span>Linux procfs</span><span>TCP / UDP</span><span>SQLite</span></div>
+            <p class="project-readmore">Explore project &rarr;</p>
+          </a>
+          <a class="project-card featured uniform-project" href="projects.html#network-threat-detector">
+            <div class="card-kicker">Python Network Automation</div>
+            <h3>Network Threat Detector</h3>
+            <p>A Python command-line tool that analyzes traffic logs, flags suspicious patterns, and saves findings for review.</p>
+            <ul class="check-list"><li>Parsed custom and Wireshark-exported CSV logs through a modular CLI.</li><li>Applied rules for possible scans, unusual connections, exfiltration, and beaconing.</li><li>Saved alerts to SQLite and automated repeatable runs with Bash and an Airflow DAG.</li></ul>
+            <div class="tags"><span>Python</span><span>CSV Parsing</span><span>SQLite</span><span>Airflow</span></div>
+            <p class="project-readmore">Explore project &rarr;</p>
+          </a>
+          <a class="project-card featured uniform-project" href="projects.html#cybersecurity-homelab">
+            <div class="card-kicker">Linux Infrastructure Lab</div>
             <h3>Cybersecurity Homelab</h3>
-            <p>
-              Isolated VirtualBox environment used to understand networks, vulnerable services, system behavior, exploit impact, remediation, and log-based detection.
-            </p>
-            <ul class="check-list">
-              <li>Multi-VM lab with Kali Linux, Metasploitable2, and Ubuntu/Splunk</li>
-              <li>Nmap service discovery and OpenVAS/GVM vulnerability scanning</li>
-              <li>Controlled exploit validation with remediation documentation</li>
-              <li>Splunk brute-force detection and log analysis workflow</li>
-            </ul>
-            <div class="tags">
-              <span>Linux</span><span>Networking</span><span>Nmap</span><span>OpenVAS/GVM</span><span>Splunk</span><span>Systems</span>
-            </div>
+            <p>An isolated VirtualBox lab for investigating Linux services, network exposure, vulnerabilities, and authentication logs.</p>
+            <ul class="check-list"><li>Configured Kali Linux, Metasploitable2, and Ubuntu/Splunk virtual machines.</li><li>Documented network discovery, controlled exploit validation, and remediation recommendations.</li><li>Forwarded authentication logs into Splunk and configured brute-force detection searches and alerts.</li></ul>
+            <div class="tags"><span>Linux</span><span>VirtualBox</span><span>Nmap / GVM</span><span>Splunk</span></div>
+            <p class="project-readmore">Explore project &rarr;</p>
           </a>
         </div>
       </div>
@@ -112,44 +112,10 @@
           <h2 class="section-title">Skills</h2>
         </div>
         <div class="skill-groups">
-          <section class="skill-group">
-            <h3>Cybersecurity Operations</h3>
-            <ul class="chips">
-              <li>Security operations</li>
-              <li>SIEM monitoring</li>
-              <li>Log analysis</li>
-              <li>Threat detection</li>
-              <li>Incident response</li>
-            </ul>
-          </section>
-          <section class="skill-group">
-            <h3>Assessment &amp; Tooling</h3>
-            <ul class="chips">
-              <li>Vulnerability assessment</li>
-              <li>Security tooling</li>
-              <li>Networking</li>
-              <li>Linux systems</li>
-              <li>Windows systems</li>
-            </ul>
-          </section>
-          <section class="skill-group">
-            <h3>Programming &amp; Scripting</h3>
-            <ul class="chips">
-              <li>Python</li>
-              <li>C/C++</li>
-              <li>Java</li>
-              <li>Bash</li>
-              <li>PowerShell</li>
-              <li>SQL</li>
-            </ul>
-          </section>
-          <section class="skill-group">
-            <h3>Tools &amp; Productivity</h3>
-            <ul class="chips">
-              <li>Git/GitHub</li>
-              <li>Microsoft Office Suite</li>
-            </ul>
-          </section>
+          <section class="skill-group"><h3>Programming</h3><ul class="chips"><li>C / C++20</li><li>Python</li><li>Bash</li><li>SQL</li></ul></section>
+          <section class="skill-group"><h3>Systems</h3><ul class="chips"><li>Linux / POSIX</li><li>Multithreading</li><li>File I/O</li><li>systemd</li></ul></section>
+          <section class="skill-group"><h3>Networking</h3><ul class="chips"><li>TCP/IP &amp; UDP</li><li>Sockets</li><li>Wireshark</li><li>Troubleshooting</li></ul></section>
+          <section class="skill-group"><h3>Tools</h3><ul class="chips"><li>Git / GitHub</li><li>CMake</li><li>Docker</li><li>VirtualBox</li></ul></section>
         </div>
       </div>
     </section>
@@ -162,7 +128,7 @@
         <div class="info-grid two-up">
           <article class="info-card">
             <h3>Toronto Metropolitan University</h3>
-            <p>I am a third-year Computer Engineering student with coursework across programming, software systems, algorithms and data structures, object-oriented design, microprocessor systems, computer organization and architecture, operating systems, probability, communication systems, and advanced algorithms.</p>
+            <p>I am a Computer Engineering student at Toronto Metropolitan University, graduating in April 2027. My coursework includes operating systems, computer organization and architecture, software systems, and communication systems.</p>
           </article>
           <article class="info-card">
             <h3>VP of Education, TorontoMet CyberSecurity Association</h3>
@@ -185,10 +151,6 @@
           <article class="info-card">
             <h3>Google IT Support Professional Certificate</h3>
             <p>Completed February 8, 2025. Strengthened troubleshooting, networking, operating systems, system administration, IT infrastructure, and technical support workflows.</p>
-          </article>
-          <article class="info-card">
-            <h3>CyberStart Canada</h3>
-            <p>Hands-on cybersecurity learning program using guided pathways, practical labs, challenges, and puzzles to build technical problem-solving confidence.</p>
           </article>
         </div>
       </div>

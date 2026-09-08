@@ -1047,3 +1047,13 @@ footer {
     flex-direction: column;
   }
 }
+
+/* Systems and networking portfolio additions */
+.career-note { color: var(--primary-dark); font-weight: 600; max-width: 62ch; }
+.project-readmore { color: var(--primary-dark); font-weight: 700; margin-top: 20px; }
+.project-scope { color: var(--muted-text); font-size: .94rem; border-left: 3px solid var(--border-color); padding-left: 16px; }
+
+/* Shared project-card structure across all four projects. */
+.uniform-project { display: flex; flex-direction: column; }
+.uniform-project .tags { margin-top: auto; padding-top: 12px; }
+.uniform-project .project-readmore { margin-bottom: 0; }

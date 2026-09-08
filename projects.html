@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects | Shayaan Rashedin</title>
-  <meta name="description" content="Software engineering, Python, systems, and cybersecurity-aware projects by Shayaan Rashedin." />
+  <meta name="description" content="C++ systems programming, Linux networking, observability, and automation projects by Shayaan Rashedin." />
   <link rel="stylesheet" href="assets/css/style.css" />
   <script defer src="assets/js/script.js"></script>
 </head>
@@ -26,92 +26,52 @@
   </header>
 
   <main>
-    <section class="page-hero section">
-      <div class="container narrow">
-        <h1>Projects</h1>
-      </div>
+    <section class="page-hero section"><div class="container narrow">
+      <p class="eyebrow">Build &middot; Observe &middot; Troubleshoot</p>
+      <h1>Systems &amp; Networking Projects</h1>
+      <p class="lead">Hands-on projects in Linux, network protocols, infrastructure, and automation.</p>
+      <div class="cta-row"><a class="btn secondary" href="#syncwire">SyncWire</a><a class="btn secondary" href="#netwatch">NetWatch</a><a class="btn secondary" href="#network-threat-detector">Network Threat Detector</a><a class="btn secondary" href="#cybersecurity-homelab">Cybersecurity Homelab</a></div>
+    </div></section>
+    <section id="syncwire" class="section">
+      <div class="container"><article class="project-detail flagship">
+        <div class="detail-header"><div><p class="eyebrow">Linux Systems Programming</p><h2>SyncWire</h2></div><div class="tags"><span>C++20</span><span>Linux / POSIX</span><span>TCP Sockets</span><span>Concurrency</span></div></div>
+        <p class="lead">A Linux client-server application for resumable file uploads and incremental directory synchronization over TCP.</p>
+        <div class="project-card homelab-summary-card"><h3>Engineering Highlights</h3><ul class="check-list"><li>Designed binary message framing and handled partial socket reads and writes.</li><li>Combined an epoll accept loop with a bounded worker pool and coordinated shutdown.</li><li>Recovered interrupted uploads with CRC-32 checks, fsync, and atomic file replacement.</li></ul></div>
+        <p><strong>Systems &amp; networking foundation:</strong> Operating-system interfaces, thread coordination, protocol design, and filesystem durability.</p>
+        <p class="project-scope"><strong>Scope:</strong> One-way push MVP with loopback binding. HMAC authentication does not encrypt file data.</p>
+        <div class="card-actions"><a class="btn primary" href="https://github.com/ShayaanRashedin/syncwire" target="_blank" rel="noopener">View GitHub Repo</a><a class="btn secondary" href="https://github.com/ShayaanRashedin/syncwire/blob/main/docs/architecture.md" target="_blank" rel="noopener">Architecture &amp; Tradeoffs</a></div>
+      </article></div>
     </section>
-
+    <section id="netwatch" class="section subtle-section">
+      <div class="container"><article class="project-detail flagship">
+        <div class="detail-header"><div><p class="eyebrow">Linux Network Observability</p><h2>NetWatch</h2></div><div class="tags"><span>C++20</span><span>Linux procfs</span><span>TCP / UDP</span><span>SQLite</span></div></div>
+        <p class="lead">A Linux agent that connects TCP/UDP socket activity to processes and exposes event history through a live dashboard.</p>
+        <div class="project-card homelab-summary-card"><h3>Engineering Highlights</h3><ul class="check-list"><li>Mapped IPv4/IPv6 sockets to owning processes using Linux procfs.</li><li>Tracked connection changes and stored events through a bounded queue and background writer.</li><li>Delivered a read-only REST API, dashboard, tests, and systemd/container configuration.</li></ul></div>
+        <p><strong>Systems &amp; networking foundation:</strong> Linux process visibility, network troubleshooting, asynchronous persistence, and service delivery.</p>
+        <p class="project-scope"><strong>Scope:</strong> Periodic host snapshots; process visibility depends on Linux permissions. Alerts are investigation signals.</p>
+        <div class="card-actions"><a class="btn primary" href="https://github.com/ShayaanRashedin/netwatch" target="_blank" rel="noopener">View GitHub Repo</a><a class="btn secondary" href="https://github.com/ShayaanRashedin/netwatch/blob/main/docs/DEPLOYMENT.md" target="_blank" rel="noopener">Deployment Guide</a></div>
+      </article></div>
+    </section>
     <section id="network-threat-detector" class="section">
-      <div class="container">
-        <article class="project-detail flagship">
-          <div class="detail-header">
-            <div>
-              <p class="eyebrow">Featured Software Project</p>
-              <h2>Network Threat Detector</h2>
-            </div>
-            <div class="tags">
-              <span>Python</span><span>CLI</span><span>CSV Parsing</span><span>SQLite</span><span>Airflow</span><span>Bash</span>
-            </div>
-          </div>
-          <p class="lead">
-            A Python IDS-style detection prototype that analyzes traffic logs, supports custom and Wireshark CSV formats, applies rule-based detection logic, prints readable alerts, saves findings to SQLite, and includes Apache Airflow orchestration.
-          </p>
-          <div class="project-card homelab-summary-card">
-            <h3>Engineering Value</h3>
-            <ul class="check-list">
-              <li>Separates parsing, detection rules, alert printing, and database writes into focused Python modules.</li>
-              <li>Uses command-line arguments for file path and log format selection.</li>
-              <li>Persists alert records in SQLite so findings can be reviewed after execution.</li>
-              <li>Includes Bash automation and an Airflow DAG to show repeatable workflow execution.</li>
-              <li>Connects software development with security-domain logic such as port scans, suspicious outbound connections, exfiltration indicators, and beaconing.</li>
-            </ul>
-          </div>
-          <div class="card-actions">
-            <a class="btn primary" href="https://github.com/ShayaanRashedin/network-threat-detector" target="_blank" rel="noopener">View GitHub Repo</a>
-          </div>
-        </article>
-      </div>
+      <div class="container"><article class="project-detail flagship">
+        <div class="detail-header"><div><p class="eyebrow">Python Network Automation</p><h2>Network Threat Detector</h2></div><div class="tags"><span>Python</span><span>CSV Parsing</span><span>SQLite</span><span>Airflow</span></div></div>
+        <p class="lead">A Python command-line tool that analyzes traffic logs, flags suspicious patterns, and saves findings for review.</p>
+        <div class="project-card homelab-summary-card"><h3>Engineering Highlights</h3><ul class="check-list"><li>Parsed custom and Wireshark-exported CSV logs through a modular CLI.</li><li>Applied rules for possible scans, unusual connections, exfiltration, and beaconing.</li><li>Saved alerts to SQLite and automated repeatable runs with Bash and an Airflow DAG.</li></ul></div>
+        <p><strong>Systems &amp; networking foundation:</strong> Network log analysis, modular scripting, persistent records, and repeatable automation.</p>
+        <p class="project-scope"><strong>Scope:</strong> Analyzes exported logs. Rule-based findings do not establish malicious activity.</p>
+        <div class="card-actions"><a class="btn primary" href="https://github.com/ShayaanRashedin/network-threat-detector" target="_blank" rel="noopener">View GitHub Repo</a><a class="btn secondary" href="https://github.com/ShayaanRashedin/network-threat-detector/blob/main/README.md" target="_blank" rel="noopener">Read Documentation</a></div>
+      </article></div>
     </section>
-
     <section id="cybersecurity-homelab" class="section subtle-section">
-      <div class="container">
-        <article class="project-detail flagship">
-          <div class="detail-header">
-            <div>
-              <p class="eyebrow">Featured Systems Project</p>
-              <h2>Cybersecurity Homelab</h2>
-            </div>
-            <div class="tags">
-              <span>Linux</span><span>VirtualBox</span><span>Networking</span><span>Nmap</span><span>OpenVAS/GVM</span><span>Splunk</span>
-            </div>
-          </div>
-          <p class="lead">
-            A controlled multi-VM lab used to practice network discovery, service analysis, vulnerability triage, exploit impact validation, remediation documentation, and log-based detection.
-          </p>
-          <div class="project-card homelab-summary-card">
-            <h3>Systems Value</h3>
-            <ul class="check-list">
-              <li>Builds comfort with Linux, networking, VM configuration, service exposure, and system logs.</li>
-              <li>Documents reconnaissance and vulnerability scanning as repeatable technical workflows.</li>
-              <li>Uses exploit validation to understand impact, then translates findings into remediation notes.</li>
-              <li>Extends the environment into defensive work with Splunk searches, alerts, and incident reporting.</li>
-            </ul>
-          </div>
-          <div class="card-actions">
-            <a class="btn primary" href="homelab.html">Homelab Overview</a>
-          </div>
-          <div class="lab-grid evidence-card-grid">
-            <a class="project-card evidence-link-card" href="project-network-scanning.html">
-              <h3>Recon &amp; Vulnerability Scanning</h3>
-              <p>Nmap service discovery, OpenVAS/GVM scanning, CVE review, and remediation notes.</p>
-              <div class="tags"><span>Nmap</span><span>OpenVAS/GVM</span><span>Recon</span></div>
-            </a>
-            <a class="project-card evidence-link-card" href="project-metasploitable2-exploit.html">
-              <h3>Exploit Validation</h3>
-              <p>Controlled Metasploitable2 exploitation evidence, impact validation, and remediation thinking.</p>
-              <div class="tags"><span>Metasploit</span><span>CVE validation</span><span>Ethical lab</span></div>
-            </a>
-            <a class="project-card evidence-link-card" href="project-splunk-bruteforce.html">
-              <h3>Splunk Detection</h3>
-              <p>FTP brute-force simulation, Splunk log analysis, alert configuration, and incident report evidence.</p>
-              <div class="tags"><span>Splunk</span><span>SPL</span><span>Detection</span></div>
-            </a>
-          </div>
-        </article>
-      </div>
+      <div class="container"><article class="project-detail flagship">
+        <div class="detail-header"><div><p class="eyebrow">Linux Infrastructure Lab</p><h2>Cybersecurity Homelab</h2></div><div class="tags"><span>Linux</span><span>VirtualBox</span><span>Nmap / GVM</span><span>Splunk</span></div></div>
+        <p class="lead">An isolated VirtualBox lab for investigating Linux services, network exposure, vulnerabilities, and authentication logs.</p>
+        <div class="project-card homelab-summary-card"><h3>Engineering Highlights</h3><ul class="check-list"><li>Configured Kali Linux, Metasploitable2, and Ubuntu/Splunk virtual machines.</li><li>Documented network discovery, controlled exploit validation, and remediation recommendations.</li><li>Forwarded authentication logs into Splunk and configured brute-force detection searches and alerts.</li></ul></div>
+        <p><strong>Systems &amp; networking foundation:</strong> Virtualization, Linux services, network discovery, log analysis, and technical documentation.</p>
+        <p class="project-scope"><strong>Scope:</strong> Isolated learning environment. Findings and hardening recommendations are documented lab work.</p>
+        <div class="card-actions"><a class="btn primary" href="homelab.html">Explore Homelab</a><a class="btn secondary" href="project-network-scanning.html">View Lab Evidence</a></div>
+      </article></div>
     </section>
-
   </main>
 
   <footer>
