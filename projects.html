@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects | Shayaan Rashedin</title>
-  <meta name="description" content="C++ systems programming, Linux networking, observability, and automation projects by Shayaan Rashedin." />
+  <meta name="description" content="C++ systems programming, Linux networking, observability, automation, and embedded robotics projects by Shayaan Rashedin." />
   <link rel="stylesheet" href="assets/css/style.css" />
   <script defer src="assets/js/script.js"></script>
 </head>
@@ -28,9 +28,9 @@
   <main>
     <section class="page-hero section"><div class="container narrow">
       <p class="eyebrow">Build &middot; Observe &middot; Troubleshoot</p>
-      <h1>Systems &amp; Networking Projects</h1>
-      <p class="lead">Hands-on projects in Linux, network protocols, infrastructure, and automation.</p>
-      <div class="cta-row"><a class="btn secondary" href="#syncwire">SyncWire</a><a class="btn secondary" href="#netwatch">NetWatch</a><a class="btn secondary" href="#network-threat-detector">Network Threat Detector</a><a class="btn secondary" href="#cybersecurity-homelab">Cybersecurity Homelab</a></div>
+      <h1>Systems, Networking &amp; Embedded Projects</h1>
+      <p class="lead">Hands-on projects in Linux, network protocols, infrastructure, automation, and embedded robotics.</p>
+      <div class="cta-row"><a class="btn secondary" href="#syncwire">SyncWire</a><a class="btn secondary" href="#netwatch">NetWatch</a><a class="btn secondary" href="#network-threat-detector">Network Threat Detector</a><a class="btn secondary" href="#eebot-robot-guidance">EEBOT Robot Guidance</a><a class="btn secondary" href="#cybersecurity-homelab">Cybersecurity Homelab</a></div>
     </div></section>
     <section id="syncwire" class="section">
       <div class="container"><article class="project-detail flagship">
@@ -62,7 +62,18 @@
         <div class="card-actions"><a class="btn primary" href="https://github.com/ShayaanRashedin/network-threat-detector" target="_blank" rel="noopener">View GitHub Repo</a><a class="btn secondary" href="https://github.com/ShayaanRashedin/network-threat-detector/blob/main/README.md" target="_blank" rel="noopener">Read Documentation</a></div>
       </article></div>
     </section>
-    <section id="cybersecurity-homelab" class="section subtle-section">
+    <section id="eebot-robot-guidance" class="section subtle-section">
+      <div class="container"><article class="project-detail flagship">
+        <div class="detail-header"><div><p class="eyebrow">Embedded Systems &amp; Robotics</p><h2>EEBOT Robot Guidance</h2></div><div class="tags"><span>HCS12 Assembly</span><span>GPIO / ADC</span><span>State Machines</span><span>Interrupts</span></div></div>
+        <p class="lead">A COE538 group project implementing tape following, junction decisions, and route backtracking on an eebot mobile robot.</p>
+        <div class="project-card homelab-summary-card"><h3>Engineering Highlights</h3><ul class="check-list"><li>Integrated five infrared channels, bumper inputs, and motor control through hardware registers.</li><li>Organized navigation with a finite-state machine and fixed-size route memory for backtracking.</li><li>Used timer interrupts and LCD feedback to support motion timing, calibration, and debugging.</li></ul></div>
+        <p><strong>Embedded systems foundation:</strong> Assembly programming, register-level hardware interfaces, sensor processing, interrupt timing, and state-based control.</p>
+        <p><strong>Team:</strong> Shayaan Rashedin, Hamidullah Mohmmad Ali, and Daniel Chylek &mdash; COE538, Toronto Metropolitan University.</p>
+        <p class="project-scope"><strong>Scope:</strong> Branching tape mazes with up to 32 recorded junctions or corners. Route memory lasts one run; automatic stopping at the starting area assumes a blank end to the tape.</p>
+        <div class="card-actions"><a class="btn primary" href="https://github.com/ShayaanRashedin/eebot-robot-guidance" target="_blank" rel="noopener">View GitHub Repo</a><a class="btn secondary" href="https://github.com/ShayaanRashedin/eebot-robot-guidance/blob/main/docs/SETUP.md" target="_blank" rel="noopener">Build &amp; Calibration</a></div>
+      </article></div>
+    </section>
+    <section id="cybersecurity-homelab" class="section">
       <div class="container"><article class="project-detail flagship">
         <div class="detail-header"><div><p class="eyebrow">Linux Infrastructure Lab</p><h2>Cybersecurity Homelab</h2></div><div class="tags"><span>Linux</span><span>VirtualBox</span><span>Nmap / GVM</span><span>Splunk</span></div></div>
         <p class="lead">An isolated VirtualBox lab for investigating Linux services, network exposure, vulnerabilities, and authentication logs.</p>
