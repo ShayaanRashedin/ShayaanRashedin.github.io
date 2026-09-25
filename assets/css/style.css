@@ -480,9 +480,9 @@ a.project-card:hover div {
 }
 
 .btn.secondary {
-  color: #ffffff;
-  background: var(--accent-color);
-  border-color: var(--accent-color);
+  color: var(--primary-dark);
+  background: color-mix(in srgb, var(--primary-color) 13%, var(--surface));
+  border-color: color-mix(in srgb, var(--primary-color) 38%, var(--border-color));
 }
 
 .btn.ghost,
@@ -562,6 +562,16 @@ a.project-card:hover div {
 
 .project-detail.flagship {
   border-top: 4px solid var(--primary-color);
+}
+
+.project-overview {
+  margin: 0 0 22px;
+  padding: 16px 18px;
+  color: var(--muted-text);
+  background: color-mix(in srgb, var(--primary-color) 7%, var(--surface));
+  border-left: 4px solid var(--primary-color);
+  border-radius: 0 8px 8px 0;
+  font-size: 1.04rem;
 }
 
 .detail-header {
@@ -739,9 +749,9 @@ figcaption {
 }
 
 .final-cta .btn.secondary {
-  background: var(--accent-color);
-  border-color: var(--accent-color);
-  color: #ffffff;
+  color: var(--primary-dark);
+  background: color-mix(in srgb, var(--primary-color) 13%, var(--surface));
+  border-color: color-mix(in srgb, var(--primary-color) 38%, var(--border-color));
 }
 
 .final-cta .btn.ghost {
