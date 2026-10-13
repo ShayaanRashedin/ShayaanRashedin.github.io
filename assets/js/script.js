@@ -11,11 +11,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const toggleBtn = document.getElementById('theme-toggle');
   const body = document.body;
-  if (localStorage.getItem('theme') === 'dark') body.classList.add('dark');
+  try { if (localStorage.getItem('theme') === 'dark') body.classList.add('dark'); } catch { /* Theme works without storage. */ }
+  function updateThemeLabel() {
+    if (!toggleBtn) return;
+    const dark = body.classList.contains('dark');
+    toggleBtn.textContent = dark ? 'Light' : 'Dark';
+    toggleBtn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+    toggleBtn.setAttribute('aria-pressed', String(dark));
+  }
+  updateThemeLabel();
   if (toggleBtn) {
     toggleBtn.addEventListener('click', () => {
       const isDark = body.classList.toggle('dark');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch { /* Storage can be disabled. */ }
+      updateThemeLabel();
       // re-measure open accordions after theme reflow
       setTimeout(refreshOpenHeights, 220);
     });
@@ -44,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const el = document.getElementById(id);
       if (el) {
         e.preventDefault();
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        el.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
         history.replaceState(null, '', '#' + id);
       }
     });

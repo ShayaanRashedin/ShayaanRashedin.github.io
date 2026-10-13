@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects | Shayaan Rashedin</title>
-  <meta name="description" content="C++ systems programming, Linux networking, embedded firmware, robotics, cybersecurity, and automation projects by Shayaan Rashedin." />
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <script defer src="assets/js/script.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Engineering Projects | Shayaan Rashedin</title>
+<meta name="description" content="Explore the problems, architecture, decisions, and validation behind SyncWire, NetWatch, and EEBOT Robot Guidance.">
+<meta property="og:title" content="Engineering Projects | Shayaan Rashedin">
+<meta property="og:description" content="Explore the problems, architecture, decisions, and validation behind SyncWire, NetWatch, and EEBOT Robot Guidance.">
+<meta name="theme-color" content="#f4f3ed">
+<link rel="icon" href="assets/images/monogram.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/redesign.css">
+<script defer src="assets/js/script.js">
+</script>
+<script defer src="assets/js/portfolio.js">
+</script>
 </head>
 <body>
-  <header class="site-header">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html" aria-label="Shayaan Rashedin homepage">
         <span class="brand-mark">SR</span>
@@ -24,57 +33,498 @@
       <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">Theme</button>
     </div>
   </header>
-
-  <main>
-    <section class="page-hero section"><div class="container narrow">
-      <p class="eyebrow">Build &middot; Integrate &middot; Debug</p>
-      <h1>Systems, Networking &amp; Embedded Projects</h1>
-      <p class="lead">Hands-on projects in C++ systems programming, Linux, network protocols, embedded firmware, robotics, cybersecurity, and automation.</p>
-      <div class="cta-row"><a class="btn secondary" href="#syncwire">SyncWire</a><a class="btn secondary" href="#netwatch">NetWatch</a><a class="btn secondary" href="#eebot-robot-guidance">EEBOT Robot Guidance</a><a class="btn secondary" href="#network-threat-detector">Network Threat Detector</a><a class="btn secondary" href="#cybersecurity-homelab">Cybersecurity Homelab</a></div>
-    </div></section>
-    <section id="syncwire" class="section">
-      <div class="container"><article class="project-detail flagship">
-        <div class="detail-header"><div><p class="eyebrow">Linux Systems Programming</p><h2>SyncWire</h2></div><div class="tags"><span>C++20</span><span>Linux / POSIX</span><span>TCP Sockets</span><span>Concurrency</span></div></div>
-        <p class="project-overview">SyncWire is an authenticated Linux client-server application for reliable, resumable file transfer and incremental directory synchronization over TCP. It demonstrates Linux/POSIX interfaces, concurrent network services, protocol design, recovery, and filesystem durability. <strong>Scope:</strong> The current MVP is a one-way push service bound to loopback; HMAC authentication does not encrypt file data.</p>
-        <div class="project-card homelab-summary-card"><h3>Engineering Highlights</h3><ul class="check-list"><li>Designed a custom binary protocol with explicit message framing, bounded payloads, request IDs, and correct handling of partial socket reads and writes.</li><li>Combined an epoll accept loop with a bounded connection queue and configurable <code>std::jthread</code> worker pool.</li><li>Implemented HMAC-SHA256 peer authentication, CRC-32 integrity checks, restart recovery, <code>fsync</code>, and atomic file replacement.</li><li>Validated protocol, filesystem, authentication, concurrency, and recovery behavior with CTest, real TCP acceptance tests, sanitizers, and GitHub Actions.</li></ul></div>
-        <div class="card-actions"><a class="btn primary" href="https://github.com/ShayaanRashedin/syncwire" target="_blank" rel="noopener">View README</a></div>
-      </article></div>
-    </section>
-    <section id="netwatch" class="section subtle-section">
-      <div class="container"><article class="project-detail flagship">
-        <div class="detail-header"><div><p class="eyebrow">Linux Network Observability</p><h2>NetWatch</h2></div><div class="tags"><span>C++20</span><span>Linux procfs</span><span>TCP / UDP</span><span>SQLite</span></div></div>
-        <p class="project-overview">NetWatch is a Linux observability agent that correlates TCP/UDP sockets with owning processes, detects behavioral patterns, persists event history, and exposes data through a REST API and dashboard. It demonstrates Linux process and socket visibility, concurrent processing, behavioral detection, persistence, and service delivery. <strong>Scope:</strong> It uses periodic host snapshots, process visibility depends on Linux permissions, and alerts are investigation signals rather than proof of malicious activity.</p>
-        <div class="project-card homelab-summary-card"><h3>Engineering Highlights</h3><ul class="check-list"><li>Parsed Linux procfs data to correlate IPv4/IPv6 TCP and UDP sockets with process IDs, users, executables, and command lines.</li><li>Separated collection from transactional SQLite persistence through a bounded producer-consumer queue and background writer.</li><li>Applied explainable behavioral detection rules and exposed events, alerts, and evidence through a read-only JSON REST API and JavaScript dashboard.</li><li>Delivered Catch2/CTest coverage, GitHub Actions, Docker configuration, systemd services, installation checks, and CPack release packaging.</li></ul></div>
-        <div class="card-actions"><a class="btn primary" href="https://github.com/ShayaanRashedin/netwatch" target="_blank" rel="noopener">View README</a></div>
-      </article></div>
-    </section>
-    <section id="eebot-robot-guidance" class="section">
-      <div class="container"><article class="project-detail flagship">
-        <div class="detail-header"><div><p class="eyebrow">Embedded Systems &amp; Robotics</p><h2>EEBOT Robot Guidance</h2></div><div class="tags"><span>HCS12 Assembly</span><span>GPIO / ADC</span><span>State Machines</span><span>Interrupts</span></div></div>
-        <p class="project-overview">EEBOT Robot Guidance is embedded navigation firmware developed in HCS12 Assembly, integrating infrared sensors, GPIO, ADC, motor control, timer interrupts, and finite-state navigation. It demonstrates register-level programming, sensor processing, interrupt timing, robotics validation, and hardware-software integration. <strong>Scope:</strong> It targets branching tape mazes with up to 32 recorded junctions or corners; route memory lasts one run, and automatic stopping at the starting area assumes a blank end to the tape.</p>
-        <div class="project-card homelab-summary-card"><h3>Engineering Highlights</h3><ul class="check-list"><li>Integrated five infrared sensor channels, bumper inputs, motor direction and enable signals, and a 20&times;2 LCD through register-level hardware interfaces.</li><li>Organized tape following, junction decisions, dead-end recovery, and backtracking with a finite-state machine and fixed-size route memory.</li><li>Used timer-overflow interrupts, interrupt service routines, calibrated sensor thresholds, and live LCD feedback to support motion timing and hardware debugging.</li><li>Connected instruction-level firmware to physical sensors and actuators on the HCS12 / MC9S12 eebot platform using CodeWarrior.</li></ul></div>
-        <div class="card-actions"><a class="btn primary" href="https://github.com/ShayaanRashedin/eebot-robot-guidance" target="_blank" rel="noopener">View README</a><a class="btn secondary" href="https://github.com/ShayaanRashedin/eebot-robot-guidance/blob/main/docs/SETUP.md" target="_blank" rel="noopener">Build &amp; Calibration</a></div>
-      </article></div>
-    </section>
-    <section id="network-threat-detector" class="section subtle-section">
-      <div class="container"><article class="project-detail">
-        <div class="detail-header"><div><p class="eyebrow">Python Security Automation</p><h2>Network Threat Detector</h2></div><div class="tags"><span>Python</span><span>CSV Parsing</span><span>SQLite</span><span>Airflow</span></div></div>
+<main id="main">
+<section class="page-hero section">
+<div class="container">
+<p class="eyebrow">PROJECT NOTEBOOK / SELECTED ENGINEERING</p>
+<h1>Under the hood.</h1>
+<p class="lead">The problems, tradeoffs, and implementation details behind my work.</p>
+<nav class="project-index" aria-label="Jump to project">
+<a class="" href="#syncwire">SyncWire <span aria-hidden="true">↗</span>
+</a>
+<a class="" href="#netwatch">NetWatch <span aria-hidden="true">↗</span>
+</a>
+<a class="" href="#eebot-robot-guidance">EEBOT Robot Guidance <span aria-hidden="true">↗</span>
+</a>
+<a class="" href="#network-threat-detector">Security & automation <span aria-hidden="true">↗</span>
+</a>
+</nav>
+</div>
+</section>
+<section id="syncwire" class="case-section container">
+<div class="case-heading">
+<div>
+<p class="eyebrow">01 / LINUX SYSTEMS</p>
+<h2>SyncWire</h2>
+</div>
+<a class="btn ghost" href="https://github.com/ShayaanRashedin/syncwire" target="_blank" rel="noopener">View repository <span aria-hidden="true">↗</span>
+</a>
+</div>
+<div class="case-intro">
+<h3>Reliable transfers.<br>Even after a disconnect.</h3>
+<div>
+<p>TCP is a byte stream, connections fail, and a partially written file should never look complete. SyncWire explores what it takes to make file transfer recoverable and predictable.</p>
+<div class="tags">
+<span>C++20</span>
+<span>POSIX</span>
+<span>TCP / epoll</span>
+</div>
+</div>
+</div>
+<figure class="case-visual">
+<div class="sync-graphic" role="img" aria-label="SyncWire architecture: client sends framed TCP data to authenticated server workers, then verified partial storage is atomically committed.">
+<div class="diagram-top">
+<span>SYNCWIRE / TRANSFER PATH</span>
+<span>TCP · v2</span>
+</div>
+<div class="wire-nodes">
+<div>
+<span class="node-icon">&gt;_</span>
+<strong>Client</strong>
+<small>Files + manifest</small>
+</div>
+<span class="wire-arrow" aria-hidden="true">→</span>
+<div>
+<span class="node-icon">{ }</span>
+<strong>Server</strong>
+<small>Auth + worker pool</small>
+</div>
+<span class="wire-arrow" aria-hidden="true">→</span>
+<div>
+<span class="node-icon">▤</span>
+<strong>Storage</strong>
+<small>Verify + commit</small>
+</div>
+</div>
+<div class="packet-strip" aria-hidden="true">
+<span>HEADER</span>
+<i>
+</i>
+<i>
+</i>
+<i>
+</i>
+<i>
+</i>
+<i>
+</i>
+<span>CRC-32</span>
+</div>
+<div class="diagram-bottom">
+<span>Interrupted? Resume from a verified offset.</span>
+<span>01 / SYSTEMS</span>
+</div>
+</div>
+<figcaption>Architecture illustration based on the project documentation.</figcaption>
+</figure>
+<ol class="architecture-flow">
+<li>
+<span class="flow-number">01</span>
+<strong>Client CLI</strong>
+<small>Manifest + framed messages</small>
+</li>
+<li>
+<span class="flow-number">02</span>
+<strong>Server workers</strong>
+<small>epoll → bounded queue</small>
+</li>
+<li>
+<span class="flow-number">03</span>
+<strong>Verified storage</strong>
+<small>Partial data → atomic rename</small>
+</li>
+</ol>
+<div class="case-decisions">
+<h3>Engineering decisions</h3>
+<div>
+<article>
+<span class="mono">01</span>
+<div>
+<h4>Explicit framing</h4>
+<p>A versioned 32-byte header, request IDs, bounded payloads, and incremental parsing handle partial reads and coalesced messages.</p>
+</div>
+</article>
+<article>
+<span class="mono">02</span>
+<div>
+<h4>Recovery before restart</h4>
+<p>Saved offsets and prefix checksums let interrupted uploads reuse verified bytes, including after a server restart.</p>
+</div>
+</article>
+<article>
+<span class="mono">03</span>
+<div>
+<h4>Bounded concurrency</h4>
+<p>A worker pool handles sessions while destination mutations are serialized to protect filesystem state.</p>
+</div>
+</article>
+</div>
+</div>
+<div class="case-evidence">
+<div>
+<h3>Implementation & validation</h3>
+<p>The repository includes CTest coverage, real TCP interruption and restart acceptance tests, and Debug, Release, ASan, and UBSan CI configurations. The acceptance script compares output files using SHA-256.</p>
+<div class="evidence-links">
+<a class="text-link" href="https://github.com/ShayaanRashedin/syncwire/tree/main/scripts/verify_resume.py" target="_blank" rel="noopener">Recovery acceptance script <span aria-hidden="true">↗</span>
+</a>
+<a class="text-link" href="https://github.com/ShayaanRashedin/syncwire/tree/main/tests/unit" target="_blank" rel="noopener">Protocol & integration tests <span aria-hidden="true">↗</span>
+</a>
+</div>
+</div>
+<details>
+<summary>Scope & tradeoffs</summary>
+<p>One-way push over loopback. HMAC authenticates peers but does not encrypt file data or authenticate later frames. CRC-32 detects accidental corruption; directory sync commits files individually.</p>
+</details>
+</div>
+</section>
+<section id="netwatch" class="case-section container">
+<div class="case-heading">
+<div>
+<p class="eyebrow">02 / NETWORK OBSERVABILITY</p>
+<h2>NetWatch</h2>
+</div>
+<a class="btn ghost" href="https://github.com/ShayaanRashedin/netwatch" target="_blank" rel="noopener">View repository <span aria-hidden="true">↗</span>
+</a>
+</div>
+<div class="case-intro">
+<h3>Every connection<br>has a process behind it.</h3>
+<div>
+<p>A socket tells only part of the story. NetWatch connects network activity with the process responsible, retaining the events and evidence needed to investigate changes.</p>
+<div class="tags">
+<span>C++20</span>
+<span>Linux procfs</span>
+<span>SQLite</span>
+</div>
+</div>
+</div>
+<figure class="case-visual">
+<div class="net-graphic" role="img" aria-label="NetWatch pipeline: Linux procfs socket snapshots, process correlation, detection, SQLite persistence, read-only API and dashboard.">
+<div class="diagram-top">
+<span>NETWATCH / OBSERVABILITY</span>
+<span>LINUX</span>
+</div>
+<div class="signal-bars" aria-hidden="true">
+<i style="--bar:28%">
+</i>
+<i style="--bar:46%">
+</i>
+<i style="--bar:34%">
+</i>
+<i style="--bar:62%">
+</i>
+<i style="--bar:43%">
+</i>
+<i style="--bar:77%">
+</i>
+<i style="--bar:58%">
+</i>
+<i style="--bar:90%">
+</i>
+<i style="--bar:64%">
+</i>
+<i style="--bar:40%">
+</i>
+<i style="--bar:56%">
+</i>
+<i style="--bar:82%">
+</i>
+<i style="--bar:55%">
+</i>
+<i style="--bar:37%">
+</i>
+<i style="--bar:69%">
+</i>
+<i style="--bar:48%">
+</i>
+<i style="--bar:27%">
+</i>
+<i style="--bar:58%">
+</i>
+<i style="--bar:42%">
+</i>
+<i style="--bar:74%">
+</i>
+<i style="--bar:52%">
+</i>
+<i style="--bar:36%">
+</i>
+<i style="--bar:61%">
+</i>
+<i style="--bar:44%">
+</i>
+</div>
+<div class="net-stages">
+<span>/proc</span>
+<b>→</b>
+<span>process + socket</span>
+<b>→</b>
+<span>evidence</span>
+</div>
+<div class="diagram-bottom">
+<span>From network activity to process context.</span>
+<span>02 / NETWORKING</span>
+</div>
+</div>
+<figcaption>Architecture illustration based on the project documentation.</figcaption>
+</figure>
+<ol class="architecture-flow">
+<li>
+<span class="flow-number">01</span>
+<strong>Linux procfs</strong>
+<small>Collect sockets + processes</small>
+</li>
+<li>
+<span class="flow-number">02</span>
+<strong>Detection pipeline</strong>
+<small>Compare → queue → SQLite</small>
+</li>
+<li>
+<span class="flow-number">03</span>
+<strong>Read-only API</strong>
+<small>Events + alerts → dashboard</small>
+</li>
+</ol>
+<div class="case-decisions">
+<h3>Engineering decisions</h3>
+<div>
+<article>
+<span class="mono">01</span>
+<div>
+<h4>Process identity matters</h4>
+<p>PID and process start time are tracked together so reused PIDs do not combine unrelated activity.</p>
+</div>
+</article>
+<article>
+<span class="mono">02</span>
+<div>
+<h4>Collection and storage are separate</h4>
+<p>A bounded producer-consumer queue and background writer make persistence pressure explicit.</p>
+</div>
+</article>
+<article>
+<span class="mono">03</span>
+<div>
+<h4>Findings stay explainable</h4>
+<p>Each rule produces severity, reasons, and supporting evidence. Events and their alerts are stored in one transaction.</p>
+</div>
+</article>
+</div>
+</div>
+<div class="dashboard-preview">
+<div>
+<h3>The actual dashboard interface</h3>
+<p>Static interface preview from the NetWatch repository. No live host is connected and no telemetry is simulated.</p>
+<a class="text-link" href="assets/demos/netwatch/index.html">Open interface preview <span aria-hidden="true">↗</span>
+</a>
+</div>
+<iframe src="assets/demos/netwatch/index.html" title="NetWatch dashboard interface preview without live data" loading="lazy">
+</iframe>
+</div>
+<div class="case-evidence">
+<div>
+<h3>Implementation & validation</h3>
+<p>The repository includes Catch2/CTest coverage for parsing, process resolution, snapshot comparison, detection, queue behaviour, storage, and API services, plus installation and container checks.</p>
+<div class="evidence-links">
+<a class="text-link" href="https://github.com/ShayaanRashedin/netwatch/tree/main/tests/unit" target="_blank" rel="noopener">Tests & validation <span aria-hidden="true">↗</span>
+</a>
+<a class="text-link" href="https://github.com/ShayaanRashedin/netwatch/tree/main/web" target="_blank" rel="noopener">Dashboard source <span aria-hidden="true">↗</span>
+</a>
+</div>
+</div>
+<details>
+<summary>Scope & tradeoffs</summary>
+<p>Periodic snapshots can miss short-lived connections. Visibility depends on Linux permissions. Heuristic alerts support investigation, not a conclusion of malicious activity. The unauthenticated API defaults to loopback.</p>
+</details>
+</div>
+</section>
+<section id="eebot-robot-guidance" class="case-section container">
+<div class="case-heading">
+<div>
+<p class="eyebrow">03 / EMBEDDED · TEAM PROJECT</p>
+<h2>EEBOT Robot Guidance</h2>
+</div>
+<a class="btn ghost" href="https://github.com/ShayaanRashedin/eebot-robot-guidance" target="_blank" rel="noopener">View repository <span aria-hidden="true">↗</span>
+</a>
+</div>
+<div class="case-intro">
+<h3>From sensor readings<br>to a route home.</h3>
+<div>
+<p>A mobile robot must turn noisy sensor readings into reliable movement: follow tape, choose branches, recover from dead ends, and retrace recorded decisions. This shared COE538 project was developed with Hamidullah Mohmmad Ali and Daniel Chylek.</p>
+<div class="tags">
+<span>Assembly</span>
+<span>GPIO / ADC</span>
+<span>State machines</span>
+</div>
+</div>
+</div>
+<figure class="case-visual">
+<div class="robot-graphic">
+<div class="diagram-top">
+<span>EEBOT / SENSE → DECIDE → ACT</span>
+<span>HCS12</span>
+</div>
+<svg class="robot-map" viewBox="0 0 600 240" role="img" aria-label="Illustrated tape maze with a robot at a junction. This is a conceptual diagram, not a recorded hardware run.">
+<path class="maze-path" d="M60 190 H220 V65 H380 V190 H530 M220 145 H120 M380 110 H505"/>
+<path class="maze-route" d="M60 190 H220 V65 H380 V190 H530"/>
+<g class="robot-marker" transform="translate(220 145)">
+<rect x="-21" y="-25" width="42" height="50" rx="9"/>
+<rect class="robot-wheel" x="-27" y="-14" width="6" height="26" rx="2"/>
+<rect class="robot-wheel" x="21" y="-14" width="6" height="26" rx="2"/>
+<circle cx="-11" cy="-14" r="3"/>
+<circle cx="0" cy="-17" r="3"/>
+<circle cx="11" cy="-14" r="3"/>
+<path d="M-7 5 L0 -3 L7 5"/>
+</g>
+<text x="45" y="224">START</text>
+<text x="480" y="224">DESTINATION</text>
+<text x="425" y="94">BRANCH</text>
+</svg>
+<div class="diagram-bottom">
+<span>Five sensors. A state machine. A route home.</span>
+<span>03 / EMBEDDED</span>
+</div>
+</div>
+<figcaption>Architecture illustration based on the project documentation.</figcaption>
+</figure>
+<ol class="architecture-flow">
+<li>
+<span class="flow-number">01</span>
+<strong>Sense</strong>
+<small>5 infrared channels + bumpers</small>
+</li>
+<li>
+<span class="flow-number">02</span>
+<strong>Decide</strong>
+<small>State machine + route memory</small>
+</li>
+<li>
+<span class="flow-number">03</span>
+<strong>Act</strong>
+<small>Motors + LCD feedback</small>
+</li>
+</ol>
+<div class="case-decisions">
+<h3>Engineering decisions</h3>
+<div>
+<article>
+<span class="mono">01</span>
+<div>
+<h4>Separate state from hardware</h4>
+<p>Sensing, motor helpers, route routines, and display updates are kept distinct so physical behaviour is easier to debug.</p>
+</div>
+</article>
+<article>
+<span class="mono">02</span>
+<div>
+<h4>Record decisions explicitly</h4>
+<p>Fixed-size route arrays record arrival, departure, and alternative headings for up to 32 junctions or corners.</p>
+</div>
+</article>
+<article>
+<span class="mono">03</span>
+<div>
+<h4>Make timing observable</h4>
+<p>Timer-overflow interrupts and live LCD feedback support steering calibration, navigation timing, and fault diagnosis.</p>
+</div>
+</article>
+</div>
+</div>
+<div class="robot-explainer">
+<div>
+<p class="eyebrow">ILLUSTRATED NAVIGATION CYCLE</p>
+<h3>Sense. Decide. Act.</h3>
+<p>Step through the firmware’s responsibilities. This explains the control loop; it is not a hardware simulation.</p>
+<div class="step-controls" role="group" aria-label="Navigation cycle">
+<button type="button" data-robot-step="0" aria-pressed="true">1. Sense</button>
+<button type="button" data-robot-step="1" aria-pressed="false">2. Decide</button>
+<button type="button" data-robot-step="2" aria-pressed="false">3. Act</button>
+</div>
+</div>
+<div class="robot-explanation" aria-live="polite">
+<span id="robot-step-label" class="mono">01 / SENSE</span>
+<h4 id="robot-step-title">Read the physical world.</h4>
+<p id="robot-step-copy">Five infrared channels and bumper inputs provide the observations used to follow tape and detect obstacles.</p>
+</div>
+</div>
+<div class="case-evidence">
+<div>
+<h3>Implementation & validation</h3>
+<p>The firmware implements sensor classification, state dispatch, motor control, backtracking, and fault stops. The build and calibration guide documents the hardware setup and operating procedure.</p>
+<div class="evidence-links">
+<a class="text-link" href="https://github.com/ShayaanRashedin/eebot-robot-guidance/tree/main/Sources/main.asm" target="_blank" rel="noopener">Assembly firmware <span aria-hidden="true">↗</span>
+</a>
+<a class="text-link" href="https://github.com/ShayaanRashedin/eebot-robot-guidance/tree/main/docs/SETUP.md" target="_blank" rel="noopener">Build & calibration guide <span aria-hidden="true">↗</span>
+</a>
+</div>
+</div>
+<details>
+<summary>Scope & tradeoffs</summary>
+<p>Team course project. Route memory lasts one run and targets branching mazes rather than cyclic maps. Returning to the start assumes a blank end to the tape. The illustration below is conceptual, not recorded robot footage.</p>
+</details>
+</div>
+</section>    <section id="network-threat-detector" class="section subtle-section">
+      <div class="container">
+<article class="project-detail">
+        <div class="detail-header">
+<div>
+<p class="eyebrow">Python Security Automation</p>
+<h2>Network Threat Detector</h2>
+</div>
+<div class="tags">
+<span>Python</span>
+<span>CSV Parsing</span>
+<span>SQLite</span>
+<span>Airflow</span>
+</div>
+</div>
         <p class="project-overview">Network Threat Detector is a Python command-line tool that analyzes custom and Wireshark-exported network logs, flags suspicious patterns, and saves structured findings for review. It demonstrates modular Python, deterministic detection, persistent records, and repeatable security-automation workflows. <strong>Scope:</strong> It analyzes exported logs rather than live packet captures, and rule-based findings do not establish malicious activity.</p>
-        <div class="project-card homelab-summary-card"><h3>Engineering Highlights</h3><ul class="check-list"><li>Separated CSV ingestion, detection rules, presentation, SQLite persistence, and workflow orchestration into focused modules.</li><li>Implemented explainable rules for possible port scanning, suspicious outbound connections, exfiltration indicators, and beaconing.</li><li>Automated repeatable execution with Bash and an optional Apache Airflow DAG backed by a local Docker Compose workflow.</li></ul></div>
-        <div class="card-actions"><a class="btn primary" href="https://github.com/ShayaanRashedin/network-threat-detector" target="_blank" rel="noopener">View README</a></div>
-      </article></div>
+        <div class="project-card homelab-summary-card">
+<h3>Engineering Highlights</h3>
+<ul class="check-list">
+<li>Separated CSV ingestion, detection rules, presentation, SQLite persistence, and workflow orchestration into focused modules.</li>
+<li>Implemented explainable rules for possible port scanning, suspicious outbound connections, exfiltration indicators, and beaconing.</li>
+<li>Automated repeatable execution with Bash and an optional Apache Airflow DAG backed by a local Docker Compose workflow.</li>
+</ul>
+</div>
+        <div class="card-actions">
+<a class="btn primary" href="https://github.com/ShayaanRashedin/network-threat-detector" target="_blank" rel="noopener">View README</a>
+</div>
+      </article>
+</div>
     </section>
     <section id="cybersecurity-homelab" class="section">
-      <div class="container"><article class="project-detail">
-        <div class="detail-header"><div><p class="eyebrow">Linux Infrastructure Lab</p><h2>Cybersecurity Homelab</h2></div><div class="tags"><span>Linux</span><span>VirtualBox</span><span>Nmap / GVM</span><span>Splunk</span></div></div>
+      <div class="container">
+<article class="project-detail">
+        <div class="detail-header">
+<div>
+<p class="eyebrow">Linux Infrastructure Lab</p>
+<h2>Cybersecurity Homelab</h2>
+</div>
+<div class="tags">
+<span>Linux</span>
+<span>VirtualBox</span>
+<span>Nmap / GVM</span>
+<span>Splunk</span>
+</div>
+</div>
         <p class="project-overview">The Cybersecurity Homelab is an isolated VirtualBox environment for investigating Linux services, network exposure, vulnerabilities, and authentication logs. It demonstrates virtualization, Linux administration, network discovery, log analysis, detection engineering, and technical documentation. <strong>Scope:</strong> It is a controlled learning environment whose findings and hardening recommendations document lab work rather than a production assessment.</p>
-        <div class="project-card homelab-summary-card"><h3>Engineering Highlights</h3><ul class="check-list"><li>Configured Kali Linux, Metasploitable2, and Ubuntu/Splunk virtual machines.</li><li>Documented network discovery, controlled exploit validation, and remediation recommendations.</li><li>Forwarded authentication logs into Splunk and configured brute-force detection searches and alerts.</li></ul></div>
-        <div class="card-actions"><a class="btn primary" href="homelab.html">Explore Homelab</a><a class="btn secondary" href="project-network-scanning.html">View Lab Evidence</a></div>
-      </article></div>
+        <div class="project-card homelab-summary-card">
+<h3>Engineering Highlights</h3>
+<ul class="check-list">
+<li>Configured Kali Linux, Metasploitable2, and Ubuntu/Splunk virtual machines.</li>
+<li>Documented network discovery, controlled exploit validation, and remediation recommendations.</li>
+<li>Forwarded authentication logs into Splunk and configured brute-force detection searches and alerts.</li>
+</ul>
+</div>
+        <div class="card-actions">
+<a class="btn primary" href="homelab.html">Explore Homelab</a>
+<a class="btn secondary" href="project-network-scanning.html">View Lab Evidence</a>
+</div>
+      </article>
+</div>
     </section>
-  </main>
-
-  <footer>
+</main>
+<footer>
     <div class="container footer-inner">
       <p>&copy; 2026 Shayaan Rashedin</p>
       <div class="footer-links">
