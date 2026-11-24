@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Engineering Projects | Shayaan Rashedin</title>
-<meta name="description" content="Explore the problems, architecture, decisions, and validation behind SyncWire, NetWatch, and EEBOT Robot Guidance.">
+<meta name="description" content="Explore the design and hardware testing behind Shayaan Rashedin’s systems software, embedded firmware, and FPGA projects.">
 <meta property="og:title" content="Engineering Projects | Shayaan Rashedin">
-<meta property="og:description" content="Explore the problems, architecture, decisions, and validation behind SyncWire, NetWatch, and EEBOT Robot Guidance.">
+<meta property="og:description" content="Explore the design and hardware testing behind Shayaan Rashedin’s systems software, embedded firmware, and FPGA projects.">
 <meta name="theme-color" content="#f4f3ed">
 <link rel="icon" href="assets/images/monogram.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/style.css">
@@ -40,6 +40,8 @@
 <h1>Projects</h1>
 <p class="lead">The problems, tradeoffs, and implementation details behind my work.</p>
 <nav class="project-index" aria-label="Jump to project">
+<a href="#mission-control-media-center">Mission Control Media Center <span aria-hidden="true">↗</span></a>
+<a href="#fpga-vga-pong">FPGA VGA Pong <span aria-hidden="true">↗</span></a>
 <a href="#fpga-cache-controller">FPGA Cache Controller ↗</a>
 <a class="" href="#syncwire">SyncWire <span aria-hidden="true">↗</span>
 </a>
@@ -52,6 +54,62 @@
 </nav>
 </div>
 </section>
+<section id="mission-control-media-center" class="case-section container">
+<div class="case-heading">
+<div>
+<p class="eyebrow">03 / EMBEDDED FIRMWARE · COE718</p>
+<h2>Mission Control Media Center</h2>
+</div>
+<a class="btn ghost" href="https://github.com/ShayaanRashedin/mission-control-media-center" target="_blank" rel="noopener">View repository <span aria-hidden="true">↗</span></a>
+</div>
+<div class="case-intro">
+<h3>One joystick, three media features</h3>
+<div>
+<p>I built a space-themed media center for the Keil MCB1700 board with an NXP LPC1768 microcontroller. Its joystick interface opens an RGB565 photo gallery, two games with two levels each, and an audio screen with a local speaker test.</p>
+<div class="tags"><span>Embedded C</span><span>ARM Cortex-M3</span><span>GPIO</span><span>ADC / DAC</span><span>Interrupts</span></div>
+</div>
+</div>
+<div class="case-evidence">
+<div>
+<h3>Firmware design and board results</h3>
+<p>A foreground state machine handles menus and level transitions. SysTick drives joystick debouncing and nominal 50 ms game updates. Lunar Lander uses fixed-point physics, and Robot Rescue tracks supplies, hazards, and battery life in a maze.</p>
+<p>On the board, I exercised the gallery and both levels of each game, and verified speaker output using a 440 Hz tone with potentiometer volume control. USB audio streaming remained incomplete because the PC could not enumerate the board.</p>
+</div>
+<figure class="case-visual hardware-evidence">
+<img src="assets/images/projects/mission-control-lunar-lander.jpg" alt="Lunar Lander gameplay and results on the Keil board’s LCD" width="1120" height="1140" loading="lazy">
+<figcaption>Lunar Lander during board testing.</figcaption>
+</figure>
+</div>
+</section>
+
+<section id="fpga-vga-pong" class="case-section container">
+<div class="case-heading">
+<div>
+<p class="eyebrow">FPGA / DIGITAL SYSTEMS · COE758</p>
+<h2>FPGA VGA Pong</h2>
+</div>
+<a class="btn ghost" href="https://github.com/ShayaanRashedin/fpga-vga-pong" target="_blank" rel="noopener">View repository <span aria-hidden="true">↗</span></a>
+</div>
+<div class="case-intro">
+<h3>Two-player Pong in VHDL</h3>
+<div>
+<p>Four board switches control the paddles on a Xilinx Spartan-3E FPGA. The design generates a 640 × 480 VGA signal and renders each pixel directly from object coordinates without a framebuffer.</p>
+<div class="tags"><span>VHDL</span><span>Spartan-3E</span><span>VGA</span><span>ChipScope</span></div>
+</div>
+</div>
+<div class="case-evidence">
+<div>
+<h3>Video timing and hardware tests</h3>
+<p>Separate modules handle VGA timing, rendering, and gameplay. The game updates during vertical blanking so object positions stay fixed throughout the visible frame. A state machine handles serving, play, and restarts after the ball passes through a gate.</p>
+<p>On the lab board, I checked paddle movement, collisions, gate exits, and restarts. ChipScope captures showed a 32 µs horizontal line period, a 3.84 µs horizontal sync pulse, and a 25 MHz video DAC clock cadence.</p>
+</div>
+<figure class="case-visual hardware-evidence">
+<img src="assets/images/projects/fpga-vga-pong-gameplay.jpg" alt="FPGA Pong on a VGA monitor with a green playing field and two paddles" width="1280" height="960" loading="lazy">
+<figcaption>Pong running on the lab VGA monitor.</figcaption>
+</figure>
+</div>
+</section>
+
 <section id="fpga-cache-controller" class="case-section container">
 <div class="case-heading"><div><p class="eyebrow">FPGA / DIGITAL SYSTEMS · COE758</p><h2>FPGA Cache Controller</h2></div><a class="btn ghost" href="https://github.com/ShayaanRashedin/ShayaanRashedin.github.io/tree/main/projects/fpga-cache-controller" target="_blank" rel="noopener">View source ↗</a></div>
 <div class="case-intro"><h3>Write-back cache in VHDL</h3><div><p>Designed and integrated a 256-byte direct-mapped cache on a Xilinx Spartan-3E FPGA. A 13-state controller handles read and write hits, block refill, and dirty-block write-back.</p><div class="tags"><span>VHDL</span><span>Spartan-3E</span><span>BRAM</span><span>ChipScope</span></div></div></div>
@@ -349,7 +407,7 @@
 <section id="eebot-robot-guidance" class="case-section container">
 <div class="case-heading">
 <div>
-<p class="eyebrow">03 / EMBEDDED · TEAM PROJECT</p>
+<p class="eyebrow">07 / EMBEDDED · TEAM PROJECT</p>
 <h2>EEBOT Robot Guidance</h2>
 </div>
 <a class="btn ghost" href="https://github.com/ShayaanRashedin/eebot-robot-guidance" target="_blank" rel="noopener">View repository <span aria-hidden="true">↗</span>
@@ -390,7 +448,7 @@
 </svg>
 <div class="diagram-bottom">
 <span>Infrared sensing, state-based navigation, and route memory.</span>
-<span>03 / EMBEDDED</span>
+<span>07 / EMBEDDED</span>
 </div>
 </div>
 <figcaption>Architecture illustration based on the project documentation.</figcaption>

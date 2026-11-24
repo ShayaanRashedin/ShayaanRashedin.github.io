@@ -282,6 +282,17 @@ body.dark .btn.primary {
   transform:translateY(-3px);
   text-decoration:none
 }
+.work-visual-photo {
+  width:min(100%, 440px);
+  justify-self:center;
+  overflow:hidden;
+  border:1px solid var(--border-color)
+}
+.work-visual-photo img {
+  display:block;
+  width:100%;
+  height:auto
+}
 .diagram-top,.diagram-bottom {
   display:flex;
   justify-content:space-between;
@@ -616,6 +627,19 @@ footer {
 .case-visual figcaption {
   font-size:11px
 }
+.hardware-evidence {
+  margin:0
+}
+.hardware-evidence img {
+  display:block;
+  width:100%;
+  height:auto;
+  border:1px solid var(--border-color)
+}
+.hardware-evidence figcaption {
+  margin-top:8px;
+  color:var(--muted-text)
+}
 .architecture-flow {
   list-style:none;
   padding:0;
@@ -755,7 +779,7 @@ footer {
   border-top-width:1px
 }
 .resume-actions {
-  margin-top:20px
+  margin-bottom:20px
 }
 .contact-card h2 {
   font-size:27px
