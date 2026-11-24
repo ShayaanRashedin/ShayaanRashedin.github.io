@@ -616,6 +616,19 @@ footer {
 .case-visual figcaption {
   font-size:11px
 }
+.hardware-evidence {
+  margin:0
+}
+.hardware-evidence img {
+  display:block;
+  width:100%;
+  height:auto;
+  border:1px solid var(--border-color)
+}
+.hardware-evidence figcaption {
+  margin-top:8px;
+  color:var(--muted-text)
+}
 .architecture-flow {
   list-style:none;
   padding:0;
