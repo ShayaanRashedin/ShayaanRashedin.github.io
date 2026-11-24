@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Systems & Embedded Software | Shayaan Rashedin</title>
-<meta name="description" content="Computer Engineering student building Linux systems, network software, and embedded firmware. Explore SyncWire, NetWatch, and EEBOT.">
+<meta name="description" content="Computer Engineering student building Linux systems, network software, and embedded firmware. Explore SyncWire, NetWatch, and Mission Control Media Center.">
 <meta property="og:title" content="Systems & Embedded Software | Shayaan Rashedin">
-<meta property="og:description" content="Computer Engineering student building Linux systems, network software, and embedded firmware. Explore SyncWire, NetWatch, and EEBOT.">
+<meta property="og:description" content="Computer Engineering student building Linux systems, network software, and embedded firmware. Explore SyncWire, NetWatch, and Mission Control Media Center.">
 <meta name="theme-color" content="#f4f3ed">
 <link rel="icon" href="assets/images/monogram.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/style.css">
@@ -67,6 +67,7 @@
 <p class="eyebrow">01 / LINUX SYSTEMS</p>
 <h3>SyncWire</h3>
 <p>A C++20 file-transfer service built around protocol correctness, recovery, and filesystem durability.</p>
+<p><strong>Verified result:</strong> An acceptance test resumes an interrupted TCP transfer and checks the finished file against the original using SHA‑256.</p>
 <div class="tags">
 <span>C++20</span>
 <span>POSIX</span>
@@ -130,6 +131,7 @@
 <p class="eyebrow">02 / NETWORK OBSERVABILITY</p>
 <h3>NetWatch</h3>
 <p>A Linux agent that turns socket snapshots into process-aware events and explainable alerts.</p>
+<p><strong>Verified result:</strong> Unit tests cover matching Linux sockets to processes, detecting activity across snapshots, and retrieving stored events through the API.</p>
 <div class="tags">
 <span>C++20</span>
 <span>Linux procfs</span>
@@ -214,48 +216,22 @@
 </article>
 <article class="work-row">
 <div class="work-copy">
-<p class="eyebrow">03 / EMBEDDED · TEAM PROJECT</p>
-<h3>EEBOT Robot Guidance</h3>
-<p>HCS12 Assembly firmware connecting infrared sensing, navigation decisions, and motor control.</p>
+<p class="eyebrow">03 / EMBEDDED FIRMWARE</p>
+<h3>Mission Control Media Center</h3>
+<p>Bare-metal C firmware for a joystick-controlled photo gallery, two games, and an audio test on an ARM Cortex-M3 board.</p>
+<p><strong>Verified result:</strong> Tested both levels of both games on the board and confirmed the speaker played a 440 Hz tone with adjustable volume.</p>
 <div class="tags">
-<span>Assembly</span>
-<span>GPIO / ADC</span>
-<span>State machines</span>
+<span>Embedded C</span>
+<span>ARM Cortex-M3</span>
+<span>GPIO / ADC / DAC</span>
 </div>
 <div class="card-actions">
-<a class="text-link" href="projects.html#eebot-robot-guidance">Explore the engineering <span aria-hidden="true">↗</span>
-</a>
-<a class="quiet-link" href="https://github.com/ShayaanRashedin/eebot-robot-guidance" target="_blank" rel="noopener">Code <span aria-hidden="true">↗</span>
-</a>
+<a class="text-link" href="projects.html#mission-control-media-center">Explore the engineering <span aria-hidden="true">↗</span></a>
+<a class="quiet-link" href="https://github.com/ShayaanRashedin/mission-control-media-center" target="_blank" rel="noopener">Code <span aria-hidden="true">↗</span></a>
 </div>
 </div>
-<a class="work-visual" href="projects.html#eebot-robot-guidance" aria-label="Explore EEBOT Robot Guidance">
-<div class="robot-graphic">
-<div class="diagram-top">
-<span>EEBOT / SENSE → DECIDE → ACT</span>
-<span>HCS12</span>
-</div>
-<svg class="robot-map" viewBox="0 0 600 240" role="img" aria-label="Illustrated tape maze with a robot at a junction. This is a conceptual diagram, not a recorded hardware run.">
-<path class="maze-path" d="M60 190 H220 V65 H380 V190 H530 M220 145 H120 M380 110 H505"/>
-<path class="maze-route" d="M60 190 H220 V65 H380 V190 H530"/>
-<g class="robot-marker" transform="translate(220 145)">
-<rect x="-21" y="-25" width="42" height="50" rx="9"/>
-<rect class="robot-wheel" x="-27" y="-14" width="6" height="26" rx="2"/>
-<rect class="robot-wheel" x="21" y="-14" width="6" height="26" rx="2"/>
-<circle cx="-11" cy="-14" r="3"/>
-<circle cx="0" cy="-17" r="3"/>
-<circle cx="11" cy="-14" r="3"/>
-<path d="M-7 5 L0 -3 L7 5"/>
-</g>
-<text x="45" y="224">START</text>
-<text x="480" y="224">DESTINATION</text>
-<text x="425" y="94">BRANCH</text>
-</svg>
-<div class="diagram-bottom">
-<span>Infrared sensing, state-based navigation, and route memory.</span>
-<span>03 / EMBEDDED</span>
-</div>
-</div>
+<a class="work-visual work-visual-photo" href="projects.html#mission-control-media-center">
+<img src="assets/images/projects/mission-control-lunar-lander.jpg" alt="Explore Mission Control Media Center and see Lunar Lander running on the board" width="1120" height="1140" loading="lazy">
 </a>
 </article>
 </section>
@@ -267,10 +243,10 @@
 </div>
 <div class="supporting-grid">
 <article>
-<span class="mono">07 / EMBEDDED FIRMWARE</span>
-<h3>Mission Control Media Center</h3>
-<p>Bare-metal C firmware for a joystick-controlled photo gallery, two games, and a local speaker test on an ARM Cortex-M3 board.</p>
-<a class="text-link" href="projects.html#mission-control-media-center">Explore project <span aria-hidden="true">↗</span></a>
+<span class="mono">07 / EMBEDDED · TEAM PROJECT</span>
+<h3>EEBOT Robot Guidance</h3>
+<p>HCS12 Assembly firmware connecting infrared sensing, navigation decisions, and motor control.</p>
+<a class="text-link" href="projects.html#eebot-robot-guidance">Explore project <span aria-hidden="true">↗</span></a>
 </article>
 <article>
 <span class="mono">08 / FPGA DESIGN</span>
